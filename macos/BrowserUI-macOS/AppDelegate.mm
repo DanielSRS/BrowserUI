@@ -1,6 +1,7 @@
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
+#import <React/RCTRootView.h>
 
 @implementation AppDelegate
 
@@ -10,8 +11,34 @@
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
+  
+  /**
+   *  Use a notification observer to modify the window properties once the window has been created.
+   */
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(windowDidBecomeKey:)
+                                                 name:NSWindowDidBecomeKeyNotification
+                                               object:nil];
 
   return [super applicationDidFinishLaunching:notification];
+}
+
+/**
+ * Ensures that the window is fully initialized and has become the key window before you attempt to modify its properties
+ */
+- (void)windowDidBecomeKey:(NSNotification *)notification
+{
+  NSWindow *window = notification.object;
+  [window setTitleVisibility:NSWindowTitleHidden];
+  [window setTitlebarAppearsTransparent:YES];
+  [window setStyleMask:[window styleMask] | NSWindowStyleMaskFullSizeContentView];
+  
+  // Hide the close button
+  [[window standardWindowButton:NSWindowCloseButton] setHidden:YES];
+  // Hide the minimize button
+  [[window standardWindowButton:NSWindowMiniaturizeButton] setHidden:YES];
+  // Hide the maximize button
+  [[window standardWindowButton:NSWindowZoomButton] setHidden:YES];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
