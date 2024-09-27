@@ -11,13 +11,21 @@ import {
 
 function App(): React.JSX.Element {
   return (
-    <View style={{flex: 1}}>
+    <View
+      style={{
+        flex: 1,
+        borderColor: 'rgba(255, 255, 255, 0.2)',
+        borderWidth: 1,
+        borderRadius: 10,
+      }}>
       <TouchableOpacity
+        disabled={true}
         style={{
           paddingHorizontal: 20,
-          borderWidth: 1,
+          // borderWidth: 1,
           paddingVertical: 4,
-          backgroundColor: 'green',
+          alignItems: 'center',
+          // backgroundColor: 'green',
         }}
         onPress={() => {
           console.log('Touchhing ttitlebar area');

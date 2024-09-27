@@ -39,6 +39,21 @@
   [[window standardWindowButton:NSWindowMiniaturizeButton] setHidden:YES];
   // Hide the maximize button
   [[window standardWindowButton:NSWindowZoomButton] setHidden:YES];
+
+  // Make the window transparent
+  window.opaque = NO;
+  window.backgroundColor = [NSColor clearColor];
+  
+  // Add the blur effect
+  NSVisualEffectView *blurView = [[NSVisualEffectView alloc] initWithFrame:window.contentView.bounds];
+  blurView.blendingMode = NSVisualEffectBlendingModeBehindWindow;
+  blurView.material = NSVisualEffectMaterialUnderWindowBackground;
+  blurView.state = NSVisualEffectStateActive;
+
+  // Ensure the blur view resizes with the window
+  blurView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+  
+  [window.contentView addSubview:blurView positioned:NSWindowBelow relativeTo:nil];
   
   // Remove the observer
   [[NSNotificationCenter defaultCenter] removeObserver:self
