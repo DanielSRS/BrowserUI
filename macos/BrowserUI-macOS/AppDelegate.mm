@@ -39,6 +39,11 @@
   [[window standardWindowButton:NSWindowMiniaturizeButton] setHidden:YES];
   // Hide the maximize button
   [[window standardWindowButton:NSWindowZoomButton] setHidden:YES];
+  
+  // Remove the observer
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:NSWindowDidBecomeKeyNotification
+                                                object:nil];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
