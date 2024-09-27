@@ -1,5 +1,10 @@
 import {NativeModules, Platform} from 'react-native';
 
+const TRAFFIC_LIGHTS_OFFSET = {
+  x: 0,
+  y: 0,
+};
+
 const LINKING_ERROR =
   "The package 'react-native-infinity' doesn't seem to be linked. Make sure: \n\n" +
   Platform.select({ios: "- You have run 'pod install'\n", default: ''}) +
@@ -35,4 +40,21 @@ export function hideTrafficLights(): Promise<void> {
 
 export function showTrafficLights(): Promise<void> {
   return _Infinity.showTrafficLights();
+}
+
+export function animateTrafficLightsPositionTo(
+  x: number,
+  y: number,
+  duration: number,
+): void {
+  const posX = x - TRAFFIC_LIGHTS_OFFSET.x;
+  const posY = y - TRAFFIC_LIGHTS_OFFSET.y;
+  console.log('posins: ', {
+    ...TRAFFIC_LIGHTS_OFFSET,
+    posX,
+    posY,
+  });
+  TRAFFIC_LIGHTS_OFFSET.x = TRAFFIC_LIGHTS_OFFSET.x + posX;
+  TRAFFIC_LIGHTS_OFFSET.y = TRAFFIC_LIGHTS_OFFSET.y + posY;
+  return _Infinity.animateTrafficLights(posX, posY, duration);
 }

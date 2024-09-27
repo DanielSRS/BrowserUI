@@ -6,6 +6,7 @@ import {
   hideTrafficLights,
   showTitleBar,
   showTrafficLights,
+  animateTrafficLightsPositionTo,
 } from 'react-native-infinity';
 
 function App(): React.JSX.Element {
@@ -75,6 +76,26 @@ function App(): React.JSX.Element {
           onPress={async () => {
             try {
               await showTrafficLights();
+            } catch (error) {
+              console.log(error);
+            }
+          }}
+        />
+        <Button
+          title="Animate tl position 20"
+          onPress={async () => {
+            try {
+              animateTrafficLightsPositionTo(0, 20, 0.2);
+            } catch (error) {
+              console.log(error);
+            }
+          }}
+        />
+        <Button
+          title="Animate tl position 0"
+          onPress={async () => {
+            try {
+              animateTrafficLightsPositionTo(0, 0, 0.2);
             } catch (error) {
               console.log(error);
             }
