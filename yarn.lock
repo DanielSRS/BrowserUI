@@ -3292,7 +3292,9 @@ __metadata:
     prettier: 2.8.8
     react: 18.3.1
     react-native: 0.75.3
+    react-native-infinity: "link:./modules/infinity"
     react-native-macos: ^0.75.0-0
+    react-native-tt: "link:./modules/tt"
     react-test-renderer: 18.3.1
     typescript: 5.0.4
   languageName: unknown
@@ -8217,6 +8219,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-infinity@link:./modules/infinity::locator=BrowserUI%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "react-native-infinity@link:./modules/infinity::locator=BrowserUI%40workspace%3A."
+  languageName: node
+  linkType: soft
+
 "react-native-macos@npm:^0.75.0-0":
   version: 0.75.5
   resolution: "react-native-macos@npm:0.75.5"
@@ -8270,6 +8278,12 @@ __metadata:
   checksum: 5d27b4e735e87a425c45a81d5eb15e3afa2c2c27250ba44fa9191780016f15a5bda8a038db28fb067aba87d92d578cf25e4f98aecc73e0b43e97c7918fccabef
   languageName: node
   linkType: hard
+
+"react-native-tt@link:./modules/tt::locator=BrowserUI%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "react-native-tt@link:./modules/tt::locator=BrowserUI%40workspace%3A."
+  languageName: node
+  linkType: soft
 
 "react-native@npm:0.75.3":
   version: 0.75.3

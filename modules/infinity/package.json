@@ -1,0 +1,14 @@
+{
+  "name": "react-native-infinity",
+  "version": "0.0.0",
+  "description": "macos hidden titlebar",
+  "main": "src/index",
+  "author": " <> ()",
+  "license": "UNLICENSED",
+  "homepage": "#readme",
+  "create-react-native-library": {
+    "type": "module-legacy",
+    "languages": "kotlin-swift",
+    "version": "0.41.2"
+  }
+}
