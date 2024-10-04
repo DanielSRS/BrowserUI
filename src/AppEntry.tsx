@@ -8,7 +8,7 @@ import {
   showTrafficLights,
   animateTrafficLightsPositionTo,
 } from 'react-native-infinity';
-import { Topbar } from './Topbar/Topbar';
+import { Topbar } from './components/Topbar/Topbar';
 import { ExpandOnHover } from './components/ExpandOnHover/ExpandOnHover';
 
 const WINDOW_BORDER_SIZE = 6;
