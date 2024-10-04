@@ -1,14 +1,16 @@
-import React, { useLayoutEffect, useRef } from 'react';
-import { Animated, StyleSheet } from 'react-native';
+import React, { useLayoutEffect, useRef, useState } from 'react';
+import { Animated, StyleSheet, View } from 'react-native';
 import {
   animateTrafficLightsPositionTo,
   hideTrafficLights,
   showTrafficLights,
 } from 'react-native-infinity';
 import { BlurView } from 'blurview';
+import type { MouseEvent } from 'react-native';
 
 const WINDOW_BORDER_SIZE = 6;
 
+const hover_targer_height = WINDOW_BORDER_SIZE * 2;
 export const ExpandOnHover = (props: {
   children: React.ReactNode;
   expanded?: boolean;
@@ -24,7 +26,9 @@ export const ExpandOnHover = (props: {
   } as const;
 
   const childrenHeight = useRef<number>(0);
+  const lastY = useRef<number>(0);
   const height = useRef(new Animated.Value(-50)).current;
+  const [hoverHeight, setHoverHeight] = useState(hover_targer_height);
 
   useLayoutEffect(() => {
     console.log('Set ne ', childrenHeight.current);
@@ -44,6 +48,7 @@ export const ExpandOnHover = (props: {
     showTrafficLights();
     // Animate it
     animateTrafficLightsPositionTo(0, -10, 0.25);
+    setHoverHeight(childrenHeight.current);
   };
 
   const fadeOut = () => {
@@ -60,6 +65,7 @@ export const ExpandOnHover = (props: {
       // Hide it
       hideTrafficLights();
     }, 200);
+    setHoverHeight(hover_targer_height);
   };
 
   if (expanded) {
@@ -67,35 +73,48 @@ export const ExpandOnHover = (props: {
   }
 
   return (
-    <Animated.View
-      hitSlop={{ top: 100, left: 0, right: 0, bottom: 0 }}
-      style={[
-        st,
-        {
-          zIndex: 2,
-          borderColor: 'rgba(255, 255, 255, 0.2)',
-          borderBottomWidth: 1,
-        },
-        { transform: [{ translateY: height }] },
-      ]}
-      // @ts-expect-error Not sure why
-      onMouseEnter={() => {
-        console.log('enter');
-        fadeIn();
-      }}
-      onMouseLeave={() => {
-        console.log('leave');
-        fadeOut();
-      }}
-      onPointerMove={() => console.log('move?')}
-      onMouseCapture={() => console.log('onMouseCapture?')}
-      onMouseMove={() => console.log('onMouseMove?')}
-      onLayout={event => {
-        const h = event.nativeEvent.layout.height;
-        console.log('Tabbar height: ', h);
-        childrenHeight.current = h + 1;
-      }}>
-      <BlurView style={HH}>{children}</BlurView>
-    </Animated.View>
+    <>
+      <View
+        // @ts-expect-error Not sure why
+        onMouseEnter={(p: MouseEvent) => {
+          const screenY = p.nativeEvent.screenY;
+          lastY.current = screenY;
+          fadeIn();
+        }}
+        onMouseLeave={(p: MouseEvent) => {
+          const screenY = p.nativeEvent.screenY;
+          if (screenY > lastY.current) {
+            // console.log('Pointer left from the top');
+          } else {
+            // console.log('Pointer left from the bottom');
+            fadeOut();
+          }
+        }}
+        style={{
+          ...StyleSheet.absoluteFillObject,
+          bottom: undefined,
+          height: hoverHeight,
+          // backgroundColor: 'rgba(255, 0, 0, 0.2)',
+        }}
+      />
+      <Animated.View
+        // hitSlop={{ top: 100, left: 0, right: 0, bottom: 0 }}
+        style={[
+          st,
+          {
+            zIndex: 2,
+            borderColor: 'rgba(255, 255, 255, 0.2)',
+            borderBottomWidth: 1,
+          },
+          { transform: [{ translateY: height }] },
+        ]}
+        onLayout={event => {
+          const h = event.nativeEvent.layout.height;
+          console.log('Tabbar height: ', h);
+          childrenHeight.current = h + 1;
+        }}>
+        <BlurView style={HH}>{children}</BlurView>
+      </Animated.View>
+    </>
   );
 };
