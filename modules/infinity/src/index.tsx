@@ -1,4 +1,4 @@
-import {NativeModules, Platform} from 'react-native';
+import { NativeModules, Platform } from 'react-native';
 
 const TRAFFIC_LIGHTS_OFFSET = {
   x: 0,
@@ -7,7 +7,7 @@ const TRAFFIC_LIGHTS_OFFSET = {
 
 const LINKING_ERROR =
   "The package 'react-native-infinity' doesn't seem to be linked. Make sure: \n\n" +
-  Platform.select({ios: "- You have run 'pod install'\n", default: ''}) +
+  Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
@@ -49,11 +49,11 @@ export function animateTrafficLightsPositionTo(
 ): void {
   const posX = x - TRAFFIC_LIGHTS_OFFSET.x;
   const posY = y - TRAFFIC_LIGHTS_OFFSET.y;
-  console.log('posins: ', {
-    ...TRAFFIC_LIGHTS_OFFSET,
-    posX,
-    posY,
-  });
+  // console.log('posins: ', {
+  //   ...TRAFFIC_LIGHTS_OFFSET,
+  //   posX,
+  //   posY,
+  // });
   TRAFFIC_LIGHTS_OFFSET.x = TRAFFIC_LIGHTS_OFFSET.x + posX;
   TRAFFIC_LIGHTS_OFFSET.y = TRAFFIC_LIGHTS_OFFSET.y + posY;
   return _Infinity.animateTrafficLights(posX, posY, duration);

@@ -9,6 +9,7 @@ import {
   animateTrafficLightsPositionTo,
 } from 'react-native-infinity';
 import { Topbar } from './Topbar/Topbar';
+import { ExpandOnHover } from './components/ExpandOnHover/ExpandOnHover';
 
 const WINDOW_BORDER_SIZE = 6;
 
@@ -16,7 +17,9 @@ export function App() {
   return (
     <View style={styles.window}>
       {/* Nav bar */}
-      <Topbar />
+      <ExpandOnHover>
+        <Topbar />
+      </ExpandOnHover>
       <View style={styles.row}>
         {/* Tabbar */}
         <View style={styles.sideBar}>
@@ -112,6 +115,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: WINDOW_BORDER_SIZE,
     rowGap: WINDOW_BORDER_SIZE,
+    zIndex: 3,
+    overflow: 'hidden',
   },
   contentArea: {
     flex: 1,
