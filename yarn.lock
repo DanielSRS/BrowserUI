@@ -3287,6 +3287,7 @@ __metadata:
     "@types/react": ^18.2.6
     "@types/react-test-renderer": ^18.0.0
     babel-jest: ^29.6.3
+    blurview: "link:./modules/BlurView"
     eslint: ^8.19.0
     jest: ^29.6.3
     prettier: 2.8.8
@@ -3294,7 +3295,6 @@ __metadata:
     react-native: 0.75.3
     react-native-infinity: "link:./modules/infinity"
     react-native-macos: ^0.75.0-0
-    react-native-tt: "link:./modules/tt"
     react-test-renderer: 18.3.1
     typescript: 5.0.4
   languageName: unknown
@@ -3782,6 +3782,12 @@ __metadata:
   checksum: 9e8521fa7e83aa9427c6f8ccdcba6e8167ef30cc9a22df26effcc5ab682ef91d2cbc23a239f945d099289e4bbcfae7a192e9c28c84c6202e710a0dfec3722662
   languageName: node
   linkType: hard
+
+"blurview@link:./modules/BlurView::locator=BrowserUI%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "blurview@link:./modules/BlurView::locator=BrowserUI%40workspace%3A."
+  languageName: node
+  linkType: soft
 
 "brace-expansion@npm:^1.1.7":
   version: 1.1.11
@@ -8278,12 +8284,6 @@ __metadata:
   checksum: 5d27b4e735e87a425c45a81d5eb15e3afa2c2c27250ba44fa9191780016f15a5bda8a038db28fb067aba87d92d578cf25e4f98aecc73e0b43e97c7918fccabef
   languageName: node
   linkType: hard
-
-"react-native-tt@link:./modules/tt::locator=BrowserUI%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "react-native-tt@link:./modules/tt::locator=BrowserUI%40workspace%3A."
-  languageName: node
-  linkType: soft
 
 "react-native@npm:0.75.3":
   version: 0.75.3

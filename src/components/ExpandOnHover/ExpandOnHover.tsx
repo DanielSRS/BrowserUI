@@ -5,6 +5,7 @@ import {
   hideTrafficLights,
   showTrafficLights,
 } from 'react-native-infinity';
+import { BlurView } from 'blurview';
 
 const WINDOW_BORDER_SIZE = 6;
 
@@ -16,8 +17,10 @@ export const ExpandOnHover = (props: {
   const st = {
     ...StyleSheet.absoluteFillObject,
     overflow: 'hidden',
-    paddingVertical: WINDOW_BORDER_SIZE,
     bottom: undefined,
+  } as const;
+  const HH = {
+    paddingVertical: WINDOW_BORDER_SIZE,
   } as const;
 
   const childrenHeight = useRef<number>(0);
@@ -69,7 +72,6 @@ export const ExpandOnHover = (props: {
       style={[
         st,
         {
-          backgroundColor: 'rgba(255, 255, 255, 0.05)',
           zIndex: 2,
           borderColor: 'rgba(255, 255, 255, 0.2)',
           borderBottomWidth: 1,
@@ -93,7 +95,7 @@ export const ExpandOnHover = (props: {
         console.log('Tabbar height: ', h);
         childrenHeight.current = h + 1;
       }}>
-      {children}
+      <BlurView style={HH}>{children}</BlurView>
     </Animated.View>
   );
 };

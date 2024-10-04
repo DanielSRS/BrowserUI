@@ -5,11 +5,13 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "macos": "react-native run-macos",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest"
   },
   "dependencies": {
+    "blurview": "link:./modules/BlurView",
     "react": "18.3.1",
     "react-native": "0.75.3",
     "react-native-infinity": "link:./modules/infinity",

@@ -1,0 +1,14 @@
+{
+  "name": "blurview",
+  "version": "0.0.0",
+  "description": "macos BlurView",
+  "main": "src/index",
+  "author": " <> ()",
+  "license": "UNLICENSED",
+  "homepage": "#readme",
+  "create-react-native-library": {
+    "type": "view-legacy",
+    "languages": "kotlin-objc",
+    "version": "0.41.2"
+  }
+}
