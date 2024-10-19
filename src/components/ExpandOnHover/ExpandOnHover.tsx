@@ -2,8 +2,8 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 import {
   animateTrafficLightsPositionTo,
-  hideTrafficLights,
-  showTrafficLights,
+  // hideTrafficLights,
+  // showTrafficLights,
 } from 'react-native-infinity';
 import { BlurView } from 'blurview';
 import type { MouseEvent } from 'react-native';
@@ -45,7 +45,7 @@ export const ExpandOnHover = (props: {
     // Make sure its hidden
     // animateTrafficLightsPositionTo(0, 20, 0);
     // Show it
-    showTrafficLights();
+    // showTrafficLights();
     // Animate it
     animateTrafficLightsPositionTo(0, -10, 0.25);
     setHoverHeight(childrenHeight.current);
@@ -61,10 +61,10 @@ export const ExpandOnHover = (props: {
 
     // Animate it
     animateTrafficLightsPositionTo(0, 20, 0.3);
-    setTimeout(() => {
-      // Hide it
-      hideTrafficLights();
-    }, 200);
+    // setTimeout(() => {
+    //   // Hide it
+    //   hideTrafficLights();
+    // }, 200);
     setHoverHeight(hover_targer_height);
   };
 
