@@ -9,6 +9,8 @@ import { BlurView } from 'blurview';
 import type { MouseEvent } from 'react-native';
 
 const WINDOW_BORDER_SIZE = 6;
+const OPEN_ANIMATION_DURATION = 200;
+const CLOSE_ANIMATION_DURATION = 200;
 
 const hover_targer_height = WINDOW_BORDER_SIZE * 2;
 export const ExpandOnHover = (props: {
@@ -38,7 +40,7 @@ export const ExpandOnHover = (props: {
     // Will change fadeAnim value to 1 in 5 seconds
     Animated.timing(height, {
       toValue: 0,
-      duration: 200,
+      duration: OPEN_ANIMATION_DURATION,
       useNativeDriver: false,
     }).start();
 
@@ -55,7 +57,7 @@ export const ExpandOnHover = (props: {
     // Will change fadeAnim value to 0 in 3 seconds
     Animated.timing(height, {
       toValue: -childrenHeight.current,
-      duration: 200,
+      duration: CLOSE_ANIMATION_DURATION,
       useNativeDriver: false,
     }).start();
 
