@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native';
 import {
   multiply,
   hideTitleBar,
@@ -9,6 +9,7 @@ import {
   animateTrafficLightsPositionTo,
 } from 'react-native-infinity';
 import { Topbar } from './components/Topbar/Topbar';
+import { Tabbar } from './components/Tabbar/Tabbar';
 import { ExpandOnHover } from './components/ExpandOnHover/ExpandOnHover';
 
 const WINDOW_BORDER_SIZE = 6;
@@ -22,9 +23,7 @@ export function App() {
       </ExpandOnHover>
       <View style={styles.row}>
         {/* Tabbar */}
-        <View style={styles.sideBar}>
-          <TouchableOpacity style={styles.btn} />
-        </View>
+        <Tabbar />
         {/* Content container */}
         <View style={styles.contentArea}>
           {/* Content */}
@@ -130,17 +129,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: WINDOW_BORDER_SIZE,
-  },
-  sideBar: {
-    // backgroundColor: 'red',
-    borderRadius: WINDOW_BORDER_SIZE,
-    overflow: 'hidden',
-  },
-  btn: {
-    width: 36,
-    height: 36,
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-    borderRadius: WINDOW_BORDER_SIZE * 0.9,
   },
   row: {
     flex: 1,
