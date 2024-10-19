@@ -106,7 +106,19 @@ export const ExpandOnHover = (props: {
           {
             zIndex: 2,
             borderColor: 'rgba(255, 255, 255, 0.2)',
-            borderBottomWidth: 1,
+            // borderBottomWidth: 1,
+            backgroundColor: 'red',
+
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 5,
+            },
+            shadowOpacity: height.interpolate({
+              inputRange: [-48, 48],
+              outputRange: [0, 0.26],
+            }),
+            shadowRadius: 8,
           },
           { transform: [{ translateY: height }] },
         ]}
