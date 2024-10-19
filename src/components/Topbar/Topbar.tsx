@@ -20,7 +20,7 @@ export const Topbar = () => {
     <View style={styles.container}>
       {}
       <View style={styles.contentArea}>
-        <View style={styles.leftButtons}>
+        <View style={styles.buttonsContainer}>
           {/* Voltar */}
           <View style={styles.navbarButton} />
           {/* Avançar */}
@@ -40,7 +40,7 @@ export const Topbar = () => {
         </View>
         <View style={styles.spacer} />
         {}
-        <View style={styles.rightButtons}>
+        <View style={styles.buttonsContainer}>
           {/* Menu */}
           <View style={styles.navbarButton} />
           {/* Perfil */}
@@ -64,17 +64,10 @@ const styles = StyleSheet.create({
     borderColor: 'blue',
     flexDirection: 'row',
   },
-  leftButtons: {
+  buttonsContainer: {
     paddingHorizontal: BUTTON_GAP,
     paddingVertical: 2,
     // backgroundColor: 'green',
-    flexDirection: 'row',
-    columnGap: BUTTON_GAP,
-  },
-  rightButtons: {
-    // backgroundColor: 'green',
-    paddingHorizontal: 10,
-    paddingVertical: 2,
     flexDirection: 'row',
     columnGap: BUTTON_GAP,
   },
