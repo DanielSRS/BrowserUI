@@ -9,8 +9,8 @@ import { BlurView } from 'blurview';
 import type { MouseEvent } from 'react-native';
 
 const WINDOW_BORDER_SIZE = 6;
-const OPEN_ANIMATION_DURATION = 200;
-const CLOSE_ANIMATION_DURATION = 200;
+const OPEN_ANIMATION_DURATION = 150;
+const CLOSE_ANIMATION_DURATION = 100;
 
 const hover_targer_height = WINDOW_BORDER_SIZE * 2;
 export const ExpandOnHover = (props: {
