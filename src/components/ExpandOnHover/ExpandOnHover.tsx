@@ -9,6 +9,7 @@ import { BlurView } from 'blurview';
 import type { MouseEvent } from 'react-native';
 
 const WINDOW_BORDER_SIZE = 6;
+const WINDOW_BORDER_RADIUS = 6;
 const OPEN_ANIMATION_DURATION = 150;
 const CLOSE_ANIMATION_DURATION = 100;
 
@@ -24,6 +25,7 @@ export const ExpandOnHover = (props: {
     bottom: undefined,
   } as const;
   const HH = {
+    borderRadius: WINDOW_BORDER_SIZE,
     paddingVertical: WINDOW_BORDER_SIZE,
   } as const;
 
@@ -105,9 +107,10 @@ export const ExpandOnHover = (props: {
           st,
           {
             zIndex: 2,
-            borderColor: 'rgba(255, 255, 255, 0.2)',
-            // borderBottomWidth: 1,
-            backgroundColor: 'red',
+            borderColor: 'dimgray',
+            borderBottomWidth: 1,
+            backgroundColor: 'dimgray',
+            borderRadius: WINDOW_BORDER_RADIUS,
 
             shadowColor: '#000',
             shadowOffset: {
