@@ -8288,7 +8288,7 @@ __metadata:
 
 "react-native-sdk@https://github.com/DanielSRS/SDK":
   version: 0.1.0
-  resolution: "react-native-sdk@https://github.com/DanielSRS/SDK.git#commit=820e452e7ea7ab0ddce0376e730053b863ee83f3"
+  resolution: "react-native-sdk@https://github.com/DanielSRS/SDK.git#commit=6337ea6eabd9bfee237df652598482ff2b049047"
   dependencies:
     scheduler: "npm:^0.23.2"
     ts-pattern: "npm:^5.2.0"
@@ -8300,7 +8300,7 @@ __metadata:
   peerDependenciesMeta:
     react-native-document-picker:
       optional: true
-  checksum: 10/48546d7289528fa99141a71ad09532204f90a10b8c1f462de8727f6ed1abfddb94c795ecf6ecfd450d9a640db648bc03f2c1a1033b5a47422eea6d4c31bdac76
+  checksum: 10/98876e3fa36f7a8a3251c6514e16bd78c1a68a7d97990fbfb46173f9fcc15ff72ef4785811dd8784bf94804a92ee59d9104c4c8f1e6888514e7df637e8e4fbf7
   languageName: node
   linkType: hard
 
