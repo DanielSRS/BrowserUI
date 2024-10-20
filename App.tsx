@@ -1,2 +1,11 @@
+import React from 'react';
 import { App } from './src/AppEntry';
-export default App;
+import { SdkProvider } from 'react-native-sdk';
+
+export default () => {
+  return (
+    <SdkProvider>
+      <App />
+    </SdkProvider>
+  );
+};

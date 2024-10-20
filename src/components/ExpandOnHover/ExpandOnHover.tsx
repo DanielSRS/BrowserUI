@@ -6,6 +6,7 @@ import {
   // showTrafficLights,
 } from 'react-native-infinity';
 import { BlurView } from 'blurview';
+import { useColors } from 'react-native-sdk';
 import type { MouseEvent } from 'react-native';
 
 const WINDOW_BORDER_SIZE = 6;
@@ -32,6 +33,7 @@ export const ExpandOnHover = (props: {
   const childrenHeight = useRef<number>(0);
   const lastY = useRef<number>(0);
   const height = useRef(new Animated.Value(-50)).current;
+  const colors = useColors();
   const [hoverHeight, setHoverHeight] = useState(hover_targer_height);
 
   useLayoutEffect(() => {
@@ -107,21 +109,21 @@ export const ExpandOnHover = (props: {
           st,
           {
             zIndex: 2,
-            borderColor: 'dimgray',
+            borderColor: colors.strokeColorCardStrokeDefault,
             borderBottomWidth: 1,
-            backgroundColor: 'dimgray',
+            backgroundColor: colors.backgroundFillColorSolidBackgroundSecondary,
             borderRadius: WINDOW_BORDER_RADIUS,
 
             shadowColor: '#000',
             shadowOffset: {
               width: 0,
-              height: 5,
+              height: 4,
             },
             shadowOpacity: height.interpolate({
               inputRange: [-48, 48],
-              outputRange: [0, 0.26],
+              outputRange: [0, 0.6],
             }),
-            shadowRadius: 8,
+            shadowRadius: 4,
           },
           { transform: [{ translateY: height }] },
         ]}

@@ -11,12 +11,14 @@ import {
 import { Topbar } from './components/Topbar/Topbar';
 import { Tabbar } from './components/Tabbar/Tabbar';
 import { ExpandOnHover } from './components/ExpandOnHover/ExpandOnHover';
+import { useColors } from 'react-native-sdk';
 
 const WINDOW_BORDER_SIZE = 6;
 
 export function App() {
+  const colors = useColors();
   return (
-    <View style={styles.window}>
+    <View style={[styles.window]}>
       {/* Nav bar */}
       <ExpandOnHover>
         <Topbar />
@@ -25,7 +27,11 @@ export function App() {
         {/* Tabbar */}
         <Tabbar />
         {/* Content container */}
-        <View style={styles.contentArea}>
+        <View
+          style={[
+            styles.contentArea,
+            { borderColor: colors.strokeColorDividerStrokeDefault },
+          ]}>
           {/* Content */}
           <View style={styles.content}>
             <Button

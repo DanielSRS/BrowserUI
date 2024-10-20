@@ -3295,6 +3295,7 @@ __metadata:
     react-native: 0.75.3
     react-native-infinity: "link:./modules/infinity"
     react-native-macos: ^0.75.0-0
+    react-native-sdk: "https://github.com/DanielSRS/SDK"
     react-test-renderer: 18.3.1
     typescript: 5.0.4
   languageName: unknown
@@ -8285,6 +8286,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-sdk@https://github.com/DanielSRS/SDK":
+  version: 0.1.0
+  resolution: "react-native-sdk@https://github.com/DanielSRS/SDK.git#commit=820e452e7ea7ab0ddce0376e730053b863ee83f3"
+  dependencies:
+    scheduler: ^0.23.2
+    ts-pattern: ^5.2.0
+    use-context-selector: ^2.0.0
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-document-picker: "*"
+  peerDependenciesMeta:
+    react-native-document-picker:
+      optional: true
+  checksum: 4e52ef9f5854027d7a941df9cfe99747e9c8bb01e6db8b1a5cf1bd09b4467ed5849ff149cbabb9b5def0cb11685475d06dbd012d3cf84ab37bd8445cbc11bc1c
+  languageName: node
+  linkType: hard
+
 "react-native@npm:0.75.3":
   version: 0.75.3
   resolution: "react-native@npm:0.75.3"
@@ -9396,6 +9415,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ts-pattern@npm:^5.2.0":
+  version: 5.5.0
+  resolution: "ts-pattern@npm:5.5.0"
+  checksum: a64bfb4e5e7a34f19e956e043a3f09be5b0137934afb9f4f9eca19b20dd7898fba193509923e74ce3faca68f07ff14db8ec090c66ea94201b8685a9e6fd82e8a
+  languageName: node
+  linkType: hard
+
 "tslib@npm:^1.8.1":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
@@ -9632,6 +9658,16 @@ __metadata:
   dependencies:
     punycode: ^2.1.0
   checksum: 7167432de6817fe8e9e0c9684f1d2de2bb688c94388f7569f7dbdb1587c9f4ca2a77962f134ec90be0cc4d004c939ff0d05acc9f34a0db39a3c797dada262633
+  languageName: node
+  linkType: hard
+
+"use-context-selector@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "use-context-selector@npm:2.0.0"
+  peerDependencies:
+    react: ">=18.0.0"
+    scheduler: ">=0.19.0"
+  checksum: d6e576d24959ffb5bb061102941bef9e0b35b05219e9f52f802c11062b003ad05904e257609f60b706627f39f4b0a37bec91d93fe217468d388431e44cead488
   languageName: node
   linkType: hard
 

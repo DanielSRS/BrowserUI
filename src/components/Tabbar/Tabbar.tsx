@@ -10,11 +10,11 @@ import {
   Animated,
   FlatList,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
   type ViewStyle,
 } from 'react-native';
+import { Caption, useColors } from 'react-native-sdk';
 
 const WINDOW_BORDER_SIZE = 6;
 /**
@@ -158,11 +158,16 @@ interface TabProps {
 }
 const Tab = (props: TabProps) => {
   const { id, onPress } = props;
+  const colors = useColors();
   const hoverRef = useRef<HoverViewRef>(null);
 
   return (
     <View key={id}>
-      <HoverView ref={hoverRef} style={{ borderRadius: btn.borderRadius }} />
+      <HoverView
+        ref={hoverRef}
+        style={{ borderRadius: btn.borderRadius }}
+        hoveredStyle={{ backgroundColor: colors.fillColorControlDefault }}
+      />
       <TouchableOpacity
         onPress={onPress}
         onPressIn={() => {
@@ -175,11 +180,11 @@ const Tab = (props: TabProps) => {
         <View style={btnIconContainer}>
           <View style={icon} />
         </View>
-        <Text
+        <Caption
           numberOfLines={1} // otherwise, tab height changes when theres no enough space
         >
           TAB NAME
-        </Text>
+        </Caption>
       </TouchableOpacity>
     </View>
   );

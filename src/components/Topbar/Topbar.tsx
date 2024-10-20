@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native';
+import { useColors } from 'react-native-sdk';
 
 const WINDOW_CONTROL_AREA_LEFT = 55;
 const WINDOW_CONTROL_AREA_RIGHT = 55;
@@ -16,6 +17,8 @@ const BUTTON_GAP = 10;
  *  - Profile icon
  */
 export const Topbar = () => {
+  const colors = useColors();
+
   return (
     <View style={styles.container}>
       {}
@@ -31,6 +34,7 @@ export const Topbar = () => {
         <View style={styles.urlContainer}>
           <View style={styles.url}>
             <TextInput
+              placeholderTextColor={colors.fillColorTextSecondary}
               style={styles.urlInput}
               placeholder={'about:working-in-progress'}
               // @ts-expect-error Exits only on Macos
