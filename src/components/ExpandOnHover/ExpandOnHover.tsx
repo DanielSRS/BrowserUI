@@ -109,21 +109,19 @@ export const ExpandOnHover = (props: {
           st,
           {
             zIndex: 2,
-            borderColor: colors.strokeColorCardStrokeDefault,
-            borderBottomWidth: 1,
-            backgroundColor: colors.backgroundFillColorSolidBackgroundSecondary,
+            backgroundColor: colors.appBackground,
             borderRadius: WINDOW_BORDER_RADIUS,
 
             shadowColor: '#000',
             shadowOffset: {
               width: 0,
-              height: 4,
+              height: 2,
             },
             shadowOpacity: height.interpolate({
               inputRange: [-48, 48],
-              outputRange: [0, 0.6],
+              outputRange: [0, 0.3],
             }),
-            shadowRadius: 4,
+            shadowRadius: 2,
           },
           { transform: [{ translateY: height }] },
         ]}
@@ -132,7 +130,16 @@ export const ExpandOnHover = (props: {
           console.log('Tabbar height: ', h);
           childrenHeight.current = h + 1;
         }}>
-        <BlurView style={HH}>{children}</BlurView>
+        <View
+          style={{
+            borderColor: colors.strokeColorSurfaceStrokeDefault,
+            borderBottomWidth: 1,
+            marginBottom: -1,
+            overflow: 'hidden',
+            borderRadius: WINDOW_BORDER_RADIUS,
+          }}>
+          <BlurView style={HH}>{children}</BlurView>
+        </View>
       </Animated.View>
     </>
   );
