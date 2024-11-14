@@ -178,7 +178,12 @@ const Tab = (props: TabProps) => {
         }}
         style={btn}>
         <View style={btnIconContainer}>
-          <View style={icon} />
+          <View
+            style={[
+              icon,
+              { borderColor: colors.strokeColorControlStrongStrokeDefault },
+            ]}
+          />
         </View>
         <Caption
           numberOfLines={1} // otherwise, tab height changes when theres no enough space
