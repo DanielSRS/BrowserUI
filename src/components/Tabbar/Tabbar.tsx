@@ -1,14 +1,16 @@
 import { BlurView } from 'blurview';
-import React, { useMemo, useRef, useState } from 'react';
-import { Animated, FlatList, StyleSheet, View } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { Animated, FlatList, StyleSheet } from 'react-native';
 import {
-  BUTTUN_SIZE,
+  TABBAR_COLAPSED_WIDTH,
+  TABLIST_GAP,
   TITLEBAR_SIZE,
   WINDOW_BORDER_SIZE,
 } from './Tabbar.contants';
 import { Tab } from './components/Tab';
+import { Styled } from 'react-native-sdk';
 
-const TABS = [{ id: 13 }, { id: 14 }] as const;
+const TABS = [{ id: 13 }, { id: 14 }, { id: 15 }] as const;
 const TABBAR_EXPANDED_WIDTH = 250;
 const OPEN_ANIMATION_DURATION = 50;
 const CLOSE_ANIMATION_DURATION = 150;
@@ -21,7 +23,6 @@ export function Tabbar(props: TabbarProps) {
   const {} = props;
   const [isHovered, setIsHovered] = useState(false);
   const tabbarWidth = useRef(new Animated.Value(TABBAR_COLAPSED_WIDTH));
-  const BV = useMemo(() => (isHovered ? BlurView : View), [isHovered]);
 
   const expand = () => {
     setIsHovered(true);
@@ -45,87 +46,48 @@ export function Tabbar(props: TabbarProps) {
   };
 
   return (
-    <View style={tabbarContainer}>
-      {isHovered && <View style={minSideBar} />}
+    <TabbarContainer>
+      {/* Expandable view */}
       <Animated.View
         // @ts-expect-error
         onMouseEnter={(_p: MouseEvent) => {
           expand();
         }}
-        key={isHovered ? 'A' : 'B'}
         onMouseLeave={(_p: MouseEvent) => {
           colapse();
         }}
-        style={[
-          sideBar,
-          isHovered && StyleSheet.absoluteFill,
-          isHovered
-            ? {
-                // backgroundColor: 'rgba(255, 0, 0, 0.5)',
-                maxWidth: TABBAR_EXPANDED_WIDTH,
-                width: tabbarWidth.current,
-                left: -WINDOW_BORDER_SIZE,
-                top: -WINDOW_BORDER_SIZE,
-                bottom: -WINDOW_BORDER_SIZE,
-              }
-            : undefined,
-        ]}>
-        <BV style={[fatlist]}>
-          <View
-            style={[
-              // { backgroundColor: 'rgba(255, 0, 0, 0.1)' },
-              isHovered && {
-                padding: WINDOW_BORDER_SIZE,
-                paddingTop: WINDOW_BORDER_SIZE + TITLEBAR_SIZE,
-              },
-              flexOne,
-            ]}>
-            <FlatList
-              data={TABS}
-              contentContainerStyle={fatlistContent}
-              renderItem={({ item }) => <Tab {...item} />}
-            />
-          </View>
-        </BV>
+        style={[sideBar, { width: tabbarWidth.current }]}>
+        {/* Blurred background */}
+        {isHovered && <BlurView style={[StyleSheet.absoluteFill]} />}
+
+        {/* Tab list */}
+        <FlatList
+          data={TABS}
+          style={fatlist}
+          contentContainerStyle={fatlistContent}
+          renderItem={({ item }) => <Tab {...item} />}
+        />
       </Animated.View>
-    </View>
+    </TabbarContainer>
   );
 }
 
-const tabbarContainer = { zIndex: 3 } as const;
+const TabbarContainer = Styled.createStyledView({
+  zIndex: 3,
+});
 
 const sideBar = {
   // backgroundColor: 'red',
   borderRadius: WINDOW_BORDER_SIZE,
-  overflow: 'hidden',
-  paddingTop: 0,
-  // backgroundColor: 'blue',
-  maxWidth: BUTTUN_SIZE,
-  minWidth: BUTTUN_SIZE,
   flex: 1,
-  // maxWidth: 50,
 } as const;
-
-const minSideBar = {
-  minWidth: BUTTUN_SIZE,
-} as const;
-
 const fatlist = {
   flex: 1,
   marginTop: -TITLEBAR_SIZE,
+  // backgroundColor: 'rgba(255, 0, 0, 0.1)',
 } as const;
 
-const flexOne = {
-  flex: 1,
-} as const;
-
-const TABLIST_GAP = 3;
 const fatlistContent = {
   rowGap: TABLIST_GAP,
+  padding: WINDOW_BORDER_SIZE,
 } as const;
-/**
- * When this value is used, sidebar is absolute positioned, so
- * its needed compensate right padding not being aplied with
- * WINDOW_BORDER_SIZE
- */
-const TABBAR_COLAPSED_WIDTH = BUTTUN_SIZE + WINDOW_BORDER_SIZE;

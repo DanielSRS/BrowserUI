@@ -34,14 +34,14 @@ export function App() {
   );
 }
 
+const SIDEBAR_SIZE = 36 + 2 * WINDOW_BORDER_SIZE;
+
 const styles = StyleSheet.create({
   window: {
     flex: 1,
     borderColor: 'rgba(255, 255, 255, 0.2)',
     borderWidth: 1,
     borderRadius: 10,
-    padding: WINDOW_BORDER_SIZE,
-    rowGap: WINDOW_BORDER_SIZE,
     zIndex: 3,
     overflow: 'hidden',
   },
@@ -50,6 +50,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.08)',
     borderRadius: WINDOW_BORDER_SIZE,
+    ...StyleSheet.absoluteFillObject,
+    left: SIDEBAR_SIZE,
+    right: WINDOW_BORDER_SIZE,
+    bottom: WINDOW_BORDER_SIZE,
+    top: WINDOW_BORDER_SIZE,
     // backgroundColor: 'green',
   },
   content: {
@@ -59,6 +64,6 @@ const styles = StyleSheet.create({
   row: {
     flex: 1,
     flexDirection: 'row',
-    columnGap: WINDOW_BORDER_SIZE,
+    // columnGap: WINDOW_BORDER_SIZE,
   },
 });

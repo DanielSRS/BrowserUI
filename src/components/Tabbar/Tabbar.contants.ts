@@ -7,3 +7,12 @@ export const WINDOW_BORDER_SIZE = 6;
  * all flatlist seems to inherit some sort of padding
  */
 export const TITLEBAR_SIZE = 21;
+
+export const TABLIST_GAP = 3;
+
+/**
+ * When this value is used, sidebar is absolute positioned, so
+ * its needed compensate right padding not being aplied with
+ * WINDOW_BORDER_SIZE
+ */
+export const TABBAR_COLAPSED_WIDTH = BUTTUN_SIZE + WINDOW_BORDER_SIZE * 2;
