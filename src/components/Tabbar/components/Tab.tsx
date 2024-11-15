@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Caption, Styled, useColors } from 'react-native-sdk';
-import { HoverView, type HoverViewRef } from './HoverView';
 import {
   BUTTON_ICON_SIZE,
   ICON_PADDING,
@@ -15,28 +14,24 @@ interface TabProps {
 }
 export const Tab = React.memo((props: TabProps) => {
   const { id, onPress } = props;
+  const [isHovered, setIsHovered] = useState(false);
   const colors = useColors();
-  const hoverRef = useRef<HoverViewRef>(null);
+
+  const hoverBgColor = { backgroundColor: colors.fillColorControlDefault };
 
   return (
     <View key={id}>
-      {/* Tab background */}
-      <HoverView
-        ref={hoverRef}
-        style={{ borderRadius: btn.borderRadius }}
-        hoveredStyle={{ backgroundColor: colors.fillColorControlDefault }}
-      />
-
       {/* Pressable area */}
       <TouchableOpacity
         onPress={onPress}
-        onPressIn={() => {
-          hoverRef.current?.setOpacity(0.4);
+        // @ts-expect-error
+        onMouseEnter={(_p: MouseEvent) => {
+          setIsHovered(true);
         }}
-        onPressOut={() => {
-          hoverRef.current?.setOpacity(1);
+        onMouseLeave={(_p: MouseEvent) => {
+          setIsHovered(false);
         }}
-        style={btn}>
+        style={[btn, isHovered && hoverBgColor]}>
         {/* Tab icon */}
         <View style={btnIconContainer}>
           <View style={[icon]}>
@@ -52,7 +47,7 @@ export const Tab = React.memo((props: TabProps) => {
         </TabName>
 
         {/* Close button */}
-        <CloseButton />
+        {isHovered && <CloseButton />}
       </TouchableOpacity>
     </View>
   );
@@ -111,3 +106,5 @@ const icon = {
   alignItems: 'center',
   overflow: 'hidden',
 } as const;
+
+// const hoverBgColor = { backgroundColor: 'rgba(255, 255, 255, 0.08)' };
