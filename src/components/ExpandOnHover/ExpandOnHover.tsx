@@ -7,6 +7,7 @@ import {
 } from 'react-native-infinity';
 import { BlurView } from 'blurview';
 import { useColors } from 'react-native-sdk';
+import { ExpandOnHoverContext } from './ExpandOnHover.context';
 import type { MouseEvent } from 'react-native';
 
 const WINDOW_BORDER_SIZE = 6;
@@ -35,6 +36,7 @@ export const ExpandOnHover = (props: {
   const height = useRef(new Animated.Value(-50)).current;
   const colors = useColors();
   const [hoverHeight, setHoverHeight] = useState(hover_targer_height);
+  const focusCount = useRef(0);
 
   useLayoutEffect(() => {
     console.log('Set ne ', childrenHeight.current);
@@ -78,6 +80,25 @@ export const ExpandOnHover = (props: {
     return children;
   }
 
+  const incrementFocusCount = () => {
+    focusCount.current++;
+  };
+
+  const decrementFocusCount = () => {
+    focusCount.current--;
+  };
+
+  const decrementFocusCountAnd = (fn: () => void) => () => {
+    decrementFocusCount();
+    fn();
+  };
+
+  const closeIfNotFocused = () => {
+    if (focusCount.current === 0) {
+      fadeOut();
+    }
+  };
+
   return (
     <>
       <View
@@ -93,7 +114,7 @@ export const ExpandOnHover = (props: {
             // console.log('Pointer left from the top');
           } else {
             // console.log('Pointer left from the bottom');
-            fadeOut();
+            closeIfNotFocused();
           }
         }}
         style={{
@@ -127,7 +148,7 @@ export const ExpandOnHover = (props: {
         ]}
         onLayout={event => {
           const h = event.nativeEvent.layout.height;
-          console.log('Tabbar height: ', h);
+          // console.log('Tabbar height: ', h);
           childrenHeight.current = h + 1;
         }}>
         <View
@@ -138,7 +159,13 @@ export const ExpandOnHover = (props: {
             overflow: 'hidden',
             borderRadius: WINDOW_BORDER_RADIUS,
           }}>
-          <BlurView style={HH}>{children}</BlurView>
+          <ExpandOnHoverContext.Provider
+            value={{
+              onInnerBlur: decrementFocusCountAnd(closeIfNotFocused),
+              onInnerFocus: incrementFocusCount,
+            }}>
+            <BlurView style={HH}>{children}</BlurView>
+          </ExpandOnHoverContext.Provider>
         </View>
       </Animated.View>
     </>

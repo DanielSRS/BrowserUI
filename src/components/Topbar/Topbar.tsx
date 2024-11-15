@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native';
 import { useColors } from 'react-native-sdk';
+import { ExpandOnHoverContext } from '../ExpandOnHover/ExpandOnHover.context';
 
 const WINDOW_CONTROL_AREA_LEFT = 55;
 const WINDOW_CONTROL_AREA_RIGHT = 55;
 const BUTTON_GAP = 10;
+
+interface TopbarProps {
+  //
+}
 
 /**
  * Exibe a barra superior no navegador.
@@ -16,7 +21,9 @@ const BUTTON_GAP = 10;
  *  - Browser menu
  *  - Profile icon
  */
-export const Topbar = () => {
+export const Topbar = (props: TopbarProps) => {
+  const {} = props;
+  const { onInnerBlur, onInnerFocus } = useContext(ExpandOnHoverContext);
   const colors = useColors();
 
   return (
@@ -39,6 +46,8 @@ export const Topbar = () => {
               placeholder={'about:working-in-progress'}
               // @ts-expect-error Exits only on Macos
               enableFocusRing={false}
+              onFocus={onInnerFocus}
+              onBlur={onInnerBlur}
             />
           </View>
         </View>
