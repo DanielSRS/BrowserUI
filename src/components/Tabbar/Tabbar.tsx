@@ -2,6 +2,7 @@ import { BlurView } from 'blurview';
 import React, { useRef, useState } from 'react';
 import { Animated, FlatList, StyleSheet } from 'react-native';
 import {
+  DELAY_TO_OPEN_TABBAR,
   TABBAR_COLAPSED_WIDTH,
   TABLIST_GAP,
   TITLEBAR_SIZE,
@@ -24,18 +25,24 @@ export function Tabbar(props: TabbarProps) {
   const {} = props;
   const [isHovered, setIsHovered] = useState(false);
   const tabbarWidth = useRef(new Animated.Value(TABBAR_COLAPSED_WIDTH));
+  const scheduledId = useRef<NodeJS.Timeout>();
 
   const expand = () => {
-    setIsHovered(true);
-    // Will change fadeAnim value to 1 in 5 seconds
-    Animated.timing(tabbarWidth.current, {
-      toValue: TABBAR_EXPANDED_WIDTH,
-      duration: OPEN_ANIMATION_DURATION,
-      useNativeDriver: false,
-    }).start();
+    scheduledId.current = setTimeout(() => {
+      setIsHovered(true);
+      // Will change fadeAnim value to 1 in 5 seconds
+      Animated.timing(tabbarWidth.current, {
+        toValue: TABBAR_EXPANDED_WIDTH,
+        duration: OPEN_ANIMATION_DURATION,
+        useNativeDriver: false,
+      }).start();
+    }, DELAY_TO_OPEN_TABBAR);
   };
 
   const colapse = () => {
+    // Stop openning schedule if any
+    clearTimeout(scheduledId.current);
+
     // Will change fadeAnim value to 0 in 3 seconds
     Animated.timing(tabbarWidth.current, {
       toValue: TABBAR_COLAPSED_WIDTH,

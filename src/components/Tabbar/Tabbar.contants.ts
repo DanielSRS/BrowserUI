@@ -16,3 +16,5 @@ export const TABLIST_GAP = 3;
  * WINDOW_BORDER_SIZE
  */
 export const TABBAR_COLAPSED_WIDTH = BUTTUN_SIZE + WINDOW_BORDER_SIZE * 2;
+
+export const DELAY_TO_OPEN_TABBAR = 150; // in milisseconds
