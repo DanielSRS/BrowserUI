@@ -77,7 +77,7 @@ const CloseButton = () => {
       style={hoverStyle}>
       {/* Close icon */}
       <TouchableOpacity>
-        <DismissFilled />
+        <DismissFilled color={colors.fillColorTextSecondary} />
       </TouchableOpacity>
     </CloseButtonContainer>
   );
