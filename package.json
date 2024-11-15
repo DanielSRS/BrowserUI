@@ -16,7 +16,8 @@
     "react-native": "0.75.3",
     "react-native-infinity": "link:./modules/infinity",
     "react-native-macos": "0.75.15",
-    "react-native-sdk": "https://github.com/DanielSRS/SDK"
+    "react-native-sdk": "https://github.com/DanielSRS/SDK",
+    "react-native-svg": "^15.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

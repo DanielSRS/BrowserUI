@@ -1495,6 +1495,8 @@ PODS:
     - React-logger (= 0.75.15)
     - React-perflogger (= 0.75.15)
     - React-utils (= 0.75.15)
+  - RNSVG (15.9.0):
+    - React-Core
   - SocketRocket (0.7.0)
   - Yoga (0.0.0)
 
@@ -1562,6 +1564,7 @@ DEPENDENCIES:
   - React-utils (from `../node_modules/react-native-macos/ReactCommon/react/utils`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native-macos/ReactCommon`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - SocketRocket (from `../node_modules/react-native-macos/third-party-podspecs/SocketRocket.podspec`)
   - Yoga (from `../node_modules/react-native-macos/ReactCommon/yoga`)
 
@@ -1688,6 +1691,8 @@ EXTERNAL SOURCES:
     :path: build/generated/ios
   ReactCommon:
     :path: "../node_modules/react-native-macos/ReactCommon"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   SocketRocket:
     :podspec: "../node_modules/react-native-macos/third-party-podspecs/SocketRocket.podspec"
   Yoga:
@@ -1755,6 +1760,7 @@ SPEC CHECKSUMS:
   React-utils: 0b6570f9bd5906be8f30825e4f5b7cbde27cdcf7
   ReactCodegen: 7cbc1233033d9c732ba97dd370f10c59c915fb21
   ReactCommon: d96e1e293621808b6b5facf45316aaf2a8a77e10
+  RNSVG: 3d2bdcaef51c8071880a9c0072fe324f4423a3ba
   SocketRocket: 9ee265c4b5ae2382d18e4ee1d2dd2d7af0ff1ab5
   Yoga: 283ba3f1ca75ca003da22ff1162a978e25bb43d4
 
