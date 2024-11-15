@@ -4,8 +4,7 @@ import { Topbar } from './components/Topbar/Topbar';
 import { Tabbar } from './components/Tabbar/Tabbar';
 import { ExpandOnHover } from './components/ExpandOnHover/ExpandOnHover';
 import { useColors } from 'react-native-sdk';
-
-const WINDOW_BORDER_SIZE = 6;
+import { WINDOW_BORDER_SIZE } from './constraints/layout';
 
 export function App() {
   const colors = useColors();

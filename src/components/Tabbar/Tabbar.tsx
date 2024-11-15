@@ -58,26 +58,34 @@ export function Tabbar(props: TabbarProps) {
         }}
         style={[
           sideBar,
-          isHovered ? StyleSheet.absoluteFill : undefined,
+          isHovered && StyleSheet.absoluteFill,
           isHovered
             ? {
                 // backgroundColor: 'rgba(255, 0, 0, 0.5)',
                 maxWidth: TABBAR_EXPANDED_WIDTH,
-                // paddingRight: WINDOW_BORDER_SIZE,
                 width: tabbarWidth.current,
+                left: -WINDOW_BORDER_SIZE,
+                top: -WINDOW_BORDER_SIZE,
+                bottom: -WINDOW_BORDER_SIZE,
               }
             : undefined,
         ]}>
-        <BV
-          style={[
-            { paddingRight: isHovered ? WINDOW_BORDER_SIZE : undefined },
-            fatlist,
-          ]}>
-          <FlatList
-            data={TABS}
-            contentContainerStyle={fatlistContent}
-            renderItem={({ item }) => <Tab {...item} />}
-          />
+        <BV style={[fatlist]}>
+          <View
+            style={[
+              // { backgroundColor: 'rgba(255, 0, 0, 0.1)' },
+              isHovered && {
+                padding: WINDOW_BORDER_SIZE,
+                paddingTop: WINDOW_BORDER_SIZE + TITLEBAR_SIZE,
+              },
+              flexOne,
+            ]}>
+            <FlatList
+              data={TABS}
+              contentContainerStyle={fatlistContent}
+              renderItem={({ item }) => <Tab {...item} />}
+            />
+          </View>
         </BV>
       </Animated.View>
     </View>
@@ -105,6 +113,10 @@ const minSideBar = {
 const fatlist = {
   flex: 1,
   marginTop: -TITLEBAR_SIZE,
+} as const;
+
+const flexOne = {
+  flex: 1,
 } as const;
 
 const TABLIST_GAP = 3;
