@@ -9,6 +9,7 @@ import {
 } from './Tabbar.contants';
 import { Tab } from './components/Tab';
 import { Styled } from 'react-native-sdk';
+import { NewTabButton } from './components/NewTabButton';
 
 const TABS = [{ id: 13 }, { id: 14 }, { id: 15 }] as const;
 const TABBAR_EXPANDED_WIDTH = 250;
@@ -67,6 +68,7 @@ export function Tabbar(props: TabbarProps) {
           contentContainerStyle={fatlistContent}
           renderItem={({ item }) => <Tab {...item} />}
         />
+        <NewTabButton />
       </Animated.View>
     </TabbarContainer>
   );
@@ -79,15 +81,15 @@ const TabbarContainer = Styled.createStyledView({
 const sideBar = {
   // backgroundColor: 'red',
   borderRadius: WINDOW_BORDER_SIZE,
+  padding: WINDOW_BORDER_SIZE,
   flex: 1,
 } as const;
 const fatlist = {
   flex: 1,
-  marginTop: -TITLEBAR_SIZE,
+  marginTop: -TITLEBAR_SIZE - WINDOW_BORDER_SIZE,
   // backgroundColor: 'rgba(255, 0, 0, 0.1)',
 } as const;
 
 const fatlistContent = {
   rowGap: TABLIST_GAP,
-  padding: WINDOW_BORDER_SIZE,
 } as const;
