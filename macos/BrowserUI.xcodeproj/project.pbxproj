@@ -7,20 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3ABF27AD92E3FE0DC04FAEB2 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A67535709D412D7ED4EF25E3 /* PrivacyInfo.xcprivacy */; };
+		148197F7E2C91CF628777A8B /* libPods-BrowserUI-macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C963851A215F64782FDF761 /* libPods-BrowserUI-macOS.a */; };
+		360ABEB77B4A958BBEE2923C /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 7CBEB6C1F2D37594D1894F18 /* PrivacyInfo.xcprivacy */; };
 		5142014D2437B4B30078DB4F /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5142014C2437B4B30078DB4F /* AppDelegate.mm */; };
 		514201522437B4B40078DB4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 514201512437B4B40078DB4F /* Assets.xcassets */; };
 		514201552437B4B40078DB4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 514201532437B4B40078DB4F /* Main.storyboard */; };
 		514201582437B4B40078DB4F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 514201572437B4B40078DB4F /* main.m */; };
-		55ACD7BB94D0FDF8E0B1181A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 3E05374E3B1B9655206D0038 /* PrivacyInfo.xcprivacy */; };
-		FF74FA63C801C061B0B0AB16 /* libPods-BrowserUI-macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 222BF8DC1BFF6A044950BE05 /* libPods-BrowserUI-macOS.a */; };
+		77BE73B69B7595FBA1F860AB /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B66375DEF20584DEAA145DD3 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		137F1B42FF26870231ABE7D2 /* Pods-BrowserUI-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrowserUI-macOS.debug.xcconfig"; path = "Target Support Files/Pods-BrowserUI-macOS/Pods-BrowserUI-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* BrowserUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrowserUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		222BF8DC1BFF6A044950BE05 /* libPods-BrowserUI-macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BrowserUI-macOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E05374E3B1B9655206D0038 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = ../PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		514201492437B4B30078DB4F /* BrowserUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrowserUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5142014B2437B4B30078DB4F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5142014C2437B4B30078DB4F /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -29,8 +26,11 @@
 		514201562437B4B40078DB4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		514201572437B4B40078DB4F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		514201592437B4B40078DB4F /* BrowserUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BrowserUI.entitlements; sourceTree = "<group>"; };
-		A67535709D412D7ED4EF25E3 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		BE14B4569C2406A2B736C9BE /* Pods-BrowserUI-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrowserUI-macOS.release.xcconfig"; path = "Target Support Files/Pods-BrowserUI-macOS/Pods-BrowserUI-macOS.release.xcconfig"; sourceTree = "<group>"; };
+		5C963851A215F64782FDF761 /* libPods-BrowserUI-macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BrowserUI-macOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CBEB6C1F2D37594D1894F18 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		B06729F0E4BEFD3C73489D1A /* Pods-BrowserUI-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrowserUI-macOS.debug.xcconfig"; path = "Target Support Files/Pods-BrowserUI-macOS/Pods-BrowserUI-macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		B66375DEF20584DEAA145DD3 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = ../PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		C6D797B00E2EE29A31D27C16 /* Pods-BrowserUI-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BrowserUI-macOS.release.xcconfig"; path = "Target Support Files/Pods-BrowserUI-macOS/Pods-BrowserUI-macOS.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -46,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF74FA63C801C061B0B0AB16 /* libPods-BrowserUI-macOS.a in Frameworks */,
+				148197F7E2C91CF628777A8B /* libPods-BrowserUI-macOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,7 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				222BF8DC1BFF6A044950BE05 /* libPods-BrowserUI-macOS.a */,
+				5C963851A215F64782FDF761 /* libPods-BrowserUI-macOS.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -72,9 +72,19 @@
 				514201562437B4B40078DB4F /* Info.plist */,
 				514201572437B4B40078DB4F /* main.m */,
 				514201592437B4B40078DB4F /* BrowserUI.entitlements */,
-				3E05374E3B1B9655206D0038 /* PrivacyInfo.xcprivacy */,
+				B66375DEF20584DEAA145DD3 /* PrivacyInfo.xcprivacy */,
 			);
 			path = "BrowserUI-macOS";
+			sourceTree = "<group>";
+		};
+		67AF3C380A320C72C09B988C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B06729F0E4BEFD3C73489D1A /* Pods-BrowserUI-macOS.debug.xcconfig */,
+				C6D797B00E2EE29A31D27C16 /* Pods-BrowserUI-macOS.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -91,8 +101,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				A67535709D412D7ED4EF25E3 /* PrivacyInfo.xcprivacy */,
-				97A80FBFFA636D1C6E558146 /* Pods */,
+				7CBEB6C1F2D37594D1894F18 /* PrivacyInfo.xcprivacy */,
+				67AF3C380A320C72C09B988C /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -106,16 +116,6 @@
 				514201492437B4B30078DB4F /* BrowserUI.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		97A80FBFFA636D1C6E558146 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				137F1B42FF26870231ABE7D2 /* Pods-BrowserUI-macOS.debug.xcconfig */,
-				BE14B4569C2406A2B736C9BE /* Pods-BrowserUI-macOS.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,7 +148,7 @@
 				514201462437B4B30078DB4F /* Frameworks */,
 				514201472437B4B30078DB4F /* Resources */,
 				381D8A6E24576A4E00465D17 /* Bundle React Native code and images */,
-				E1DBB924874DD5A9E6ABEE66 /* [CP] Copy Pods Resources */,
+				F03838E18D2DEB456076B62F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -200,7 +200,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ABF27AD92E3FE0DC04FAEB2 /* PrivacyInfo.xcprivacy in Resources */,
+				360ABEB77B4A958BBEE2923C /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +210,7 @@
 			files = (
 				514201522437B4B40078DB4F /* Assets.xcassets in Resources */,
 				514201552437B4B40078DB4F /* Main.storyboard in Resources */,
-				55ACD7BB94D0FDF8E0B1181A /* PrivacyInfo.xcprivacy in Resources */,
+				77BE73B69B7595FBA1F860AB /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +271,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native-macos/scripts/react-native-xcode.sh\n";
 		};
-		E1DBB924874DD5A9E6ABEE66 /* [CP] Copy Pods Resources */ = {
+		F03838E18D2DEB456076B62F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -374,7 +374,7 @@
 		};
 		5142015B2437B4B40078DB4F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 137F1B42FF26870231ABE7D2 /* Pods-BrowserUI-macOS.debug.xcconfig */;
+			baseConfigurationReference = B06729F0E4BEFD3C73489D1A /* Pods-BrowserUI-macOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -398,7 +398,7 @@
 		};
 		5142015C2437B4B40078DB4F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE14B4569C2406A2B736C9BE /* Pods-BrowserUI-macOS.release.xcconfig */;
+			baseConfigurationReference = C6D797B00E2EE29A31D27C16 /* Pods-BrowserUI-macOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
