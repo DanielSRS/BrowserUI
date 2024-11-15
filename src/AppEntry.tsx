@@ -1,13 +1,5 @@
 import React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
-import {
-  multiply,
-  hideTitleBar,
-  hideTrafficLights,
-  showTitleBar,
-  showTrafficLights,
-  animateTrafficLightsPositionTo,
-} from 'react-native-infinity';
+import { StyleSheet, View } from 'react-native';
 import { Topbar } from './components/Topbar/Topbar';
 import { Tabbar } from './components/Tabbar/Tabbar';
 import { ExpandOnHover } from './components/ExpandOnHover/ExpandOnHover';
@@ -34,77 +26,8 @@ export function App() {
           ]}>
           {/* Content */}
           <View style={styles.content}>
-            <Button
-              title="multiply"
-              onPress={async () => {
-                try {
-                  const res = await multiply(1, 2);
-                  console.log(res);
-                } catch (error) {
-                  console.log(error);
-                }
-              }}
-            />
-            <Button
-              title="hide title bar"
-              onPress={async () => {
-                try {
-                  await hideTitleBar();
-                } catch (error) {
-                  console.log(error);
-                }
-              }}
-            />
-            <Button
-              title="show title bar"
-              onPress={async () => {
-                try {
-                  await showTitleBar();
-                } catch (error) {
-                  console.log(error);
-                }
-              }}
-            />
-            <Button
-              title="hideTrafficLights"
-              onPress={async () => {
-                try {
-                  await hideTrafficLights();
-                } catch (error) {
-                  console.log(error);
-                }
-              }}
-            />
-            <Button
-              title="showTrafficLights"
-              onPress={async () => {
-                try {
-                  await showTrafficLights();
-                } catch (error) {
-                  console.log(error);
-                }
-              }}
-            />
-            <Button
-              title="Animate tl position 20"
-              onPress={async () => {
-                try {
-                  animateTrafficLightsPositionTo(0, 20, 0.2);
-                } catch (error) {
-                  console.log(error);
-                }
-              }}
-            />
-            <Button
-              title="Animate tl position 0"
-              onPress={async () => {
-                try {
-                  animateTrafficLightsPositionTo(0, 0, 0.2);
-                } catch (error) {
-                  console.log(error);
-                }
-              }}
-            />
+            {}
+            {}
           </View>
         </View>
       </View>
@@ -132,8 +55,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     borderRadius: WINDOW_BORDER_SIZE,
   },
   row: {
