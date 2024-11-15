@@ -1,29 +1,12 @@
 import { BlurView } from 'blurview';
-import React, {
-  forwardRef,
-  useImperativeHandle,
-  useMemo,
-  useRef,
-  useState,
-  type ComponentProps,
-} from 'react';
+import React, { useMemo, useRef, useState } from 'react';
+import { Animated, FlatList, StyleSheet, View } from 'react-native';
 import {
-  Animated,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  type ViewStyle,
-} from 'react-native';
-import { Caption, useColors } from 'react-native-sdk';
-import Svg, { Path } from 'react-native-svg';
-
-const WINDOW_BORDER_SIZE = 6;
-/**
- * When titlebar is hidden, its size seem to still be accoutable and
- * all flatlist seems to inherit some sort of padding
- */
-const TITLEBAR_SIZE = 21;
+  BUTTUN_SIZE,
+  TITLEBAR_SIZE,
+  WINDOW_BORDER_SIZE,
+} from './Tabbar.contants';
+import { Tab } from './components/Tab';
 
 const TABS = [{ id: 13 }, { id: 14 }] as const;
 const TABBAR_EXPANDED_WIDTH = 250;
@@ -69,6 +52,7 @@ export function Tabbar(props: TabbarProps) {
         onMouseEnter={(_p: MouseEvent) => {
           expand();
         }}
+        key={isHovered ? 'A' : 'B'}
         onMouseLeave={(_p: MouseEvent) => {
           colapse();
         }}
@@ -102,20 +86,6 @@ export function Tabbar(props: TabbarProps) {
 
 const tabbarContainer = { zIndex: 3 } as const;
 
-const BUTTON_ICON_SIZE = 16;
-const BUTTUN_SIZE = 36;
-const ICON_PADDING = (BUTTUN_SIZE - BUTTON_ICON_SIZE) / 2;
-const btn = {
-  borderRadius: WINDOW_BORDER_SIZE * 0.9,
-  flexDirection: 'row',
-  alignItems: 'center',
-  overflow: 'hidden',
-  paddingRight: ICON_PADDING,
-} as const;
-const btnIconContainer = {
-  padding: ICON_PADDING,
-} as const;
-
 const sideBar = {
   // backgroundColor: 'red',
   borderRadius: WINDOW_BORDER_SIZE,
@@ -130,14 +100,6 @@ const sideBar = {
 
 const minSideBar = {
   minWidth: BUTTUN_SIZE,
-} as const;
-
-const icon = {
-  width: BUTTON_ICON_SIZE,
-  aspectRatio: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-  overflow: 'hidden',
 } as const;
 
 const fatlist = {
@@ -155,97 +117,3 @@ const fatlistContent = {
  * WINDOW_BORDER_SIZE
  */
 const TABBAR_COLAPSED_WIDTH = BUTTUN_SIZE + WINDOW_BORDER_SIZE;
-
-interface TabProps {
-  id: number;
-  onPress?: () => void;
-}
-const Tab = (props: TabProps) => {
-  const { id, onPress } = props;
-  const colors = useColors();
-  const hoverRef = useRef<HoverViewRef>(null);
-
-  return (
-    <View key={id}>
-      <HoverView
-        ref={hoverRef}
-        style={{ borderRadius: btn.borderRadius }}
-        hoveredStyle={{ backgroundColor: colors.fillColorControlDefault }}
-      />
-      <TouchableOpacity
-        onPress={onPress}
-        onPressIn={() => {
-          hoverRef.current?.setOpacity(0.4);
-        }}
-        onPressOut={() => {
-          hoverRef.current?.setOpacity(1);
-        }}
-        style={btn}>
-        <View style={btnIconContainer}>
-          <View style={[icon]}>
-            <TabDesktopNewPageRegular color={colors.fillColorTextSecondary} />
-          </View>
-        </View>
-        <Caption
-          numberOfLines={1} // otherwise, tab height changes when theres no enough space
-        >
-          TAB NAME
-        </Caption>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-interface HoverViewProps {
-  hoveredStyle?: ViewStyle;
-  style?: ViewStyle;
-}
-interface HoverViewRef {
-  setOpacity: (value: number) => void;
-}
-const HoverView = forwardRef<HoverViewRef, HoverViewProps>((props, ref) => {
-  const { hoveredStyle, style } = props;
-  const [isHovered, setIsHovered] = useState(false);
-  const [opacity, setOpaciy] = useState(1);
-  const bgColor = { backgroundColor: 'rgba(255, 255, 255, 0.08)' };
-
-  useImperativeHandle(ref, () => ({
-    setOpacity: setOpaciy,
-  }));
-
-  return (
-    <View
-      // @ts-expect-error
-      onMouseEnter={(_p: MouseEvent) => {
-        setIsHovered(true);
-      }}
-      onMouseLeave={(_p: MouseEvent) => {
-        setIsHovered(false);
-      }}
-      style={[
-        StyleSheet.absoluteFill,
-        style,
-        { opacity },
-        isHovered ? bgColor : undefined,
-        isHovered ? hoveredStyle : undefined,
-      ]}
-    />
-  );
-});
-
-function TabDesktopNewPageRegular(props: ComponentProps<typeof Svg>) {
-  return (
-    <Svg
-      width={20}
-      height={20}
-      viewBox="0 0 20 20"
-      fill="none"
-      // xmlns="http://www.w3.org/2000/svg"
-      {...props}>
-      <Path
-        d="M7 12a1 1 0 100-2 1 1 0 000 2zm4-1a1 1 0 11-2 0 1 1 0 012 0zm2 1a1 1 0 100-2 1 1 0 000 2zM3 5.5A2.5 2.5 0 015.5 3h9A2.5 2.5 0 0117 5.5v9a2.5 2.5 0 01-2.5 2.5h-9A2.5 2.5 0 013 14.5v-9zM5.5 4A1.5 1.5 0 004 5.5v9A1.5 1.5 0 005.5 16h9a1.5 1.5 0 001.5-1.5V7H9.5A1.5 1.5 0 018 5.5V4H5.5zM16 5.5A1.5 1.5 0 0014.5 4H9v1.5a.5.5 0 00.5.5H16v-.5z"
-        fill={props.color ?? '#212121'}
-      />
-    </Svg>
-  );
-}
