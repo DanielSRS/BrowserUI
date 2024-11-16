@@ -28,6 +28,8 @@ export function Tabbar(props: TabbarProps) {
   const scheduledId = useRef<NodeJS.Timeout>();
 
   const expand = () => {
+    clearTimeout(scheduledId.current);
+
     scheduledId.current = setTimeout(() => {
       setIsHovered(true);
       // Will change fadeAnim value to 1 in 5 seconds
@@ -49,14 +51,16 @@ export function Tabbar(props: TabbarProps) {
     // Stop openning schedule if any
     clearTimeout(scheduledId.current);
 
-    // Will change fadeAnim value to 0 in 3 seconds
-    Animated.timing(tabbarWidth.current, {
-      toValue: TABBAR_COLAPSED_WIDTH,
-      duration: CLOSE_ANIMATION_DURATION,
-      useNativeDriver: false,
-    }).start(() => {
-      setIsHovered(false);
-    });
+    scheduledId.current = setTimeout(() => {
+      // Will change fadeAnim value to 0 in CLOSE_ANIMATION_DURATION
+      Animated.timing(tabbarWidth.current, {
+        toValue: TABBAR_COLAPSED_WIDTH,
+        duration: CLOSE_ANIMATION_DURATION,
+        useNativeDriver: false,
+      }).start(() => {
+        setIsHovered(false);
+      });
+    }, 10);
   };
 
   return (
