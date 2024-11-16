@@ -14,7 +14,7 @@ import { NewTabButton } from './components/NewTabButton';
 
 const TABS = [{ id: 13 }, { id: 14 }, { id: 15 }] as const;
 const TABBAR_EXPANDED_WIDTH = 250;
-const OPEN_ANIMATION_DURATION = 50;
+// const OPEN_ANIMATION_DURATION = 100;
 const CLOSE_ANIMATION_DURATION = 150;
 // const DELAY_TO_EXPAND = 1000;
 
@@ -31,10 +31,16 @@ export function Tabbar(props: TabbarProps) {
     scheduledId.current = setTimeout(() => {
       setIsHovered(true);
       // Will change fadeAnim value to 1 in 5 seconds
-      Animated.timing(tabbarWidth.current, {
+      Animated.spring(tabbarWidth.current, {
         toValue: TABBAR_EXPANDED_WIDTH,
-        duration: OPEN_ANIMATION_DURATION,
+        // duration: OPEN_ANIMATION_DURATION,
+        isInteraction: true,
         useNativeDriver: false,
+        // mass: 1,
+        // damping: 600,
+        // stiffness: 800,
+        bounciness: 100,
+        speed: 20,
       }).start();
     }, DELAY_TO_OPEN_TABBAR);
   };
