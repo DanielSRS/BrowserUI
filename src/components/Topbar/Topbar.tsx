@@ -3,6 +3,13 @@ import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native';
 import { useColors } from 'react-native-sdk';
 import { ExpandOnHoverContext } from '../ExpandOnHover/ExpandOnHover.context';
+import { TopBarButton } from './components/TopbarButton';
+import {
+  ArrowLeftRegular,
+  ArrowRightRegular,
+  MoreHorizontalRegular,
+  PersonRegular,
+} from './components/icons';
 
 const WINDOW_CONTROL_AREA_LEFT = 55;
 const WINDOW_CONTROL_AREA_RIGHT = 55;
@@ -32,9 +39,9 @@ export const Topbar = (props: TopbarProps) => {
       <View style={styles.contentArea}>
         <View style={styles.buttonsContainer}>
           {/* Voltar */}
-          <View style={styles.navbarButton} />
+          <TopBarButton>{ArrowLeftRegular}</TopBarButton>
           {/* Avançar */}
-          <View style={styles.navbarButton} />
+          <TopBarButton>{ArrowRightRegular}</TopBarButton>
         </View>
         {}
         <View style={styles.spacer} />
@@ -42,7 +49,14 @@ export const Topbar = (props: TopbarProps) => {
           <View style={styles.url}>
             <TextInput
               placeholderTextColor={colors.fillColorTextSecondary}
-              style={styles.urlInput}
+              style={[
+                styles.urlInput,
+                {
+                  backgroundColor: colors.backgroundFillColorLayerDefault,
+                  borderWidth: StyleSheet.hairlineWidth,
+                  borderColor: colors.strokeColorCardStrokeDefault,
+                },
+              ]}
               placeholder={'about:working-in-progress'}
               // @ts-expect-error Exits only on Macos
               enableFocusRing={false}
@@ -55,9 +69,9 @@ export const Topbar = (props: TopbarProps) => {
         {}
         <View style={styles.buttonsContainer}>
           {/* Menu */}
-          <View style={styles.navbarButton} />
+          <TopBarButton>{MoreHorizontalRegular}</TopBarButton>
           {/* Perfil */}
-          <View style={styles.navbarButton} />
+          <TopBarButton>{PersonRegular}</TopBarButton>
         </View>
       </View>
       {}
@@ -100,12 +114,12 @@ const styles = StyleSheet.create({
   },
   urlInput: {
     paddingVertical: 8,
-    backgroundColor: '#00000040',
+    // backgroundColor: '#00000040',
     paddingHorizontal: 32,
     borderRadius: 10,
     width: '100%',
     maxWidth: 400,
-    borderColor: 'red',
+    // borderColor: 'red',
     fontSize: 14,
     justifyContent: 'center',
     alignItems: 'center',
