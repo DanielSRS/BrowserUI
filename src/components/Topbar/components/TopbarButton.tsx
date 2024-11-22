@@ -11,7 +11,7 @@ interface TabProps {
    */
   children: (props: { color: ColorValue }) => React.ReactNode;
 }
-export const TopBarButton = React.memo((props: TabProps) => {
+export const TopBarButton = React.memo(function TopBarButton(props: TabProps) {
   const { children: Icon } = props;
   const [isHovered, setIsHovered] = useState(false);
   const colors = useColors();
@@ -62,5 +62,4 @@ const ButtonContainer = Styled.createStyledTouchableOpacity({
   justifyContent: 'center',
   alignItems: 'center',
 });
-
 // const hoverBgColor = { backgroundColor: 'rgba(255, 255, 255, 0.08)' };
