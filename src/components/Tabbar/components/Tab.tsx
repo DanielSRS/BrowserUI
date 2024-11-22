@@ -16,7 +16,7 @@ interface TabProps {
   /**
    * Callback chamado ao pressionar a aba
    */
-  onPress?: () => void;
+  onPress?: (pressedTab: Pick<TabProps, 'id' | 'name'>) => void;
   /**
    * Indica se aba está selecionada
    */
@@ -27,17 +27,24 @@ interface TabProps {
   name: string;
 }
 export const Tab = React.memo((props: TabProps) => {
-  const { id, onPress, isSelected } = props;
+  const { id, onPress, isSelected, name } = props;
   const [isHovered, setIsHovered] = useState(false);
   const colors = useColors();
 
   const hoverBgColor = { backgroundColor: colors.fillColorControlDefault };
 
+  const fireTabPressEvent = () => {
+    onPress?.({
+      id,
+      name,
+    });
+  };
+
   return (
     <View key={id}>
       {/* Pressable area */}
       <TouchableOpacity
-        onPress={onPress}
+        onPress={fireTabPressEvent}
         // @ts-expect-error
         onMouseEnter={(_p: MouseEvent) => {
           setIsHovered(true);
@@ -63,7 +70,7 @@ export const Tab = React.memo((props: TabProps) => {
         <TabName
           // otherwise, tab height changes when theres no enough space
           numberOfLines={1}>
-          TAB NAME
+          {name}
         </TabName>
 
         {/* Close button */}

@@ -12,7 +12,11 @@ import { Tab } from './components/Tab';
 import { Styled } from 'react-native-sdk';
 import { NewTabButton } from './components/NewTabButton';
 
-const TABS = [{ id: 13 }, { id: 14 }, { id: 15 }] as const;
+const TABS = [
+  { id: 13, name: 'New Tab' },
+  { id: 14, name: 'New Tab' },
+  { id: 15, name: 'New Tab' },
+] as const;
 const TABBAR_EXPANDED_WIDTH = 250;
 // const OPEN_ANIMATION_DURATION = 100;
 const CLOSE_ANIMATION_DURATION = 150;
