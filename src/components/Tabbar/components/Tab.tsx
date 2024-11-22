@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Caption, Styled, useColors } from 'react-native-sdk';
 import {
   BUTTON_ICON_SIZE,
@@ -9,11 +9,25 @@ import {
 import { DismissFilled, TabDesktopNewPageRegular } from './Icons';
 
 interface TabProps {
+  /**
+   * Identificação unica da aba
+   */
   id: number;
+  /**
+   * Callback chamado ao pressionar a aba
+   */
   onPress?: () => void;
+  /**
+   * Indica se aba está selecionada
+   */
+  isSelected?: boolean;
+  /**
+   * Nome da aba
+   */
+  name: string;
 }
 export const Tab = React.memo((props: TabProps) => {
-  const { id, onPress } = props;
+  const { id, onPress, isSelected } = props;
   const [isHovered, setIsHovered] = useState(false);
   const colors = useColors();
 
@@ -31,7 +45,13 @@ export const Tab = React.memo((props: TabProps) => {
         onMouseLeave={(_p: MouseEvent) => {
           setIsHovered(false);
         }}
-        style={[btn, isHovered && hoverBgColor]}>
+        style={[
+          btn,
+          isHovered && hoverBgColor,
+          isSelected && {
+            borderColor: colors.controlStrongStrokeDefault,
+          },
+        ]}>
         {/* Tab icon */}
         <View style={btnIconContainer}>
           <View style={[icon]}>
@@ -93,6 +113,8 @@ const btn = {
   alignItems: 'center',
   overflow: 'hidden',
   paddingRight: ICON_PADDING,
+  borderWidth: StyleSheet.hairlineWidth,
+  borderColor: 'transparent',
 } as const;
 
 const btnIconContainer = {

@@ -10,6 +10,7 @@ const meta = {
   },
   args: {
     id: 1,
+    name: 'New Tab',
   },
   decorators: [globalPadding],
 } satisfies Meta<typeof Tab>;
@@ -17,3 +18,8 @@ type Story = StoryObj<typeof meta>;
 
 export default meta;
 export const Basic: Story = {};
+export const Selected: Story = {
+  args: {
+    isSelected: true,
+  },
+};
