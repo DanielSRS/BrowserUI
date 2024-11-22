@@ -1,5 +1,16 @@
 import React, { StrictMode } from 'react';
 import { SdkProvider } from 'react-native-sdk';
+import { View } from 'react-native';
+/**
+ * Adds a padding of 20 to all stories
+ */
+export function globalPadding(Story: () => React.ReactNode) {
+  return (
+    <View style={globalPaddingStyle}>
+      <Story />
+    </View>
+  );
+}
 
 /**
  * Wrapps all components in <StrictMode>
@@ -25,3 +36,5 @@ export function globalSdkProvider(Story: () => React.ReactNode) {
     </SdkProvider>
   );
 }
+
+const globalPaddingStyle = { padding: 20, flex: 1 } as const;
