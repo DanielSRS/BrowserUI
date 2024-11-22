@@ -5,7 +5,7 @@ import {
   DELAY_TO_OPEN_TABBAR,
   TABBAR_COLAPSED_WIDTH,
   TABLIST_GAP,
-  TITLEBAR_SIZE,
+  // TITLEBAR_SIZE,
   WINDOW_BORDER_SIZE,
 } from './Tabbar.contants';
 import { Tab } from './components/Tab';
@@ -93,6 +93,7 @@ export function Tabbar(props: TabbarProps) {
 
 const TabbarContainer = Styled.createStyledView({
   zIndex: 3,
+  flex: 1,
 });
 
 const sideBar = {
@@ -103,7 +104,7 @@ const sideBar = {
 } as const;
 const fatlist = {
   flex: 1,
-  marginTop: -TITLEBAR_SIZE - WINDOW_BORDER_SIZE,
+  // marginTop: -TITLEBAR_SIZE - WINDOW_BORDER_SIZE,
   // backgroundColor: 'rgba(255, 0, 0, 0.1)',
 } as const;
 
