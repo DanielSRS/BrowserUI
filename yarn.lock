@@ -2621,6 +2621,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@legendapp/state@npm:^3.0.0-beta.19":
+  version: 3.0.0-beta.19
+  resolution: "@legendapp/state@npm:3.0.0-beta.19"
+  dependencies:
+    use-sync-external-store: "npm:^1.2.2"
+  checksum: 10/938af210c72e21b75be68d3b9166bead5a91e0b48d336d58cf954cfb9180b5a51e0228707a7178f2dbfb62b81b1afc2f2000398c3c9b066a128c288fe69a7041
+  languageName: node
+  linkType: hard
+
 "@nicolo-ribaudo/eslint-scope-5-internals@npm:5.1.1-v1":
   version: 5.1.1-v1
   resolution: "@nicolo-ribaudo/eslint-scope-5-internals@npm:5.1.1-v1"
@@ -3850,6 +3859,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.20.0"
     "@babel/runtime": "npm:^7.20.0"
     "@gorhom/bottom-sheet": "npm:^5.0.6"
+    "@legendapp/state": "npm:^3.0.0-beta.19"
     "@react-native-async-storage/async-storage": "npm:^2.1.0"
     "@react-native-community/datetimepicker": "npm:^8.2.0"
     "@react-native-community/slider": "npm:^4.5.5"
@@ -11131,6 +11141,15 @@ __metadata:
     react: ">=18.0.0"
     scheduler: ">=0.19.0"
   checksum: 10/2dfd8a916b75c9ef4243381a9a061f04942dcfdaa8cf0658a574a7ca888c3f873822341c0eeff7bfda72c27447157da3b8aac886c1cf18a35975f9652885443c
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "use-sync-external-store@npm:1.2.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 10/671e9c190aab9a8374a5d468c6ba17f52c38b6fae970110bc196fc1e2b57204149aea9619be49a1bb5207fb6e51d8afd19c3bcb94afe61813fed039821461dc0
   languageName: node
   linkType: hard
 

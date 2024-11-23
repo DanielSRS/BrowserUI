@@ -12,6 +12,7 @@
     "storybook-generate": "sb-rn-get-stories"
   },
   "dependencies": {
+    "@legendapp/state": "^3.0.0-beta.19",
     "blurview": "link:./modules/BlurView",
     "react": "18.3.1",
     "react-native": "0.75.4",
