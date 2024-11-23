@@ -88,7 +88,7 @@ const TabbarContainer = memo(
   Styled.createStyledView(
     {
       zIndex: 3,
-      flex: 1,
+      height: '100%',
     },
     'TabbarContainer',
   ),
