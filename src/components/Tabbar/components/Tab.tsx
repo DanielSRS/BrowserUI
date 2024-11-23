@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useCallback, useMemo, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Caption, Styled, useColors } from 'react-native-sdk';
 import {
@@ -26,19 +26,25 @@ interface TabProps {
    */
   name: string;
 }
-export const Tab = React.memo((props: TabProps) => {
+export const Tab = React.memo(function Tab(props: TabProps) {
   const { id, onPress, isSelected, name } = props;
   const [isHovered, setIsHovered] = useState(false);
   const colors = useColors();
 
-  const hoverBgColor = { backgroundColor: colors.fillColorControlDefault };
+  const hoverBgColor = useMemo(
+    () => ({ backgroundColor: colors.fillColorControlDefault }),
+    [colors.fillColorControlDefault],
+  );
 
-  const fireTabPressEvent = () => {
+  const fireTabPressEvent = useCallback(() => {
     onPress?.({
       id,
       name,
     });
-  };
+  }, [id, name, onPress]);
+
+  const setHovered = useCallback(() => setIsHovered(true), []);
+  const unsetHovered = useCallback(() => setIsHovered(false), []);
 
   return (
     <View key={id}>
@@ -46,12 +52,8 @@ export const Tab = React.memo((props: TabProps) => {
       <TouchableOpacity
         onPress={fireTabPressEvent}
         // @ts-expect-error
-        onMouseEnter={(_p: MouseEvent) => {
-          setIsHovered(true);
-        }}
-        onMouseLeave={(_p: MouseEvent) => {
-          setIsHovered(false);
-        }}
+        onMouseEnter={setHovered}
+        onMouseLeave={unsetHovered}
         style={[
           btn,
           isHovered && hoverBgColor,
@@ -80,11 +82,17 @@ export const Tab = React.memo((props: TabProps) => {
   );
 });
 
-const CloseButtonContainer = Styled.createStyledView({
-  borderRadius: 3,
-  padding: 1,
-});
-const CloseButton = () => {
+const CloseButtonContainer = memo(
+  Styled.createStyledView(
+    {
+      borderRadius: 3,
+      padding: 1,
+    },
+    'CloseButtonContainer',
+  ),
+);
+
+const CloseButton = memo(() => {
   const [isHovered, setIsHovered] = useState<true>();
   const colors = useColors();
 
@@ -108,11 +116,17 @@ const CloseButton = () => {
       </TouchableOpacity>
     </CloseButtonContainer>
   );
-};
-
-const TabName = Styled.createStyled(Caption, {
-  flex: 1,
 });
+
+const TabName = memo(
+  Styled.createStyled(
+    Caption,
+    {
+      flex: 1,
+    },
+    'TabName',
+  ),
+);
 
 const btn = {
   borderRadius: WINDOW_BORDER_SIZE * 0.9,
@@ -125,7 +139,8 @@ const btn = {
 } as const;
 
 const btnIconContainer = {
-  padding: ICON_PADDING,
+  paddingHorizontal: ICON_PADDING,
+  paddingVertical: ICON_PADDING - StyleSheet.hairlineWidth * 2,
 } as const;
 
 const icon = {
