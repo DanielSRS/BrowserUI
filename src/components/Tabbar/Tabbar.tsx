@@ -1,11 +1,9 @@
 import { BlurView } from 'blurview';
-import React, { memo, useCallback, useRef, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { Animated, FlatList, StyleSheet, View } from 'react-native';
 import {
-  DELAY_TO_OPEN_TABBAR,
   TABBAR_COLAPSED_WIDTH,
   TABLIST_GAP,
-  // TITLEBAR_SIZE,
   WINDOW_BORDER_SIZE,
 } from './Tabbar.contants';
 import { Tab } from './components/Tab';
@@ -14,8 +12,8 @@ import { NewTabButton } from './components/NewTabButton';
 import type { TabbarProps } from './Tabbar.types';
 
 const TABBAR_EXPANDED_WIDTH = 250;
-const OPEN_ANIMATION_DURATION = 100;
-const CLOSE_ANIMATION_DURATION = 100;
+// const OPEN_ANIMATION_DURATION = 100;
+// const CLOSE_ANIMATION_DURATION = 100;
 // const DELAY_TO_EXPAND = 1000;
 
 export const Tabbar = memo(function Tabbar(props: TabbarProps) {
@@ -24,64 +22,21 @@ export const Tabbar = memo(function Tabbar(props: TabbarProps) {
     tabList,
     //
   } = props.useTabsData ? props.useTabsData(props) : props;
-  /**
-   * 0: colapsed
-   * 1: expanding
-   * 2: expanded
-   * 3: colapsing
-   */
-  const [state, setState] = useState<0 | 1 | 2 | 3>(0);
-  const tabbarWidth = useRef(new Animated.Value(TABBAR_COLAPSED_WIDTH));
-  const scheduledId = useRef<NodeJS.Timeout>();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const expand = useCallback(() => {
-    /**
-     * Se estiver aberto ou abrindo não faz nada
-     */
-    if (state === 1 || state === 2) {
+    if (isExpanded) {
       return;
     }
-    console.log('expand');
-    clearTimeout(scheduledId.current);
-    tabbarWidth.current.stopAnimation();
-
-    scheduledId.current = setTimeout(() => {
-      setState(1);
-      // Will change fadeAnim value to 1 in 5 seconds
-      Animated.timing(tabbarWidth.current, {
-        toValue: TABBAR_EXPANDED_WIDTH,
-        duration: OPEN_ANIMATION_DURATION,
-        isInteraction: true,
-        useNativeDriver: false,
-        // mass: 1,
-        // damping: 600,
-        // stiffness: 800,
-        // bounciness: 100,
-        // speed: 20,
-      }).start(() => {
-        setState(2);
-      });
-    }, DELAY_TO_OPEN_TABBAR);
-  }, [state]);
+    setIsExpanded(true);
+  }, [isExpanded]);
 
   const colapse = useCallback(() => {
-    console.log('colapse');
-    // Stop openning schedule if any
-    clearTimeout(scheduledId.current);
-    tabbarWidth.current.stopAnimation();
-    setState(3);
-
-    scheduledId.current = setTimeout(() => {
-      // Will change fadeAnim value to 0 in CLOSE_ANIMATION_DURATION
-      Animated.timing(tabbarWidth.current, {
-        toValue: TABBAR_COLAPSED_WIDTH,
-        duration: CLOSE_ANIMATION_DURATION,
-        useNativeDriver: false,
-      }).start(() => {
-        setState(0);
-      });
-    }, 10);
-  }, []);
+    if (!isExpanded) {
+      return;
+    }
+    setIsExpanded(false);
+  }, [isExpanded]);
 
   const renderItem = useCallback(
     ({ item }: { item: (typeof tabList)['0'] }) => <Tab {...item} />,
@@ -91,7 +46,7 @@ export const Tabbar = memo(function Tabbar(props: TabbarProps) {
   return (
     <TabbarContainer>
       {/* Expandable view */}
-      {state > 0 && (
+      {isExpanded && (
         <View
           // @ts-expect-error
           onMouseLeave={colapse}
@@ -107,9 +62,12 @@ export const Tabbar = memo(function Tabbar(props: TabbarProps) {
         // @ts-expect-error
         onMouseEnter={expand}
         // onMouseLeave={colapse}
-        style={[sideBar, { width: tabbarWidth.current }]}>
+        style={[
+          sideBar,
+          { width: isExpanded ? TABBAR_EXPANDED_WIDTH : TABBAR_COLAPSED_WIDTH },
+        ]}>
         {/* Blurred background */}
-        {state > 0 && <BlurView style={[StyleSheet.absoluteFill]} />}
+        {isExpanded && <BlurView style={[StyleSheet.absoluteFill]} />}
 
         {/* Tab list */}
         <FlatList
