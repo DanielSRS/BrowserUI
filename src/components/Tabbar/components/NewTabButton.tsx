@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
-import { View } from 'react-native';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import { Caption, Styled, useColors } from 'react-native-sdk';
-import { HoverView, type HoverViewRef } from './HoverView';
+import { HoverView } from './HoverView';
 import {
   BUTTON_ICON_SIZE,
   ICON_PADDING,
@@ -16,26 +16,19 @@ interface NewTabButtonProps {
 export const NewTabButton = React.memo((props: NewTabButtonProps) => {
   const { onPress } = props;
   const colors = useColors();
-  const hoverRef = useRef<HoverViewRef>(null);
 
   return (
     <View>
       {/* Tab background */}
-      <HoverView
-        ref={hoverRef}
-        style={hoverStyle}
-        hoveredStyle={{ backgroundColor: colors.fillColorControlDefault }}
-      />
 
       {/* Pressable area */}
-      <TouchableContainer
-        onPress={onPress}
-        onPressIn={() => {
-          hoverRef.current?.setOpacity(0.4);
-        }}
-        onPressOut={() => {
-          hoverRef.current?.setOpacity(1);
-        }}>
+      <TouchableContainer onPress={onPress}>
+        {/* Hover bg */}
+        <HoverView
+          style={hoverStyle}
+          hoveredStyle={{ backgroundColor: colors.fillColorControlDefault }}
+        />
+
         {/* Tab icon */}
         <IconContainer>
           <IconGroup>
@@ -73,7 +66,7 @@ const hoverStyle = {
 } as const;
 
 const IconContainer = Styled.createStyledView({
-  padding: ICON_PADDING,
+  padding: ICON_PADDING - StyleSheet.hairlineWidth,
 });
 
 const IconGroup = Styled.createStyledView({

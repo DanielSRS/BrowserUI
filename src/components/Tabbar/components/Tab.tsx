@@ -7,6 +7,9 @@ import {
   WINDOW_BORDER_SIZE,
 } from '../Tabbar.contants';
 import { DismissFilled, TabDesktopNewPageRegular } from './Icons';
+import { HoverView } from './HoverView';
+import { observer, useObservable } from '@legendapp/state/react';
+import type { ObservableBoolean } from '@legendapp/state';
 
 interface TabProps {
   /**
@@ -26,13 +29,16 @@ interface TabProps {
    */
   name: string;
 }
-export const Tab = React.memo(function Tab(props: TabProps) {
+export const Tab = observer(function Tab(props: TabProps) {
   const { id, onPress, isSelected, name } = props;
-  const [isHovered, setIsHovered] = useState(false);
+  const isHovered$ = useObservable(false);
   const colors = useColors();
 
   const hoverBgColor = useMemo(
-    () => ({ backgroundColor: colors.fillColorControlDefault }),
+    () => ({
+      backgroundColor: colors.fillColorControlDefault,
+      borderRadius: WINDOW_BORDER_SIZE * 0.9,
+    }),
     [colors.fillColorControlDefault],
   );
 
@@ -43,42 +49,47 @@ export const Tab = React.memo(function Tab(props: TabProps) {
     });
   }, [id, name, onPress]);
 
-  const setHovered = useCallback(() => setIsHovered(true), []);
-  const unsetHovered = useCallback(() => setIsHovered(false), []);
+  const setHovered = () => {
+    // console.log('tab hover');
+    isHovered$.set(true);
+  };
+  const unsetHovered = () => {
+    // console.log('tab unhover');
+    isHovered$.set(false);
+  };
 
   return (
-    <View key={id}>
-      {/* Pressable area */}
-      <TouchableOpacity
-        onPress={fireTabPressEvent}
-        // @ts-expect-error
-        onMouseEnter={setHovered}
-        onMouseLeave={unsetHovered}
-        style={[
-          btn,
-          isHovered && hoverBgColor,
-          isSelected && {
-            borderColor: colors.controlStrongStrokeDefault,
-          },
-        ]}>
-        {/* Tab icon */}
-        <View style={btnIconContainer}>
-          <View style={[icon]}>
-            <TabDesktopNewPageRegular color={colors.fillColorTextSecondary} />
-          </View>
+    <TabContent
+      key={id}
+      onPress={fireTabPressEvent}
+      // @ts-expect-error
+      onMouseEnter={setHovered}
+      onMouseLeave={unsetHovered}
+      style={[
+        isSelected && {
+          borderColor: colors.controlStrongStrokeDefault,
+        },
+      ]}>
+      {/* Hover bg */}
+      <HoverView show={isHovered$} style={hoverBgColor} />
+
+      {/* Tab icon */}
+      <View style={btnIconContainer}>
+        <View style={[icon]}>
+          <TabDesktopNewPageRegular color={colors.fillColorTextSecondary} />
         </View>
+      </View>
 
-        {/* Tab name */}
-        <TabName
-          // otherwise, tab height changes when theres no enough space
-          numberOfLines={1}>
-          {name}
-        </TabName>
+      {/* Tab name */}
+      <TabName
+        // otherwise, tab height changes when theres no enough space
+        numberOfLines={1}>
+        {name}
+      </TabName>
 
-        {/* Close button */}
-        {isHovered && <CloseButton />}
-      </TouchableOpacity>
-    </View>
+      {/* Close button */}
+      <CloseButton isTabHovered={isHovered$} />
+    </TabContent>
   );
 });
 
@@ -92,31 +103,38 @@ const CloseButtonContainer = memo(
   ),
 );
 
-const CloseButton = memo(() => {
-  const [isHovered, setIsHovered] = useState<true>();
-  const colors = useColors();
+const CloseButton = memo(
+  observer(function CloseButton(props: { isTabHovered: ObservableBoolean }) {
+    const { isTabHovered } = props;
+    const [isHovered, setIsHovered] = useState<true>();
+    const colors = useColors();
 
-  const hoverStyle = isHovered && {
-    backgroundColor: colors.controlAltQuarternary,
-  };
+    if (!isTabHovered.get()) {
+      return null;
+    }
 
-  return (
-    <CloseButtonContainer
-      // @ts-expect-error
-      onMouseEnter={(_p: MouseEvent) => {
-        setIsHovered(true);
-      }}
-      onMouseLeave={(_p: MouseEvent) => {
-        setIsHovered(undefined);
-      }}
-      style={hoverStyle}>
-      {/* Close icon */}
-      <TouchableOpacity>
-        <DismissFilled color={colors.fillColorTextSecondary} />
-      </TouchableOpacity>
-    </CloseButtonContainer>
-  );
-});
+    const hoverStyle = isHovered && {
+      backgroundColor: colors.controlAltQuarternary,
+    };
+
+    return (
+      <CloseButtonContainer
+        // @ts-expect-error
+        onMouseEnter={(_p: MouseEvent) => {
+          setIsHovered(true);
+        }}
+        onMouseLeave={(_p: MouseEvent) => {
+          setIsHovered(undefined);
+        }}
+        style={hoverStyle}>
+        {/* Close icon */}
+        <TouchableOpacity>
+          <DismissFilled color={colors.fillColorTextSecondary} />
+        </TouchableOpacity>
+      </CloseButtonContainer>
+    );
+  }),
+);
 
 const TabName = memo(
   Styled.createStyled(
@@ -128,15 +146,18 @@ const TabName = memo(
   ),
 );
 
-const btn = {
-  borderRadius: WINDOW_BORDER_SIZE * 0.9,
-  flexDirection: 'row',
-  alignItems: 'center',
-  overflow: 'hidden',
-  paddingRight: ICON_PADDING,
-  borderWidth: StyleSheet.hairlineWidth,
-  borderColor: 'transparent',
-} as const;
+const TabContent = Styled.createStyledTouchableOpacity(
+  {
+    borderRadius: WINDOW_BORDER_SIZE * 0.9,
+    flexDirection: 'row',
+    alignItems: 'center',
+    overflow: 'hidden',
+    paddingRight: ICON_PADDING,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'transparent',
+  },
+  'TabContent',
+);
 
 const btnIconContainer = {
   paddingHorizontal: ICON_PADDING,
