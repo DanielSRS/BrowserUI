@@ -57,7 +57,7 @@ export const Topbar = (props: TopbarProps) => {
                   borderColor: colors.strokeColorCardStrokeDefault,
                 },
               ]}
-              placeholder={'about:working-in-progress'}
+              placeholder={'about:work-in-progress'}
               // @ts-expect-error Exits only on Macos
               enableFocusRing={false}
               onFocus={onInnerFocus}
