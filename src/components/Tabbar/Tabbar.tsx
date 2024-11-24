@@ -75,6 +75,7 @@ export const Tabbar = memo(function Tabbar(props: TabbarProps) {
           style={fatlist}
           contentContainerStyle={fatlistContent}
           renderItem={renderItem}
+          showsVerticalScrollIndicator={isExpanded}
         />
         <NewButtonContainer>
           <NewTabButton />
