@@ -6,7 +6,7 @@ import {
   // showTrafficLights,
 } from 'react-native-infinity';
 import { BlurView } from 'blurview';
-import { useColors } from 'react-native-sdk';
+import { Styled, useColors } from 'react-native-sdk';
 import { ExpandOnHoverContext } from './ExpandOnHover.context';
 import type { MouseEvent } from 'react-native';
 
@@ -77,7 +77,7 @@ export const ExpandOnHover = (props: {
   };
 
   if (expanded) {
-    return children;
+    return <VerticalPadding>{children}</VerticalPadding>;
   }
 
   const incrementFocusCount = () => {
@@ -171,3 +171,7 @@ export const ExpandOnHover = (props: {
     </>
   );
 };
+
+const VerticalPadding = Styled.createStyledView({
+  paddingVertical: WINDOW_BORDER_SIZE,
+});

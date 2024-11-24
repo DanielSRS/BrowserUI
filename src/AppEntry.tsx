@@ -40,12 +40,13 @@ const TABS = [
   { id: 30, name: 'New Tab' },
 ] as const;
 
+const isTopBarExpanded = true;
 export function App() {
   const colors = useColors();
   return (
     <Window>
       {/* Nav bar */}
-      <ExpandOnHover>
+      <ExpandOnHover expanded={isTopBarExpanded}>
         <Topbar />
       </ExpandOnHover>
       <Row>
@@ -53,7 +54,10 @@ export function App() {
         <Tabbar tabList={TABS} />
         {/* Content container */}
         <ContentArea
-          style={[{ borderColor: colors.strokeColorDividerStrokeDefault }]}>
+          style={[
+            { borderColor: colors.strokeColorDividerStrokeDefault },
+            !isTopBarExpanded && { top: WINDOW_BORDER_SIZE },
+          ]}>
           {/* Content */}
           <Content>
             {}
@@ -103,7 +107,7 @@ const ContentArea = memo(
       left: SIDEBAR_SIZE,
       right: WINDOW_BORDER_SIZE,
       bottom: WINDOW_BORDER_SIZE,
-      top: WINDOW_BORDER_SIZE,
+      // top: WINDOW_BORDER_SIZE,
       // backgroundColor: 'green',
     },
     'ContentArea',
