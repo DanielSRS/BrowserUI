@@ -22,6 +22,7 @@ export const NewTab = function NewTab() {
             backgroundColor: colors.fillColorControlTertiary,
             borderColor: colors.strokeColorSurfaceStrokeDefault,
           }}
+          placeholderTextColor={colors.fillColorTextSecondary}
         />
       </LogoSearchGroup>
     </PageContainer>
