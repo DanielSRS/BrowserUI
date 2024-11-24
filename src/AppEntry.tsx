@@ -5,6 +5,7 @@ import { Tabbar } from './components/Tabbar/Tabbar';
 import { ExpandOnHover } from './components/ExpandOnHover/ExpandOnHover';
 import { Styled, useColors } from 'react-native-sdk';
 import { WINDOW_BORDER_SIZE } from './constraints/layout';
+import { NewTab } from './Pages/NewTab/NewTab';
 
 const TABS = [
   { id: 0, name: 'New Tab' },
@@ -61,6 +62,7 @@ export function App() {
           {/* Content */}
           <Content>
             {}
+            <NewTab />
             {}
           </Content>
         </ContentArea>
