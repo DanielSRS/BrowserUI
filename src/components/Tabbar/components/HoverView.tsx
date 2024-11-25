@@ -11,7 +11,6 @@ export interface HoverViewProps {
 export const HoverView = observer(function HoverView(props: HoverViewProps) {
   const { hoveredStyle, style, show } = props;
   const [isHovered, setIsHovered] = useState(false);
-  const bgColor = { backgroundColor: 'rgba(255, 255, 255, 0.08)' };
 
   if (show !== undefined && !show.get()) {
     return null;
@@ -28,10 +27,12 @@ export const HoverView = observer(function HoverView(props: HoverViewProps) {
       }}
       style={[
         StyleSheet.absoluteFill,
-        style,
         isHovered ? bgColor : undefined,
+        style,
         isHovered ? hoveredStyle : undefined,
       ]}
     />
   );
 });
+
+const bgColor = { backgroundColor: 'rgba(255, 255, 255, 0.08)' };
