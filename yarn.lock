@@ -2621,7 +2621,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@legendapp/state@npm:^3.0.0-beta.19":
+"@legendapp/state@npm:^3.0.0-beta.19, @legendapp/state@npm:beta":
   version: 3.0.0-beta.19
   resolution: "@legendapp/state@npm:3.0.0-beta.19"
   dependencies:
@@ -3889,7 +3889,7 @@ __metadata:
     react-native-macos: "npm:0.75.15"
     react-native-reanimated: "npm:^3.16.2"
     react-native-safe-area-context: "npm:^4.14.0"
-    react-native-sdk: "https://github.com/DanielSRS/SDK"
+    react-native-sdk: DanielSRS/SDK
     react-native-svg: "npm:^15.9.0"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:5.0.4"
@@ -9569,10 +9569,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-sdk@https://github.com/DanielSRS/SDK":
+react-native-sdk@DanielSRS/SDK:
   version: 0.1.0
-  resolution: "react-native-sdk@https://github.com/DanielSRS/SDK.git#commit=ad13940d2bc055443a5b380671b858408c206850"
+  resolution: "react-native-sdk@https://github.com/DanielSRS/SDK.git#commit=b759bc8ecdc26704431e7a96747532eb3cda9a1f"
   dependencies:
+    "@legendapp/state": "npm:beta"
     scheduler: "npm:^0.23.2"
     ts-pattern: "npm:^5.2.0"
     use-context-selector: "npm:^2.0.0"
@@ -9583,7 +9584,7 @@ __metadata:
   peerDependenciesMeta:
     react-native-document-picker:
       optional: true
-  checksum: 10/e283b7a66052c5403c65cb586175b4bb5da61fa7e71c6a588a3a56547df967db1d033e2903e68202347100647e92d267fc0df006fa869f39d0aa8c39f2956ce8
+  checksum: 10/4170a92fbb8a376d8fc78cb77e53719b58c802fbd80971cae0b5f06f3fc5f5946bc1147d5e33a13f3275b78a076c6ab0d53b5003fc79efd10576bdd536d51251
   languageName: node
   linkType: hard
 
