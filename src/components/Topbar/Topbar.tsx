@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native';
-import { useColors } from 'react-native-sdk';
+import { Menu, useColors } from 'react-native-sdk';
 import { ExpandOnHoverContext } from '../ExpandOnHover/ExpandOnHover.context';
 import { TopBarButton } from './components/TopbarButton';
 import {
@@ -68,10 +68,20 @@ export const Topbar = (props: TopbarProps) => {
         <View style={styles.spacer} />
         {}
         <View style={styles.buttonsContainer}>
-          {/* Menu */}
-          <TopBarButton>{MoreHorizontalRegular}</TopBarButton>
           {/* Perfil */}
           <TopBarButton>{PersonRegular}</TopBarButton>
+          {/* Menu */}
+          <Menu target={<TopBarButton>{MoreHorizontalRegular}</TopBarButton>}>
+            <Menu.MenuEntry>New Tab</Menu.MenuEntry>
+            <Menu.MenuEntry>New Window</Menu.MenuEntry>
+            <Menu.MenuEntry>New InPrivate Window</Menu.MenuEntry>
+            <Menu.MenuEntry>Favorites</Menu.MenuEntry>
+            <Menu.MenuEntry>History</Menu.MenuEntry>
+            <Menu.MenuEntry>Downloads</Menu.MenuEntry>
+            <Menu.MenuEntry>Extensions</Menu.MenuEntry>
+            <Menu.MenuEntry>More Tools</Menu.MenuEntry>
+            <Menu.MenuEntry>Settings</Menu.MenuEntry>
+          </Menu>
         </View>
       </View>
       {}
