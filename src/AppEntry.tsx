@@ -117,7 +117,7 @@ const Content = observer(() => {
 
   return (
     <ContentContainer>
-      <ZStack style={{ flex: 1 }}>{tabs}</ZStack>
+      <ZStack>{tabs}</ZStack>
     </ContentContainer>
   );
 });
