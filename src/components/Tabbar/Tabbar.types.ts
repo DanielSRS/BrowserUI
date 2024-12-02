@@ -1,13 +1,18 @@
 import type { PropsWithCustomHook } from 'react-native-sdk';
+import type { Workspace } from '../../store/store';
+import type { Observable } from '@legendapp/state';
 
-type TabData = {
-  readonly id: number;
-  readonly name: string;
+type TabbarStaticProps = {
+  workspace: Observable<Workspace>;
 };
 
-type TabbarStaticProps = {};
-type TabbarDinamicProps = {
-  readonly tabList: Readonly<Array<TabData>>;
+export type TabbarDinamicProps = {
+  // readonly tabList: Readonly<Array<Tab>>;
+  // selectedTabId: number;
+  // onTabPress?: (tabId: number) => void;
+  // onTabClose?: (tabId: number) => void;
+  // onNewTabPress?: () => void;
+  // len: number;
 };
 
 export type TabbarProps = PropsWithCustomHook<

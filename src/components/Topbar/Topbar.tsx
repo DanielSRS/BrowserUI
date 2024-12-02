@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native';
 import { Menu, useColors } from 'react-native-sdk';
@@ -10,9 +10,11 @@ import {
   MoreHorizontalRegular,
   PersonRegular,
 } from './components/icons';
+import { workspace } from '../../store/store';
+import { observer } from '@legendapp/state/react';
 
-const WINDOW_CONTROL_AREA_LEFT = 55;
-const WINDOW_CONTROL_AREA_RIGHT = 55;
+const WINDOW_CONTROL_AREA_LEFT = 56;
+const WINDOW_CONTROL_AREA_RIGHT = 56;
 const BUTTON_GAP = 10;
 
 interface TopbarProps {
@@ -28,10 +30,14 @@ interface TopbarProps {
  *  - Browser menu
  *  - Profile icon
  */
-export const Topbar = (props: TopbarProps) => {
+export const Topbar = observer((props: TopbarProps) => {
   const {} = props;
   const { onInnerBlur, onInnerFocus } = useContext(ExpandOnHoverContext);
   const colors = useColors();
+
+  const openSettings = useCallback(() => {
+    workspace.focusConfigTab() ? undefined : workspace.openNewConfigTab();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -72,7 +78,9 @@ export const Topbar = (props: TopbarProps) => {
           <TopBarButton>{PersonRegular}</TopBarButton>
           {/* Menu */}
           <Menu target={<TopBarButton>{MoreHorizontalRegular}</TopBarButton>}>
-            <Menu.MenuEntry>New Tab</Menu.MenuEntry>
+            <Menu.MenuEntry onPress={workspace.openNewTab}>
+              New Tab
+            </Menu.MenuEntry>
             <Menu.MenuEntry>New Window</Menu.MenuEntry>
             <Menu.MenuEntry>New InPrivate Window</Menu.MenuEntry>
             <Menu.MenuEntry>Favorites</Menu.MenuEntry>
@@ -80,14 +88,14 @@ export const Topbar = (props: TopbarProps) => {
             <Menu.MenuEntry>Downloads</Menu.MenuEntry>
             <Menu.MenuEntry>Extensions</Menu.MenuEntry>
             <Menu.MenuEntry>More Tools</Menu.MenuEntry>
-            <Menu.MenuEntry>Settings</Menu.MenuEntry>
+            <Menu.MenuEntry onPress={openSettings}>Settings</Menu.MenuEntry>
           </Menu>
         </View>
       </View>
       {}
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {

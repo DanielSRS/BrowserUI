@@ -1,48 +1,23 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import { Topbar } from './components/Topbar/Topbar';
 import { Tabbar } from './components/Tabbar/Tabbar';
 import { ExpandOnHover } from './components/ExpandOnHover/ExpandOnHover';
-import { Styled, useColors } from 'react-native-sdk';
+import { Styled, useColors, ZStack } from 'react-native-sdk';
 import { WINDOW_BORDER_SIZE } from './constraints/layout';
 import { NewTab } from './Pages/NewTab/NewTab';
-
-const TABS = [
-  { id: 0, name: 'New Tab' },
-  { id: 1, name: 'New Tab' },
-  { id: 2, name: 'New Tab' },
-  { id: 3, name: 'New Tab' },
-  { id: 4, name: 'New Tab' },
-  { id: 5, name: 'New Tab' },
-  { id: 6, name: 'New Tab' },
-  { id: 7, name: 'New Tab' },
-  { id: 8, name: 'New Tab' },
-  { id: 9, name: 'New Tab' },
-  { id: 10, name: 'New Tab' },
-  { id: 11, name: 'New Tab' },
-  { id: 12, name: 'New Tab' },
-  { id: 13, name: 'New Tab' },
-  { id: 14, name: 'New Tab' },
-  { id: 15, name: 'New Tab' },
-  { id: 16, name: 'New Tab' },
-  { id: 17, name: 'New Tab' },
-  { id: 18, name: 'New Tab' },
-  { id: 19, name: 'New Tab' },
-  { id: 20, name: 'New Tab' },
-  { id: 21, name: 'New Tab' },
-  { id: 22, name: 'New Tab' },
-  { id: 23, name: 'New Tab' },
-  { id: 24, name: 'New Tab' },
-  { id: 25, name: 'New Tab' },
-  { id: 26, name: 'New Tab' },
-  { id: 27, name: 'New Tab' },
-  { id: 28, name: 'New Tab' },
-  { id: 29, name: 'New Tab' },
-  { id: 30, name: 'New Tab' },
-] as const;
+import { observer } from '@legendapp/state/react';
+import { workspace } from './store/store';
+import { Config } from './Pages/Config/Config';
+import { hideTitleBar, showTrafficLights } from 'react-native-infinity';
 
 const isTopBarExpanded = true;
-export function App() {
+if (isTopBarExpanded) {
+  showTrafficLights();
+} else {
+  hideTitleBar();
+}
+export const App = function App() {
   const colors = useColors();
   return (
     <Window>
@@ -52,7 +27,7 @@ export function App() {
       </ExpandOnHover>
       <Row>
         {/* Tabbar */}
-        <Tabbar tabList={TABS} />
+        <Tabbar workspace={workspace} />
         {/* Content container */}
         <ContentArea
           style={[
@@ -60,16 +35,12 @@ export function App() {
             !isTopBarExpanded && { top: WINDOW_BORDER_SIZE },
           ]}>
           {/* Content */}
-          <Content>
-            {}
-            <NewTab />
-            {}
-          </Content>
+          <Content />
         </ContentArea>
       </Row>
     </Window>
   );
-}
+};
 
 const SIDEBAR_SIZE = 36 + 2 * WINDOW_BORDER_SIZE;
 
@@ -116,7 +87,7 @@ const ContentArea = memo(
   ),
 );
 
-const Content = memo(
+const ContentContainer = memo(
   Styled.createStyledView(
     {
       flex: 1,
@@ -125,3 +96,28 @@ const Content = memo(
     'Content',
   ),
 );
+
+const Content = observer(() => {
+  const selectedTab = workspace.selectedTabId.get();
+  const tabList = workspace.tabs.get();
+  const tabs = useMemo(
+    () =>
+      tabList.map(tab => {
+        if (tab.id !== selectedTab) {
+          return <React.Fragment key={tab.id} />;
+        }
+        if (tab.url === 'browser://config') {
+          return <Config key={tab.id} />;
+        }
+
+        return <NewTab key={tab.id} />;
+      }),
+    [selectedTab, tabList],
+  );
+
+  return (
+    <ContentContainer>
+      <ZStack style={{ flex: 1 }}>{tabs}</ZStack>
+    </ContentContainer>
+  );
+});

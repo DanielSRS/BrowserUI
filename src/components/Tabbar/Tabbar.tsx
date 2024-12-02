@@ -9,6 +9,8 @@ import {
 import { Tab } from './components/Tab';
 import { Styled } from 'react-native-sdk';
 import { NewTabButton } from './components/NewTabButton';
+import { observer } from '@legendapp/state/react';
+import type { Tab as TAB } from '../../store/store';
 import type { TabbarProps } from './Tabbar.types';
 
 const TABBAR_EXPANDED_WIDTH = 250;
@@ -16,13 +18,17 @@ const TABBAR_EXPANDED_WIDTH = 250;
 // const CLOSE_ANIMATION_DURATION = 100;
 // const DELAY_TO_EXPAND = 1000;
 
-export const Tabbar = memo(function Tabbar(props: TabbarProps) {
-  const {} = props;
-  const {
-    tabList,
-    //
-  } = props.useTabsData ? props.useTabsData(props) : props;
+export const Tabbar = observer(function Tabbar(props: TabbarProps) {
+  const { workspace } = props;
+  const {} = props.useTabsData ? props.useTabsData(props) : props;
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const onTabPress = workspace.selectTab;
+  const selectedTabId = workspace.selectedTabId.get();
+  const onTabClose = workspace.closeTab;
+  const tabList = workspace.tabs.get();
+  const onNewTabPress = workspace.openNewTab;
+  const len = workspace.tabs.length;
 
   const expand = useCallback(() => {
     if (isExpanded) {
@@ -39,8 +45,16 @@ export const Tabbar = memo(function Tabbar(props: TabbarProps) {
   }, [isExpanded]);
 
   const renderItem = useCallback(
-    ({ item }: { item: (typeof tabList)['0'] }) => <Tab {...item} />,
-    [],
+    ({ item }: { item: TAB }) => (
+      <Tab
+        {...item}
+        key={item.id}
+        isSelected={selectedTabId === item.id}
+        onPress={() => onTabPress?.(item.id)}
+        onClose={() => onTabClose?.(item.id)}
+      />
+    ),
+    [onTabPress, selectedTabId, onTabClose],
   );
 
   return (
@@ -64,7 +78,9 @@ export const Tabbar = memo(function Tabbar(props: TabbarProps) {
         // onMouseLeave={colapse}
         style={[
           sideBar,
-          { width: isExpanded ? TABBAR_EXPANDED_WIDTH : TABBAR_COLAPSED_WIDTH },
+          {
+            width: isExpanded ? TABBAR_EXPANDED_WIDTH : TABBAR_COLAPSED_WIDTH,
+          },
         ]}>
         {/* Blurred background */}
         {isExpanded && <BlurView style={[StyleSheet.absoluteFill]} />}
@@ -76,9 +92,10 @@ export const Tabbar = memo(function Tabbar(props: TabbarProps) {
           contentContainerStyle={fatlistContent}
           renderItem={renderItem}
           showsVerticalScrollIndicator={isExpanded}
+          extraData={len}
         />
         <NewButtonContainer>
-          <NewTabButton />
+          <NewTabButton onPress={onNewTabPress} />
         </NewButtonContainer>
       </Animated.View>
     </TabbarContainer>
