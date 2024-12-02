@@ -15,7 +15,7 @@ import { observer } from '@legendapp/state/react';
 
 const WINDOW_CONTROL_AREA_LEFT = 56;
 const WINDOW_CONTROL_AREA_RIGHT = 56;
-const BUTTON_GAP = 10;
+const BUTTON_GAP = 4;
 
 interface TopbarProps {
   //
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   buttonsContainer: {
-    paddingHorizontal: BUTTON_GAP,
+    paddingHorizontal: 16,
     paddingVertical: 2,
     // backgroundColor: 'green',
     flexDirection: 'row',

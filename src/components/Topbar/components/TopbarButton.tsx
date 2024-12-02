@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Styled, useColors } from 'react-native-sdk';
 import { BUTTON_ICON_SIZE } from '../../Tabbar/Tabbar.contants';
 import type { ColorValue } from 'react-native';
+import { HoverView } from '../../Tabbar/components/HoverView';
 
 interface TabProps {
   // id: number;
@@ -13,24 +14,13 @@ interface TabProps {
 }
 export const TopBarButton = React.memo(function TopBarButton(props: TabProps) {
   const { children: Icon } = props;
-  const [isHovered, setIsHovered] = useState(false);
   const colors = useColors();
-
-  const hoverBgColor = { backgroundColor: colors.fillColorControlDefault };
 
   return (
     // Pressable area
-    <ButtonContainer
-      // onPress={onPress}
-      // @ts-expect-error
-      onMouseEnter={(_p: MouseEvent) => {
-        setIsHovered(true);
-      }}
-      onMouseLeave={(_p: MouseEvent) => {
-        setIsHovered(false);
-      }}
-      style={[isHovered && hoverBgColor]}>
+    <ButtonContainer>
       {/* Tab icon */}
+      <HoverView />
       <IconGroup>
         <Icon color={colors.fillColorTextPrimary} />
       </IconGroup>
@@ -58,8 +48,9 @@ const ButtonContainer = Styled.createStyledTouchableOpacity({
   aspectRatio: 4 / 3,
   height: 30,
   borderRadius: 4,
-  backgroundColor: 'rgba(0, 0, 0, 0.04)',
+  // backgroundColor: 'rgba(0, 0, 0, 0.04)',
   justifyContent: 'center',
   alignItems: 'center',
+  overflow: 'hidden',
 });
 // const hoverBgColor = { backgroundColor: 'rgba(255, 255, 255, 0.08)' };
