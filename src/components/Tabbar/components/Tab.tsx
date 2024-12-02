@@ -20,6 +20,7 @@ interface TabProps {
    * Callback chamado ao pressionar a aba
    */
   onPress?: (pressedTab: Pick<TabProps, 'id' | 'name'>) => void;
+  onClose?: (pressedTab: Pick<TabProps, 'id' | 'name'>) => void;
   /**
    * Indica se aba está selecionada
    */
@@ -30,16 +31,16 @@ interface TabProps {
   name: string;
 }
 export const Tab = observer(function Tab(props: TabProps) {
-  const { id, onPress, isSelected, name } = props;
+  const { id, onPress, isSelected, name, onClose } = props;
   const isHovered$ = useObservable(false);
   const colors = useColors();
 
   const hoverBgColor = useMemo(
     () => ({
-      backgroundColor: colors.fillColorControlDefault,
+      backgroundColor: colors.fillColorSubtleSecondary,
       borderRadius: WINDOW_BORDER_SIZE * 0.9,
     }),
-    [colors.fillColorControlDefault],
+    [colors.fillColorSubtleSecondary],
   );
 
   const fireTabPressEvent = useCallback(() => {
@@ -48,6 +49,13 @@ export const Tab = observer(function Tab(props: TabProps) {
       name,
     });
   }, [id, name, onPress]);
+
+  const fireTabCloseEvent = useCallback(() => {
+    onClose?.({
+      id,
+      name,
+    });
+  }, [id, name, onClose]);
 
   const setHovered = () => {
     // console.log('tab hover');
@@ -60,7 +68,6 @@ export const Tab = observer(function Tab(props: TabProps) {
 
   return (
     <TabContent
-      key={id}
       onPress={fireTabPressEvent}
       // @ts-expect-error
       onMouseEnter={setHovered}
@@ -88,7 +95,7 @@ export const Tab = observer(function Tab(props: TabProps) {
       </TabName>
 
       {/* Close button */}
-      <CloseButton isTabHovered={isHovered$} />
+      <CloseButton isTabHovered={isHovered$} onPress={fireTabCloseEvent} />
     </TabContent>
   );
 });
@@ -104,8 +111,11 @@ const CloseButtonContainer = memo(
 );
 
 const CloseButton = memo(
-  observer(function CloseButton(props: { isTabHovered: ObservableBoolean }) {
-    const { isTabHovered } = props;
+  observer(function CloseButton(props: {
+    isTabHovered: ObservableBoolean;
+    onPress: () => void;
+  }) {
+    const { isTabHovered, onPress } = props;
     const [isHovered, setIsHovered] = useState<true>();
     const colors = useColors();
 
@@ -128,7 +138,7 @@ const CloseButton = memo(
         }}
         style={hoverStyle}>
         {/* Close icon */}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
           <DismissFilled color={colors.fillColorTextSecondary} />
         </TouchableOpacity>
       </CloseButtonContainer>
