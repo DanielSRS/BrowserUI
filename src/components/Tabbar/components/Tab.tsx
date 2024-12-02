@@ -170,8 +170,8 @@ const TabContent = Styled.createStyledTouchableOpacity(
 );
 
 const btnIconContainer = {
-  paddingHorizontal: ICON_PADDING,
-  paddingVertical: ICON_PADDING - StyleSheet.hairlineWidth * 2,
+  paddingHorizontal: ICON_PADDING - StyleSheet.hairlineWidth,
+  paddingVertical: ICON_PADDING - StyleSheet.hairlineWidth,
 } as const;
 
 const icon = {
@@ -180,6 +180,7 @@ const icon = {
   justifyContent: 'center',
   alignItems: 'center',
   overflow: 'hidden',
+  // backgroundColor: 'red',
 } as const;
 
 // const hoverBgColor = { backgroundColor: 'rgba(255, 255, 255, 0.08)' };
