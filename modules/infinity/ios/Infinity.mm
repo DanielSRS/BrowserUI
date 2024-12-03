@@ -14,6 +14,7 @@ RCT_EXTERN_METHOD(showTitleBar)
 
 RCT_EXTERN_METHOD(animateTrafficLights:(double)x y:(double)y duration:(double)duration)
 
+RCT_EXTERN_METHOD(getButtonPositions:(RCTPromiseResolveBlock)resolve withRejecter:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(showTrafficLights)
 

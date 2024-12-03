@@ -3,6 +3,8 @@ import React
 
 @objc(Infinity)
 class Infinity: NSObject {
+  private var buttonsX: CGFloat = 0.0
+  private var buttonsY: CGFloat = 0.0
 
   @objc(multiply:withB:withResolver:withRejecter:)
   func multiply(a: Float, b: Float, resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock) -> Void {
@@ -91,5 +93,29 @@ class Infinity: NSObject {
         }
       }
     }
+  }
+
+  private func getInitialPos() {
+    DispatchQueue.main.async {
+      if let window = NSApplication.shared.mainWindow {
+        let closeButton = window.standardWindowButton(.closeButton)
+        let miniaturizeButton = window.standardWindowButton(.miniaturizeButton)
+        let zoomButton = window.standardWindowButton(.zoomButton)
+
+        guard let closeButtonFrame = closeButton?.frame,
+              let miniaturizeButtonFrame = miniaturizeButton?.frame,
+              let zoomButtonFrame = zoomButton?.frame else {
+          return
+        }
+          
+          self.buttonsY = closeButtonFrame.origin.y
+      }
+    }
+  }
+    
+  @objc(getButtonPositions:withRejecter:)
+  func getButtonPositions(resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
+    let positions: [String: CGFloat] = ["buttonsX": self.buttonsX, "buttonsY": self.buttonsY]
+    resolve(positions)
   }
 }
