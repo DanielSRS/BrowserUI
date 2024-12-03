@@ -95,6 +95,35 @@ class Infinity: NSObject {
     }
   }
 
+  @objc(changeTrafficLightsPosition:y:withResolver:withRejecter:)
+  func changeTrafficLightsPosition(x: Double, y: Double, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) -> Void {
+    self.buttonsX = CGFloat(x)
+    self.buttonsY = CGFloat(y)
+      changeTrafficLightsPosition(x: x, y: y)
+    resolve(nil)
+  }
+
+  private func changeTrafficLightsPosition(x: Double, y: Double) {
+    DispatchQueue.main.async {
+      if let window = NSApplication.shared.mainWindow {
+        let closeButton = window.standardWindowButton(.closeButton)
+        let miniaturizeButton = window.standardWindowButton(.miniaturizeButton)
+        let zoomButton = window.standardWindowButton(.zoomButton)
+
+        guard let closeButtonFrame = closeButton?.frame,
+              let miniaturizeButtonFrame = miniaturizeButton?.frame,
+              let zoomButtonFrame = zoomButton?.frame else {
+          return
+        }
+
+        // Adjusting the height of the buttons
+          closeButton?.setFrameOrigin(NSPoint(x: x, y: y))
+          miniaturizeButton?.setFrameOrigin(NSPoint(x: x + 12 + 8 , y: y))
+          zoomButton?.setFrameOrigin(NSPoint(x: x + 12 + 8 + 12 + 8, y: y))
+      }
+    }
+  }
+
   private func getInitialPos() {
     DispatchQueue.main.async {
       if let window = NSApplication.shared.mainWindow {
