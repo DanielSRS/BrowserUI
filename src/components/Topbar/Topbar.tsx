@@ -12,9 +12,10 @@ import {
 } from './components/icons';
 import { workspace } from '../../store/store';
 import { observer } from '@legendapp/state/react';
+import { WindowButtons } from './components/WindowButtons';
 
-const WINDOW_CONTROL_AREA_LEFT = 56;
-const WINDOW_CONTROL_AREA_RIGHT = 56;
+const WINDOW_CONTROL_AREA_LEFT = 64;
+const WINDOW_CONTROL_AREA_RIGHT = 0;
 const BUTTON_GAP = 4;
 
 interface TopbarProps {
@@ -41,6 +42,7 @@ export const Topbar = observer((props: TopbarProps) => {
 
   return (
     <View style={styles.container}>
+      <WindowButtons />
       {}
       <View style={styles.contentArea}>
         <View style={styles.buttonsContainer}>

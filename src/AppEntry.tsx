@@ -9,14 +9,9 @@ import { NewTab } from './Pages/NewTab/NewTab';
 import { observer } from '@legendapp/state/react';
 import { workspace } from './store/store';
 import { Config } from './Pages/Config/Config';
-import { hideTitleBar, showTrafficLights } from 'react-native-infinity';
 
 const isTopBarExpanded = true;
-if (isTopBarExpanded) {
-  showTrafficLights();
-} else {
-  hideTitleBar();
-}
+
 export const App = function App() {
   const colors = useColors();
   return (
