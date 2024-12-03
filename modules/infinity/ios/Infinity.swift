@@ -48,6 +48,32 @@ class Infinity: NSObject {
       }
     }
   }
+
+  @objc(animateTrafficLights:y:duration:)
+  func animateTrafficLights(x: Double, y: Double, duration: Double) -> Void {
+    DispatchQueue.main.async {
+      guard let window = NSApp.mainWindow else { return }
+      
+      let closeButton = window.standardWindowButton(.closeButton)
+      let minimizeButton = window.standardWindowButton(.miniaturizeButton)
+      let zoomButton = window.standardWindowButton(.zoomButton)
+      
+      let buttons = [closeButton, minimizeButton, zoomButton]
+      
+      NSAnimationContext.runAnimationGroup { context in
+        context.duration = duration
+        for button in buttons {
+          if let button = button {
+            var frame = button.frame
+            frame.origin.x += CGFloat(x)
+            frame.origin.y += CGFloat(y)
+            button.animator().setFrameOrigin(frame.origin)
+          }
+        }
+      }
+    }
+  }
+
     
   @objc(showTrafficLights)
   func showTrafficLights() {
