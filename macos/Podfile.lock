@@ -1876,13 +1876,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   blurview: 6b9550505ec728a8a1cd36ff2703ad7955c5d746
-  boost: 78c06792d4bc8e05ba232b20737af9883a947a51
-  DoubleConversion: e9fd6969c78f190642ac8adbd3a5ac37995620dc
+  boost: 4c384cc67784d4b15fd14e25b3877c442c1d8064
+  DoubleConversion: c914223d2d29c914635ef1b0721d8a77cca6a732
   FBLazyVector: c4f88c60f2806748923431299fcafefb4af6fb5c
-  fmt: c32f09ca7679bf28db6ba79e474dab38daa634a1
-  glog: f12b70f4104265bf944bf5800b4f85034eba0ea7
+  fmt: cca1eb84179ad528ae1ba9fdf135ed1ac49e19cb
+  glog: 750f96a379703a2d724d2f1fc6cb3a3eff000817
   hermes-engine: ea92f60f37dba025e293cbe4b4a548fd26b610a0
-  RCT-Folly: 693a1865d476549c2b4a788ec924ce59dd7cb8cb
+  RCT-Folly: a7dc01750cc4b76a2d308fb2be04f4e3bc8dc094
   RCTDeprecation: a43cfce47439c8fbac1eb72f2c8c18b42f923142
   RCTRequired: fb8f2a736875a4e7bc252c2f52a5de8a387406fa
   RCTTypeSafety: 510e08167d81eb928402a865c13352334ee31dc0
