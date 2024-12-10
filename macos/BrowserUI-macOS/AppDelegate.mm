@@ -10,7 +10,7 @@
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
-  
+
   /**
    *  Use a notification observer to modify the window properties once the window has been created.
    */
@@ -31,7 +31,7 @@
   [window setTitleVisibility:NSWindowTitleHidden];
   [window setTitlebarAppearsTransparent:YES];
   [window setStyleMask:[window styleMask] | NSWindowStyleMaskFullSizeContentView];
-  
+
   // Hide the close button
   [[window standardWindowButton:NSWindowCloseButton] setHidden:YES];
   // Hide the minimize button
@@ -42,7 +42,7 @@
   // Make the window transparent
   window.opaque = NO;
   window.backgroundColor = [NSColor clearColor];
-  
+
   // Add the blur effect
   NSVisualEffectView *blurView = [[NSVisualEffectView alloc] initWithFrame:window.contentView.bounds];
   blurView.blendingMode = NSVisualEffectBlendingModeBehindWindow;
@@ -51,9 +51,9 @@
 
   // Ensure the blur view resizes with the window
   blurView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-  
+
   [window.contentView addSubview:blurView positioned:NSWindowBelow relativeTo:nil];
-  
+
   // Remove the observer
   [[NSNotificationCenter defaultCenter] removeObserver:self
                                                   name:NSWindowDidBecomeKeyNotification
@@ -61,6 +61,11 @@
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
+{
+  return [self bundleURL];
+}
+
+- (NSURL *)bundleURL
 {
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
