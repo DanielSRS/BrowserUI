@@ -10146,7 +10146,7 @@ react-native-sdk@DanielSRS/SDK:
   peerDependenciesMeta:
     react-native-document-picker:
       optional: true
-  checksum: 10/95576dfee105431c8736bf2ee18f217eebcde4acac4ef1c9e236e12af4d5f778cd4df5ed515d404da743993c3058ed2df4e1d7200640a573583ffbf0cc248213
+  checksum: 10/98fefd9555ff95034b40e4d706dde41460d148cf1c33c3199d05cd9e7ca6f343d5259a27b8ac6da2df1e31914b132e0e940a1e26daaab7472c2a29ec580b6970
   languageName: node
   linkType: hard
 
