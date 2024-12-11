@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "storybook-generate": "sb-rn-get-stories"
+    "storybook-generate": "sb-rn-get-stories",
+    "windows": "npx @react-native-community/cli run-windows"
   },
   "dependencies": {
     "@legendapp/state": "^3.0.0-beta.19",
@@ -19,7 +20,8 @@
     "react-native-infinity": "link:./modules/infinity",
     "react-native-macos": "^0.76.0-0",
     "react-native-sdk": "DanielSRS/SDK",
-    "react-native-svg": "^15.9.0"
+    "react-native-svg": "^15.9.0",
+    "react-native-windows": "^0.76.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -54,10 +56,18 @@
     "react-native-reanimated": "^3.16.2",
     "react-native-safe-area-context": "^4.14.0",
     "react-test-renderer": "18.3.1",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "metro-config": "^0.81.0"
   },
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "yarn@4.5.1"
+  "packageManager": "yarn@4.5.1",
+  "react-native-windows": {
+    "init-windows": {
+      "name": "BrowserUI",
+      "namespace": "BrowserUI",
+      "template": "old/uwp-cs-app"
+    }
+  }
 }
