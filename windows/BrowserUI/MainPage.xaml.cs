@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -24,9 +27,27 @@ namespace BrowserUI
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private const bool extendViewIntoTitleBar = true;
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            // Hide default title bar.
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = extendViewIntoTitleBar;
+
+            /* Sets buttons background color to transparent */
+            var applicationView = ApplicationView.GetForCurrentView();
+            var titleBar = applicationView.TitleBar;
+
+            // Set active window colors
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+
+            /** Min window size */
+            applicationView.SetPreferredMinSize(new Size(320, 320));
+
             var app = Application.Current as App;
             reactRootView.ReactNativeHost = app.Host;
         }
