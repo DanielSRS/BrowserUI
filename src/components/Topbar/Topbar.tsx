@@ -1,5 +1,5 @@
 import React, { useCallback, useContext } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native';
 import { Menu, useColors } from 'react-native-sdk';
 import { ExpandOnHoverContext } from '../ExpandOnHover/ExpandOnHover.context';
@@ -14,8 +14,9 @@ import { workspace } from '../../store/store';
 import { observer } from '@legendapp/state/react';
 import { WindowButtons } from './components/WindowButtons';
 
-const WINDOW_CONTROL_AREA_LEFT = 64;
-const WINDOW_CONTROL_AREA_RIGHT = 0;
+const IS_MACOS = Platform.OS === 'macos';
+const WINDOW_CONTROL_AREA_LEFT = IS_MACOS ? 64 : 0;
+const WINDOW_CONTROL_AREA_RIGHT = IS_MACOS ? 0 : 128;
 const BUTTON_GAP = 4;
 
 interface TopbarProps {
@@ -42,8 +43,7 @@ export const Topbar = observer((props: TopbarProps) => {
 
   return (
     <View style={styles.container}>
-      <WindowButtons />
-      {}
+      {IS_MACOS && <WindowButtons />}
       <View style={styles.contentArea}>
         <View style={styles.buttonsContainer}>
           {/* Voltar */}
