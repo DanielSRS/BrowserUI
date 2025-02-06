@@ -101,23 +101,31 @@ function Content(props: ContentProps) {
   const { workspace$ } = props;
   return (
     <ContentContainer>
-      <ZStack>
-        <Memo>
-          {() =>
-            workspace$.tabs.get().map(tab => {
-              const selectedTab = workspace$.selectedTabId.get();
-              if (tab.id !== selectedTab) {
-                return <React.Fragment key={tab.id} />;
-              }
+      <Memo>
+        {() => (
+          <ZStack>
+            {workspace$.tabs.get().map(tab => {
               if (tab.url === 'browser://config') {
-                return <Config key={tab.id} />;
+                return (
+                  <Config
+                    key={tab.id}
+                    selectedTab={workspace$.selectedTabId}
+                    tabId={tab.id}
+                  />
+                );
               }
 
-              return <NewTab key={tab.id} />;
-            })
-          }
-        </Memo>
-      </ZStack>
+              return (
+                <NewTab
+                  key={tab.id}
+                  selectedTab={workspace$.selectedTabId}
+                  tabId={tab.id}
+                />
+              );
+            })}
+          </ZStack>
+        )}
+      </Memo>
     </ContentContainer>
   );
 }
