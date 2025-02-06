@@ -153,6 +153,7 @@ const TabName = memo(
     Caption,
     {
       flex: 1,
+      pointerEvents: 'none',
     },
     'TabName',
   ),
@@ -174,6 +175,7 @@ const TabContent = Styled.createStyledTouchableOpacity(
 const btnIconContainer = {
   paddingHorizontal: ICON_PADDING - StyleSheet.hairlineWidth,
   paddingVertical: ICON_PADDING - StyleSheet.hairlineWidth,
+  pointerEvents: 'none',
 } as const;
 
 const icon = {
