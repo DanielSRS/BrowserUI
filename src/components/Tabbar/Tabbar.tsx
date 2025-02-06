@@ -9,26 +9,20 @@ import {
 import { Tab } from './components/Tab';
 import { Styled } from 'react-native-sdk';
 import { NewTabButton } from './components/NewTabButton';
-import { observer } from '@legendapp/state/react';
-import type { Tab as TAB } from '../../store/store';
+import { Memo } from '@legendapp/state/react';
+import type { Tab as TAB, Workspace } from '../../store/store';
 import type { TabbarProps } from './Tabbar.types';
+import type { Observable } from '@legendapp/state';
 
 const TABBAR_EXPANDED_WIDTH = 250;
 // const OPEN_ANIMATION_DURATION = 100;
 // const CLOSE_ANIMATION_DURATION = 100;
 // const DELAY_TO_EXPAND = 1000;
 
-export const Tabbar = observer(function Tabbar(props: TabbarProps) {
+export function Tabbar(props: TabbarProps) {
   const { workspace } = props;
   const {} = props.useTabsData ? props.useTabsData(props) : props;
   const [isExpanded, setIsExpanded] = useState(false);
-
-  const onTabPress = workspace.selectTab;
-  const selectedTabId = workspace.selectedTabId.get();
-  const onTabClose = workspace.closeTab;
-  const tabList = workspace.tabs.get();
-  const onNewTabPress = workspace.openNewTab;
-  const len = workspace.tabs.length;
 
   const expand = useCallback(() => {
     if (isExpanded) {
@@ -43,19 +37,6 @@ export const Tabbar = observer(function Tabbar(props: TabbarProps) {
     }
     setIsExpanded(false);
   }, [isExpanded]);
-
-  const renderItem = useCallback(
-    ({ item }: { item: TAB }) => (
-      <Tab
-        {...item}
-        key={item.id}
-        isSelected={selectedTabId === item.id}
-        onPress={() => onTabPress?.(item.id)}
-        onClose={() => onTabClose?.(item.id)}
-      />
-    ),
-    [onTabPress, selectedTabId, onTabClose],
-  );
 
   return (
     <TabbarContainer>
@@ -86,21 +67,47 @@ export const Tabbar = observer(function Tabbar(props: TabbarProps) {
         {isExpanded && <BlurView style={[StyleSheet.absoluteFill]} />}
 
         {/* Tab list */}
-        <FlatList
-          data={tabList}
-          style={fatlist}
-          contentContainerStyle={fatlistContent}
-          renderItem={renderItem}
-          showsVerticalScrollIndicator={isExpanded}
-          extraData={len}
-        />
-        <NewButtonContainer>
-          <NewTabButton onPress={onNewTabPress} />
-        </NewButtonContainer>
+        <Memo>
+          {() => (
+            <FlatList
+              data={workspace.tabs.get()}
+              style={fatlist}
+              contentContainerStyle={fatlistContent}
+              renderItem={renderItem(workspace)}
+              showsVerticalScrollIndicator={isExpanded}
+              // extraData={workspace.tabs.length}
+            />
+          )}
+        </Memo>
+
+        <Memo>
+          {() => (
+            <NewButtonContainer>
+              <NewTabButton onPress={workspace.openNewTab} />
+            </NewButtonContainer>
+          )}
+        </Memo>
       </Animated.View>
     </TabbarContainer>
   );
-});
+}
+
+const renderItem =
+  (workspace: Observable<Workspace>) =>
+  ({ item }: { item: TAB }) =>
+    (
+      <Memo>
+        {() => (
+          <Tab
+            {...item}
+            key={item.id}
+            onPress={() => workspace.selectTab?.(item.id)}
+            onClose={() => workspace.closeTab?.(item.id)}
+            selectedTabId={workspace.selectedTabId}
+          />
+        )}
+      </Memo>
+    );
 
 const TabbarContainer = memo(
   Styled.createStyledView(

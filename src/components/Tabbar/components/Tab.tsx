@@ -8,8 +8,8 @@ import {
 } from '../Tabbar.contants';
 import { DismissFilled, TabDesktopNewPageRegular } from './Icons';
 import { HoverView } from './HoverView';
-import { observer, useObservable } from '@legendapp/state/react';
-import type { ObservableBoolean } from '@legendapp/state';
+import { Memo, useObservable } from '@legendapp/state/react';
+import type { ObservableBoolean, ObservablePrimitive } from '@legendapp/state';
 
 interface TabProps {
   /**
@@ -22,17 +22,15 @@ interface TabProps {
   onPress?: (pressedTab: Pick<TabProps, 'id' | 'name'>) => void;
   onClose?: (pressedTab: Pick<TabProps, 'id' | 'name'>) => void;
   /**
-   * Indica se aba está selecionada
-   */
-  isSelected?: boolean;
-  /**
    * Nome da aba
    */
   name: string;
+  selectedTabId: ObservablePrimitive<number>;
 }
-export const Tab = observer(function Tab(props: TabProps) {
-  const { id, onPress, isSelected, name, onClose } = props;
+export function Tab(props: TabProps) {
+  const { id, onPress, name, onClose, selectedTabId } = props;
   const isHovered$ = useObservable(false);
+  const isSelected$ = useObservable(() => selectedTabId.get() === id);
   const colors = useColors();
 
   const hoverBgColor = useMemo(
@@ -67,38 +65,42 @@ export const Tab = observer(function Tab(props: TabProps) {
   };
 
   return (
-    <TabContent
-      onPress={fireTabPressEvent}
-      // @ts-expect-error
-      onMouseEnter={setHovered}
-      onMouseLeave={unsetHovered}
-      style={[
-        isSelected && {
-          borderColor: colors.controlStrongStrokeDefault,
-        },
-      ]}>
-      {/* Hover bg */}
-      <HoverView show={isHovered$} style={hoverBgColor} />
+    <Memo>
+      {() => (
+        <TabContent
+          onPress={fireTabPressEvent}
+          // @ts-expect-error
+          onMouseEnter={setHovered}
+          onMouseLeave={unsetHovered}
+          style={[
+            isSelected$.get() && {
+              borderColor: colors.controlStrongStrokeDefault,
+            },
+          ]}>
+          {/* Hover bg */}
+          <HoverView show={isHovered$} style={hoverBgColor} />
 
-      {/* Tab icon */}
-      <View style={btnIconContainer}>
-        <View style={[icon]}>
-          <TabDesktopNewPageRegular color={colors.fillColorTextSecondary} />
-        </View>
-      </View>
+          {/* Tab icon */}
+          <View style={btnIconContainer}>
+            <View style={[icon]}>
+              <TabDesktopNewPageRegular color={colors.fillColorTextSecondary} />
+            </View>
+          </View>
 
-      {/* Tab name */}
-      <TabName
-        // otherwise, tab height changes when theres no enough space
-        numberOfLines={1}>
-        {name}
-      </TabName>
+          {/* Tab name */}
+          <TabName
+            // otherwise, tab height changes when theres no enough space
+            numberOfLines={1}>
+            {name}
+          </TabName>
 
-      {/* Close button */}
-      <CloseButton isTabHovered={isHovered$} onPress={fireTabCloseEvent} />
-    </TabContent>
+          {/* Close button */}
+          <CloseButton isTabHovered={isHovered$} onPress={fireTabCloseEvent} />
+        </TabContent>
+      )}
+    </Memo>
   );
-});
+}
 
 const CloseButtonContainer = memo(
   Styled.createStyledView(
@@ -110,41 +112,41 @@ const CloseButtonContainer = memo(
   ),
 );
 
-const CloseButton = memo(
-  observer(function CloseButton(props: {
-    isTabHovered: ObservableBoolean;
-    onPress: () => void;
-  }) {
-    const { isTabHovered, onPress } = props;
-    const [isHovered, setIsHovered] = useState<true>();
-    const colors = useColors();
+const CloseButton = memo(function CloseButton(props: {
+  isTabHovered: ObservableBoolean;
+  onPress: () => void;
+}) {
+  const { isTabHovered, onPress } = props;
+  const [isHovered, setIsHovered] = useState<true>();
+  const colors = useColors();
 
-    if (!isTabHovered.get()) {
-      return null;
-    }
+  const hoverStyle = isHovered && {
+    backgroundColor: colors.controlAltQuarternary,
+  };
 
-    const hoverStyle = isHovered && {
-      backgroundColor: colors.controlAltQuarternary,
-    };
-
-    return (
-      <CloseButtonContainer
-        // @ts-expect-error
-        onMouseEnter={(_p: MouseEvent) => {
-          setIsHovered(true);
-        }}
-        onMouseLeave={(_p: MouseEvent) => {
-          setIsHovered(undefined);
-        }}
-        style={hoverStyle}>
-        {/* Close icon */}
-        <TouchableOpacity onPress={onPress}>
-          <DismissFilled color={colors.fillColorTextSecondary} />
-        </TouchableOpacity>
-      </CloseButtonContainer>
-    );
-  }),
-);
+  return (
+    <Memo>
+      {() =>
+        isTabHovered.get() ? (
+          <CloseButtonContainer
+            // @ts-expect-error
+            onMouseEnter={(_p: MouseEvent) => {
+              setIsHovered(true);
+            }}
+            onMouseLeave={(_p: MouseEvent) => {
+              setIsHovered(undefined);
+            }}
+            style={hoverStyle}>
+            {/* Close icon */}
+            <TouchableOpacity onPress={onPress}>
+              <DismissFilled color={colors.fillColorTextSecondary} />
+            </TouchableOpacity>
+          </CloseButtonContainer>
+        ) : null
+      }
+    </Memo>
+  );
+});
 
 const TabName = memo(
   Styled.createStyled(

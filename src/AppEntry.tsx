@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import { Topbar } from './components/Topbar/Topbar';
 import { Tabbar } from './components/Tabbar/Tabbar';
@@ -6,9 +6,10 @@ import { ExpandOnHover } from './components/ExpandOnHover/ExpandOnHover';
 import { Styled, useColors, ZStack } from 'react-native-sdk';
 import { WINDOW_BORDER_SIZE } from './constraints/layout';
 import { NewTab } from './Pages/NewTab/NewTab';
-import { observer } from '@legendapp/state/react';
-import { workspace } from './store/store';
+import { Memo } from '@legendapp/state/react';
+import { workspace, type Workspace } from './store/store';
 import { Config } from './Pages/Config/Config';
+import type { Observable } from '@legendapp/state';
 
 const isTopBarExpanded = true;
 
@@ -30,7 +31,7 @@ export const App = function App() {
             !isTopBarExpanded && { top: WINDOW_BORDER_SIZE },
           ]}>
           {/* Content */}
-          <Content />
+          <Content workspace$={workspace} />
         </ContentArea>
       </Row>
     </Window>
@@ -92,27 +93,31 @@ const ContentContainer = memo(
   ),
 );
 
-const Content = observer(() => {
-  const selectedTab = workspace.selectedTabId.get();
-  const tabList = workspace.tabs.get();
-  const tabs = useMemo(
-    () =>
-      tabList.map(tab => {
-        if (tab.id !== selectedTab) {
-          return <React.Fragment key={tab.id} />;
-        }
-        if (tab.url === 'browser://config') {
-          return <Config key={tab.id} />;
-        }
+interface ContentProps {
+  workspace$: Observable<Workspace>;
+}
 
-        return <NewTab key={tab.id} />;
-      }),
-    [selectedTab, tabList],
-  );
-
+function Content(props: ContentProps) {
+  const { workspace$ } = props;
   return (
     <ContentContainer>
-      <ZStack>{tabs}</ZStack>
+      <ZStack>
+        <Memo>
+          {() =>
+            workspace$.tabs.get().map(tab => {
+              const selectedTab = workspace$.selectedTabId.get();
+              if (tab.id !== selectedTab) {
+                return <React.Fragment key={tab.id} />;
+              }
+              if (tab.url === 'browser://config') {
+                return <Config key={tab.id} />;
+              }
+
+              return <NewTab key={tab.id} />;
+            })
+          }
+        </Memo>
+      </ZStack>
     </ContentContainer>
   );
-});
+}
