@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Styled, useColors } from 'react-native-sdk';
 import { AppLogo } from '../../components/Atoms/AppLogo';
 import { StyleSheet, TextInput } from 'react-native';
@@ -11,15 +11,18 @@ interface NewTabProps {
 }
 export const NewTab = function NewTab(props: NewTabProps) {
   const { selectedTab, tabId } = props;
+  const searchRef = useRef<TextInput>(null);
   const isSelected$ = useObservable(() => selectedTab.get() === tabId);
-  const style$ = useObservable(() =>
-    isSelected$.get()
-      ? undefined
-      : ({
-          opacity: 0,
-          pointerEvents: 'none',
-        } as const),
-  );
+  const style$ = useObservable(() => {
+    if (isSelected$.get()) {
+      searchRef.current?.focus();
+      return undefined;
+    }
+    return {
+      opacity: 0,
+      pointerEvents: 'none',
+    } as const;
+  });
   const colors = useColors();
 
   return (
@@ -35,6 +38,7 @@ export const NewTab = function NewTab(props: NewTabProps) {
             <SearchBar
               // @ts-expect-error exists only on Macos
               enableFocusRing={false}
+              ref={searchRef}
               placeholder={'Ask me anything'}
               style={{
                 backgroundColor: colors.fillColorControlTertiary,
