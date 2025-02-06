@@ -2980,12 +2980,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@legendapp/state@npm:^3.0.0-beta.19, @legendapp/state@npm:beta":
+"@legendapp/state@npm:^3.0.0-beta.19":
   version: 3.0.0-beta.19
   resolution: "@legendapp/state@npm:3.0.0-beta.19"
   dependencies:
     use-sync-external-store: "npm:^1.2.2"
   checksum: 10/938af210c72e21b75be68d3b9166bead5a91e0b48d336d58cf954cfb9180b5a51e0228707a7178f2dbfb62b81b1afc2f2000398c3c9b066a128c288fe69a7041
+  languageName: node
+  linkType: hard
+
+"@legendapp/state@npm:beta":
+  version: 3.0.0-beta.26
+  resolution: "@legendapp/state@npm:3.0.0-beta.26"
+  dependencies:
+    use-sync-external-store: "npm:^1.2.2"
+  peerDependencies:
+    expo-sqlite: ^15.0.0
+  peerDependenciesMeta:
+    expo-sqlite:
+      optional: true
+  checksum: 10/1bf16c47c697edfd1c8eab98123809ab1d374a43168a8460e8400b183003dfe9efb8d43b1c0331f3f61f7f7d9b9557221f015ccd5fe6852e74feb037c1f1fbd1
   languageName: node
   linkType: hard
 
@@ -11073,7 +11087,7 @@ __metadata:
 
 react-native-sdk@DanielSRS/SDK:
   version: 0.1.0
-  resolution: "react-native-sdk@https://github.com/DanielSRS/SDK.git#commit=0d9fbaa51833faef2f381462d4c653a1a7b83b9e"
+  resolution: "react-native-sdk@https://github.com/DanielSRS/SDK.git#commit=6561c6c61381fe59076157d697eaa9c500c8b2f9"
   dependencies:
     "@legendapp/state": "npm:beta"
     scheduler: "npm:^0.23.2"
@@ -11086,7 +11100,7 @@ react-native-sdk@DanielSRS/SDK:
   peerDependenciesMeta:
     react-native-document-picker:
       optional: true
-  checksum: 10/95576dfee105431c8736bf2ee18f217eebcde4acac4ef1c9e236e12af4d5f778cd4df5ed515d404da743993c3058ed2df4e1d7200640a573583ffbf0cc248213
+  checksum: 10/ef26704d6da2c2a477e59c40e0fef9efc5cedfd152a4a30f1cd93a975f1f945effce093b914b82c8ae95d089742f4130d25beccb7408896cdeb2ba58431afcdd
   languageName: node
   linkType: hard
 
@@ -12490,9 +12504,9 @@ react-native-sdk@DanielSRS/SDK:
   linkType: hard
 
 "ts-pattern@npm:^5.2.0":
-  version: 5.5.0
-  resolution: "ts-pattern@npm:5.5.0"
-  checksum: 10/d07b22cc65ea4601be588f9ac6e9aeafdc36e13bb3779bcb2ca298e9010b14eca34305c61ad89c0c68e52c5ea5725584fab5e500f5efdf5922289b36b398b684
+  version: 5.6.2
+  resolution: "ts-pattern@npm:5.6.2"
+  checksum: 10/7eea891a2653650793143e058a6b488c9931444996234bfb71f569528e8aa55decdc13266b710135757614c4eaa1e8cb9015c46ccfd258a5bd81e5e86c2d1dcb
   languageName: node
   linkType: hard
 
