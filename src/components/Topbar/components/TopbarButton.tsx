@@ -20,7 +20,9 @@ export const TopBarButton = React.memo(function TopBarButton(props: TabProps) {
     // Pressable area
     <ButtonContainer>
       {/* Tab icon */}
-      <HoverView />
+      <HoverView
+        hoveredStyle={{ backgroundColor: colors.fillColorControlDefault }}
+      />
       <IconGroup>
         <Icon color={colors.fillColorTextPrimary} />
       </IconGroup>

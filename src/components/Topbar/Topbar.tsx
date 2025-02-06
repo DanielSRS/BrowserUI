@@ -60,9 +60,9 @@ export const Topbar = observer((props: TopbarProps) => {
               style={[
                 styles.urlInput,
                 {
-                  backgroundColor: colors.backgroundFillColorLayerDefault,
+                  backgroundColor: colors.fillColorControlDefault,
                   borderWidth: StyleSheet.hairlineWidth,
-                  borderColor: colors.strokeColorCardStrokeDefault,
+                  borderColor: colors.strokeColorSurfaceStrokeDefault,
                 },
               ]}
               placeholder={'about:work-in-progress'}
@@ -136,9 +136,9 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     // backgroundColor: '#00000040',
     paddingHorizontal: 32,
-    borderRadius: 10,
+    borderRadius: 8,
     width: '100%',
-    maxWidth: 400,
+    maxWidth: 600,
     // borderColor: 'red',
     fontSize: 14,
     justifyContent: 'center',
