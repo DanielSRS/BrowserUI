@@ -11087,7 +11087,7 @@ __metadata:
 
 react-native-sdk@DanielSRS/SDK:
   version: 0.1.0
-  resolution: "react-native-sdk@https://github.com/DanielSRS/SDK.git#commit=410988de1316a4b2548832c0812bdd9e345fc9b8"
+  resolution: "react-native-sdk@https://github.com/DanielSRS/SDK.git#commit=53303c9f32ba8346cba8f820fe3fdf31392b0d79"
   dependencies:
     "@legendapp/state": "npm:beta"
     scheduler: "npm:^0.23.2"
@@ -11100,7 +11100,7 @@ react-native-sdk@DanielSRS/SDK:
   peerDependenciesMeta:
     react-native-document-picker:
       optional: true
-  checksum: 10/2ea4d8943a78e700ef7dffe56df1273de914951921acd0e5428dc470090054930be0b75846aa134fc0d8038b929f1b8a032ae8c7b066f020aab22b401f5d5ae0
+  checksum: 10/667effdbe69b55d41dea3b9a6d0a24968711253ec9a9d4a3e010d51a962f22d59a712e8067e64ffa79bbe189f1d8c78e0cc157abb9ed3931b255f32df31e8a94
   languageName: node
   linkType: hard
 
