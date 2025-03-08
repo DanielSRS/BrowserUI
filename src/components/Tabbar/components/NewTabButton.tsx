@@ -51,6 +51,7 @@ export const NewTabButton = React.memo((props: NewTabButtonProps) => {
 
 const ButtonTitle = Styled.createStyled(Caption, {
   flex: 1,
+  pointerEvents: 'none',
 });
 
 const TouchableContainer = Styled.createStyledTouchableOpacity({
