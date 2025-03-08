@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import { Topbar } from './components/Topbar/Topbar';
-import { Tabbar } from './components/Tabbar/Tabbar';
+import { Tabbar } from './components/Tabbar/tab-bar';
 import { ExpandOnHover } from './components/ExpandOnHover/ExpandOnHover';
 import { Styled, useColors, ZStack } from 'react-native-sdk';
 import { WINDOW_BORDER_SIZE } from './constraints/layout';
@@ -23,7 +23,13 @@ export const App = function App() {
       </ExpandOnHover>
       <Row>
         {/* Tabbar */}
-        <Tabbar workspace={workspace} />
+        <Tabbar
+          selectedTabId={workspace.selectedTabId}
+          tabs={workspace.tabs}
+          closeTab={workspace.closeTab}
+          onNewTabButtonPress={workspace.openNewTab}
+          selectTab={workspace.selectTab}
+        />
         {/* Content container */}
         <ContentArea
           style={[
