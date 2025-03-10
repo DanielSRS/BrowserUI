@@ -26,6 +26,7 @@ export const App = function App() {
         <Tabbar
           selectedTabId={workspace.selectedTabId}
           tabs={workspace.tabs}
+          tabIds={workspace.tabIds}
           closeTab={workspace.closeTab}
           onNewTabButtonPress={workspace.openNewTab}
           selectTab={workspace.selectTab}
@@ -110,22 +111,24 @@ function Content(props: ContentProps) {
       <Memo>
         {() => (
           <ZStack>
-            {workspace$.tabs.get().map(tab => {
-              if (tab.url === 'browser://config') {
+            {workspace.tabIds.get().map(tab => {
+              const { url, id } =
+                workspace$.tabs[tab as unknown as number].get();
+              if (url === 'browser://config') {
                 return (
                   <Config
-                    key={tab.id}
+                    key={id}
                     selectedTab={workspace$.selectedTabId}
-                    tabId={tab.id}
+                    tabId={id}
                   />
                 );
               }
 
               return (
                 <NewTab
-                  key={tab.id}
+                  key={id}
                   selectedTab={workspace$.selectedTabId}
-                  tabId={tab.id}
+                  tabId={id}
                 />
               );
             })}

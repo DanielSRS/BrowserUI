@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef } from 'react';
-import { Animated, FlatList } from 'react-native';
+import { Animated } from 'react-native';
 import {
   TABBAR_COLAPSED_WIDTH,
   TABLIST_GAP,
@@ -10,8 +10,10 @@ import { Styled } from 'react-native-sdk';
 import { BlurView } from 'blurview';
 import { NewTabButton } from './components/NewTabButton';
 import { Tab } from './components/Tab';
-import type { ObservablePrimitive } from '@legendapp/state';
+import { LegendList } from '@legendapp/list';
+import type { Observable, ObservablePrimitive } from '@legendapp/state';
 import type { Tab as TAB } from '../../store/store';
+import type { LegendListRef } from '@legendapp/list';
 
 const TABBAR_EXPANDED_WIDTH = 250;
 const OPEN_ANIMATION_DURATION = 30;
@@ -20,15 +22,21 @@ const DELAY_TO_EXPAND = 40;
 
 interface TabbarProps {
   onNewTabButtonPress?: () => void;
-  tabs: {
-    get: () => TAB[];
-  };
+  tabs: Observable<Record<number, TAB>>;
+  tabIds: Observable<string[]>;
   selectTab?: (id: number) => void;
   closeTab?: (id: number) => void;
   selectedTabId: ObservablePrimitive<number>;
 }
 export function Tabbar(props: TabbarProps) {
-  const { tabs, onNewTabButtonPress } = props;
+  const {
+    tabs,
+    onNewTabButtonPress,
+    selectedTabId,
+    closeTab,
+    selectTab,
+    tabIds,
+  } = props;
   const sideBarWidth = useRef(
     new Animated.Value(TABBAR_COLAPSED_WIDTH),
   ).current;
@@ -42,6 +50,39 @@ export function Tabbar(props: TabbarProps) {
   const showBlurview = useObservable(() => {
     return animationState.get() !== 0;
   });
+  const listRef = useRef<LegendListRef>(null);
+
+  const openAndFocusTab = useCallback(() => {
+    onNewTabButtonPress?.();
+    const id = selectedTabId.peek() + '';
+    const index = tabIds.peek().findIndex(v => v === id);
+    if (index !== -1) {
+      setTimeout(() => {
+        listRef.current?.scrollToIndex({
+          index: index,
+          animated: true,
+        });
+      }, 10);
+      return;
+    }
+    console.error('item not found');
+  }, [onNewTabButtonPress, selectedTabId, tabIds]);
+
+  const renderItem = useCallback(
+    ({ item }: { item: string }) => {
+      const { id, name } = tabs[item as unknown as number].get();
+      return (
+        <Tab
+          onPress={() => selectTab?.(id)}
+          onClose={() => closeTab?.(id)}
+          selectedTabId={selectedTabId}
+          id={id}
+          name={name}
+        />
+      );
+    },
+    [closeTab, selectTab, selectedTabId, tabs],
+  );
 
   const expandAnimation = useMemo(
     () =>
@@ -93,7 +134,7 @@ export function Tabbar(props: TabbarProps) {
     });
   }, [animationState, sideBarWidth]);
 
-  console.debug('render');
+  console.debug('render: ');
   return (
     <TabbarContainer
       // @ts-expect-error
@@ -113,45 +154,28 @@ export function Tabbar(props: TabbarProps) {
 
       {/* Tab list */}
       <Memo>
-        {() => (
-          <FlatList
-            data={tabs.get()}
-            style={fatlist}
-            contentContainerStyle={fatlistContent}
-            renderItem={renderItem(props)}
-            showsVerticalScrollIndicator={animationState.get() === 3}
-            // extraData={workspace.tabs.length}
-          />
-        )}
+        {() => {
+          return (
+            <LegendList
+              data={tabIds.get()}
+              style={fatlist}
+              ref={listRef}
+              contentContainerStyle={fatlistContent}
+              renderItem={renderItem}
+              keyExtractor={item => item}
+              // showsVerticalScrollIndicator={showScrollIndicator.get()}
+              estimatedItemSize={36}
+            />
+          );
+        }}
       </Memo>
 
       <NewButtonContainer>
-        <NewTabButton onPress={onNewTabButtonPress} />
+        <NewTabButton onPress={openAndFocusTab} />
       </NewButtonContainer>
     </TabbarContainer>
   );
 }
-
-const renderItem =
-  (workspace: {
-    selectTab?: (id: number) => void;
-    closeTab?: (id: number) => void;
-    selectedTabId: ObservablePrimitive<number>;
-  }) =>
-  ({ item }: { item: TAB }) =>
-    (
-      <Memo>
-        {() => (
-          <Tab
-            {...item}
-            key={item.id}
-            onPress={() => workspace.selectTab?.(item.id)}
-            onClose={() => workspace.closeTab?.(item.id)}
-            selectedTabId={workspace.selectedTabId}
-          />
-        )}
-      </Memo>
-    );
 
 // function debounce<T extends (...args: any[]) => void>(func: T, wait: number): (...args: Parameters<T>) => void {
 //   let timeout: ReturnType<typeof setTimeout>;

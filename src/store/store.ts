@@ -1,4 +1,4 @@
-import { observable } from '@legendapp/state';
+import { batch, observable } from '@legendapp/state';
 
 export interface Tab {
   name: string;
@@ -13,7 +13,8 @@ export interface Workspace {
   id: number;
   selectedTabId: number;
   nextNewTabId: number;
-  tabs: Array<Tab>;
+  tabs: Record<number, Tab>;
+  tabIds: string[];
   openNewTab: () => void;
   openNewConfigTab: () => void;
   focusConfigTab: () => boolean;
@@ -28,26 +29,29 @@ export const workspace = observable<Workspace>({
   selectedTabId: 0,
   nextNewTabId: 1,
   closedTabs: [],
-  tabs: [
-    {
+  tabs: {
+    0: {
       name: 'New Tab',
       url: 'browser://newTab',
       id: 0,
       order: 0,
     },
-  ],
+  },
+  tabIds: () => Object.keys(workspace.tabs.get(true)),
   openNewTab: () => {
     const newid = workspace.nextNewTabId.get();
     const nextId = newid + 1;
-    const newOrder = workspace.tabs.get().length;
-    workspace.tabs.push({
-      name: 'New Tab',
-      id: newid,
-      order: newOrder,
-      url: 'browser://newTab',
+    const newOrder = Object.keys(workspace.tabs.peek()).length;
+    batch(() => {
+      workspace.selectedTabId.set(newid);
+      workspace.nextNewTabId.set(nextId);
+      workspace.tabs[newid].set({
+        name: 'New Tab',
+        id: newid,
+        order: newOrder,
+        url: 'browser://newTab',
+      });
     });
-    workspace.selectedTabId.set(newid);
-    workspace.nextNewTabId.set(nextId);
   },
   selectTab: (id: number) => {
     workspace.selectedTabId.set(id);
@@ -55,20 +59,22 @@ export const workspace = observable<Workspace>({
   openNewConfigTab: () => {
     const newid = workspace.nextNewTabId.get();
     const nextId = newid + 1;
-    const newOrder = workspace.tabs.get().length;
-    workspace.tabs.push({
-      name: 'Settings',
-      id: newid,
-      order: newOrder,
-      url: 'browser://config',
+    const newOrder = Object.keys(workspace.tabs.peek()).length;
+    batch(() => {
+      workspace.tabs[newid].set({
+        name: 'Settings',
+        id: newid,
+        order: newOrder,
+        url: 'browser://config',
+      });
+      workspace.selectedTabId.set(newid);
+      workspace.nextNewTabId.set(nextId);
     });
-    workspace.selectedTabId.set(newid);
-    workspace.nextNewTabId.set(nextId);
   },
   focusConfigTab: () => {
-    const opened = workspace.tabs
-      .get()
-      .find(tab => tab.url === 'browser://config');
+    const opened = Object.values(workspace.tabs.get()).find(
+      v => v.url === 'browser://config',
+    );
     if (opened) {
       // focus on tab
       workspace.selectedTabId.set(opened.id);
@@ -101,16 +107,14 @@ export const workspace = observable<Workspace>({
   //   // workspace.selectedTabId.set(0);
   // },
   closeTab: (idToFind: number) => {
-    const lastTabIndex = workspace.tabs.length - 1;
-    const selectedTabId = workspace.selectedTabId.peek();
-    const tabToDeleteIndex = workspace.tabs.findIndex(
-      v => v.id.peek() === idToFind,
-    );
-    if (tabToDeleteIndex === -1) {
+    const ids = Object.keys(workspace.tabs.peek());
+    const lastTabIndex = ids.length - 1;
+    const selectedTabId = workspace.selectedTabId.get();
+    const tabToDelete = workspace.tabs[idToFind];
+    if (!tabToDelete) {
       console.error('no tab');
       return;
     }
-    const tabToDelete = workspace.tabs[tabToDeleteIndex];
     const deletedTabData = tabToDelete.peek();
     if (deletedTabData === undefined) {
       console.error('tab data is missing');
@@ -120,11 +124,12 @@ export const workspace = observable<Workspace>({
     workspace.closedTabs.push(deletedTabData);
     const isCurrentSelected = selectedTabId === id;
     if (isCurrentSelected) {
-      const isTheLastTabInList = tabToDeleteIndex >= lastTabIndex;
-      const toFocus = isTheLastTabInList
-        ? workspace.tabs[tabToDeleteIndex - 1]
-        : workspace.tabs[tabToDeleteIndex + 1];
-      workspace.selectedTabId.set(toFocus.peek()?.id ?? 0);
+      let tabToDeleteIndex = ids.findIndex(v => v === idToFind + '');
+      const idToFocus = ids[tabToDeleteIndex + 1] ?? ids[tabToDeleteIndex - 1];
+      // console.debug('sdf', lastTabIndex, idToFocus, tabToDeleteIndex);
+      if (idToFocus) {
+        workspace.selectedTabId.set(+idToFocus);
+      }
     }
     tabToDelete.delete();
     const deletedLastTab = lastTabIndex === 0;
