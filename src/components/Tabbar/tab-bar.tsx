@@ -191,7 +191,7 @@ const sideBar = {
   // backgroundColor: 'blue',
   borderRadius: WINDOW_BORDER_SIZE,
   zIndex: 3,
-  // height: '100%',
+  height: '100%',
   // flex: 1,
 } as const;
 const fatlist = {

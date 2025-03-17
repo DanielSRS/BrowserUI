@@ -3,14 +3,16 @@ import { Tabbar } from './tab-bar';
 import { observable } from '@legendapp/state';
 import type { Tab } from '../../store/store';
 
-const tabs: Record<number, Tab> = {
+const tabs = observable<Record<number, Tab>>({
   0: {
     id: 0,
     name: 'fist tab',
     order: 1,
     url: 'browser://newTab',
   },
-};
+});
+
+const tabIds = observable(() => Object.keys(tabs.get()));
 
 const meta = {
   title: 'Components/Tabbar',
@@ -21,9 +23,9 @@ const meta = {
     closeTab: { action: 'closeTab' },
   },
   args: {
-    tabs: observable(tabs),
+    tabs: tabs,
     selectedTabId: observable(0),
-    tabIds: observable(['0']),
+    tabIds: tabIds,
   },
 } satisfies Meta<typeof Tabbar>;
 type Story = StoryObj<typeof meta>;
