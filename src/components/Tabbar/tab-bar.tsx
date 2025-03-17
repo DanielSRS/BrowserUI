@@ -6,7 +6,7 @@ import {
   WINDOW_BORDER_SIZE,
 } from './Tabbar.contants';
 import { Memo, useObservable } from '@legendapp/state/react';
-import { Styled } from 'react-native-sdk';
+import { Styled } from '@danielsrs/react-native-sdk';
 import { BlurView } from 'blurview';
 import { NewTabButton } from './components/NewTabButton';
 import { Tab } from './components/Tab';

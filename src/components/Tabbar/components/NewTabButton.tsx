@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Caption, Styled, useColors } from 'react-native-sdk';
+import { Caption, Styled, useColors } from '@danielsrs/react-native-sdk';
 import { HoverView } from './HoverView';
 import {
   BUTTON_ICON_SIZE,

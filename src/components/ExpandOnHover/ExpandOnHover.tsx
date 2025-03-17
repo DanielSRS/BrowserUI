@@ -6,7 +6,7 @@ import {
   // showTrafficLights,
 } from 'react-native-infinity';
 import { BlurView } from 'blurview';
-import { Styled, useColors } from 'react-native-sdk';
+import { Styled, useColors } from '@danielsrs/react-native-sdk';
 import { ExpandOnHoverContext } from './ExpandOnHover.context';
 import type { MouseEvent } from 'react-native';
 

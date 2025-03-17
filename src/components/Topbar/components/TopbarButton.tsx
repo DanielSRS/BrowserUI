@@ -1,5 +1,5 @@
 import React from 'react';
-import { Styled, useColors } from 'react-native-sdk';
+import { Styled, useColors } from '@danielsrs/react-native-sdk';
 import { BUTTON_ICON_SIZE } from '../../Tabbar/Tabbar.contants';
 import type { ColorValue } from 'react-native';
 import { HoverView } from '../../Tabbar/components/HoverView';

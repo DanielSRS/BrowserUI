@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Topbar } from './components/Topbar/Topbar';
 import { Tabbar } from './components/Tabbar/tab-bar';
 import { ExpandOnHover } from './components/ExpandOnHover/ExpandOnHover';
-import { Styled, useColors, ZStack } from 'react-native-sdk';
+import { Styled, useColors, ZStack } from '@danielsrs/react-native-sdk';
 import { WINDOW_BORDER_SIZE } from './constraints/layout';
 import { NewTab } from './Pages/NewTab/NewTab';
 import { Memo } from '@legendapp/state/react';

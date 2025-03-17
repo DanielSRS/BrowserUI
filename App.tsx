@@ -1,6 +1,6 @@
 import React, { StrictMode } from 'react';
 import { App } from './src/AppEntry';
-import { SdkProvider } from 'react-native-sdk';
+import { SdkProvider } from '@danielsrs/react-native-sdk';
 
 export default () => {
   return (

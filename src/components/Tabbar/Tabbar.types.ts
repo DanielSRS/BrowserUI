@@ -1,4 +1,4 @@
-import type { PropsWithCustomHook } from 'react-native-sdk';
+import type { PropsWithCustomHook } from '@danielsrs/react-native-sdk';
 import type { Workspace } from '../../store/store';
 import type { Observable } from '@legendapp/state';
 

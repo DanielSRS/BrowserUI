@@ -1,7 +1,7 @@
 import React from 'react';
 import { Memo, useObservable } from '@legendapp/state/react';
 import { ScrollView, type ViewStyle } from 'react-native';
-import { Styled, TitleLarge } from 'react-native-sdk';
+import { Styled, TitleLarge } from '@danielsrs/react-native-sdk';
 import type { ObservablePrimitive } from '@legendapp/state';
 
 interface ConfigTabProps {

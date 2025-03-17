@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useMemo, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Caption, Styled, useColors } from 'react-native-sdk';
+import { Caption, Styled, useColors } from '@danielsrs/react-native-sdk';
 import {
   BUTTON_ICON_SIZE,
   ICON_PADDING,

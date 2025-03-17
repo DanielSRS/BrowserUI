@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native';
-import { Menu, useColors } from 'react-native-sdk';
+import { Menu, useColors } from '@danielsrs/react-native-sdk';
 import { ExpandOnHoverContext } from '../ExpandOnHover/ExpandOnHover.context';
 import { TopBarButton } from './components/TopbarButton';
 import {

@@ -2341,6 +2341,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@danielsrs/react-native-sdk@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "@danielsrs/react-native-sdk@npm:0.2.1"
+  dependencies:
+    "@legendapp/state": "npm:beta"
+    scheduler: "npm:^0.23.2"
+    ts-pattern: "npm:^5.2.0"
+    use-context-selector: "npm:^2.0.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-document-picker: "*"
+  peerDependenciesMeta:
+    react-native-document-picker:
+      optional: true
+  checksum: 10/3c6f5dfb53de2a4c644ba65ff8c0ca6c80d86339f23c243c9e933276660d7de229b12d76090603a449e062458cab6fd1e2ccdeab8650a11337a5b68711efd3b2
+  languageName: node
+  linkType: hard
+
 "@egjs/hammerjs@npm:^2.0.17":
   version: 2.0.17
   resolution: "@egjs/hammerjs@npm:2.0.17"
@@ -4973,6 +4992,7 @@ __metadata:
     "@babel/core": "npm:^7.25.2"
     "@babel/preset-env": "npm:^7.25.3"
     "@babel/runtime": "npm:^7.25.0"
+    "@danielsrs/react-native-sdk": "npm:^0.2.1"
     "@gorhom/bottom-sheet": "npm:^5.0.6"
     "@legendapp/list": "npm:1.0.0-beta.11"
     "@legendapp/state": "npm:^3.0.0-beta.19"
@@ -5009,7 +5029,6 @@ __metadata:
     react-native-macos: "npm:^0.76.0-0"
     react-native-reanimated: "npm:^3.16.2"
     react-native-safe-area-context: "npm:^4.14.0"
-    react-native-sdk: DanielSRS/SDK
     react-native-svg: "npm:^15.9.0"
     react-native-windows: "npm:^0.76.0"
     react-test-renderer: "npm:18.3.1"
@@ -11093,25 +11112,6 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10/20f744176b22b67b08b061ac8ea4d56c11539da672e80f766e48a8304a0a19c9ba0c9a903d92b94631888dd827701785b5ac49cec61c2994262708a479701a8d
-  languageName: node
-  linkType: hard
-
-react-native-sdk@DanielSRS/SDK:
-  version: 0.1.0
-  resolution: "react-native-sdk@https://github.com/DanielSRS/SDK.git#commit=53303c9f32ba8346cba8f820fe3fdf31392b0d79"
-  dependencies:
-    "@legendapp/state": "npm:beta"
-    scheduler: "npm:^0.23.2"
-    ts-pattern: "npm:^5.2.0"
-    use-context-selector: "npm:^2.0.0"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-    react-native-document-picker: "*"
-  peerDependenciesMeta:
-    react-native-document-picker:
-      optional: true
-  checksum: 10/667effdbe69b55d41dea3b9a6d0a24968711253ec9a9d4a3e010d51a962f22d59a712e8067e64ffa79bbe189f1d8c78e0cc157abb9ed3931b255f32df31e8a94
   languageName: node
   linkType: hard
 

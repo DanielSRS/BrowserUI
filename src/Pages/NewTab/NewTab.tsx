@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Styled, useColors } from 'react-native-sdk';
+import { Styled, useColors } from '@danielsrs/react-native-sdk';
 import { AppLogo } from '../../components/Atoms/AppLogo';
 import { StyleSheet, TextInput } from 'react-native';
 import { Memo, useObservable } from '@legendapp/state/react';

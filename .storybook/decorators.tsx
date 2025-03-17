@@ -1,5 +1,5 @@
 import React, { StrictMode } from 'react';
-import { SdkProvider } from 'react-native-sdk';
+import { SdkProvider } from '@danielsrs/react-native-sdk';
 import { View } from 'react-native';
 /**
  * Adds a padding of 20 to all stories

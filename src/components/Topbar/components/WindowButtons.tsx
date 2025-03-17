@@ -5,7 +5,7 @@ import {
   hideTrafficLights,
   showTrafficLights,
 } from 'react-native-infinity';
-import { Styled } from 'react-native-sdk';
+import { Styled } from '@danielsrs/react-native-sdk';
 import { StyleSheet } from 'react-native';
 
 const BUTTON_WIDTH = 12;
