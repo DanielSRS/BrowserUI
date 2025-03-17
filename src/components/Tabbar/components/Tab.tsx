@@ -6,7 +6,10 @@ import {
   ICON_PADDING,
   WINDOW_BORDER_SIZE,
 } from '../Tabbar.contants';
-import { DismissFilled, TabDesktopNewPageRegular } from './Icons';
+import {
+  DismissFilled,
+  TabDesktopNewPageRegular,
+} from '../../fluent-icons/fluent-icons';
 import { HoverView } from './HoverView';
 import { Memo, useObservable } from '@legendapp/state/react';
 import type { ObservableBoolean, ObservablePrimitive } from '@legendapp/state';

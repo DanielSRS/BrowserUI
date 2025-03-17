@@ -7,7 +7,7 @@ import {
   ICON_PADDING,
   WINDOW_BORDER_SIZE,
 } from '../Tabbar.contants';
-import { AddRegular } from './Icons';
+import { AddRegular } from '../../fluent-icons/fluent-icons';
 
 interface NewTabButtonProps {
   // id: number;
