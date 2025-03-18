@@ -3062,12 +3062,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@legendapp/state@npm:^3.0.0-beta.19":
-  version: 3.0.0-beta.19
-  resolution: "@legendapp/state@npm:3.0.0-beta.19"
+"@legendapp/state@npm:^3.0.0-beta.30":
+  version: 3.0.0-beta.30
+  resolution: "@legendapp/state@npm:3.0.0-beta.30"
   dependencies:
     use-sync-external-store: "npm:^1.2.2"
-  checksum: 10/938af210c72e21b75be68d3b9166bead5a91e0b48d336d58cf954cfb9180b5a51e0228707a7178f2dbfb62b81b1afc2f2000398c3c9b066a128c288fe69a7041
+  peerDependencies:
+    expo-sqlite: ^15.0.0
+  peerDependenciesMeta:
+    expo-sqlite:
+      optional: true
+  checksum: 10/6e433a3a8bc5d56d92f42b9f60e27c09d671b1be44e3d3dc804b5ce8bdb54eedd6719a9fb427470603f2505bf63f1c484a132c2e11eab232aefbfbc8eee712f5
   languageName: node
   linkType: hard
 
@@ -4883,7 +4888,7 @@ __metadata:
     "@danielsrs/react-native-sdk": "npm:^0.2.1"
     "@gorhom/bottom-sheet": "npm:^5.0.6"
     "@legendapp/list": "npm:1.0.0-beta.11"
-    "@legendapp/state": "npm:^3.0.0-beta.19"
+    "@legendapp/state": "npm:^3.0.0-beta.30"
     "@react-native-async-storage/async-storage": "npm:^2.1.0"
     "@react-native-community/cli": "npm:15.0.1"
     "@react-native-community/cli-platform-android": "npm:15.0.1"
