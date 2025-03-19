@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native';
 import { Menu, useColors } from '@danielsrs/react-native-sdk';
@@ -23,6 +23,7 @@ import {
   MoreHorizontal20Regular,
   Person20Regular,
 } from '../fluent-icons/fluent-icons';
+import type { Fluenticon } from '../fluent-icons/fluent-icons.base';
 
 const IS_MACOS = Platform.OS === 'macos';
 const WINDOW_CONTROL_AREA_LEFT = IS_MACOS ? 64 : 0;
@@ -46,6 +47,11 @@ export const Topbar = observer((props: TopbarProps) => {
   const {} = props;
   const { onInnerBlur, onInnerFocus } = useContext(ExpandOnHoverContext);
   const colors = useColors();
+
+  const withTextColor = useMemo(
+    () => withColor(colors.textPrimary.toString()),
+    [colors.textPrimary],
+  );
 
   const openSettings = useCallback(() => {
     workspace.focusConfigTab() ? undefined : workspace.openNewConfigTab();
@@ -92,30 +98,37 @@ export const Topbar = observer((props: TopbarProps) => {
           <Menu target={<TopBarButton>{MoreHorizontal20Regular}</TopBarButton>}>
             <Menu.MenuEntry
               onPress={workspace.openNewTab}
-              left={TabDesktopNewPage20Regular}>
+              left={withTextColor(TabDesktopNewPage20Regular)}>
               New Tab
             </Menu.MenuEntry>
-            <Menu.MenuEntry left={Window20Regular}>New Window</Menu.MenuEntry>
-            <Menu.MenuEntry left={WindowInprivateAccount20Regular}>
+            <Menu.MenuEntry left={withTextColor(Window20Regular)}>
+              New Window
+            </Menu.MenuEntry>
+            <Menu.MenuEntry
+              left={withTextColor(WindowInprivateAccount20Regular)}>
               New InPrivate Window
             </Menu.MenuEntry>
-            <Menu.MenuEntry left={StarLineHorizontal320Regular}>
+            <Menu.MenuEntry left={withTextColor(StarLineHorizontal320Regular)}>
               Favorites
             </Menu.MenuEntry>
-            <Menu.MenuEntry left={History20Regular}>History</Menu.MenuEntry>
-            <Menu.MenuEntry left={ArrowDownload20Regular}>
+            <Menu.MenuEntry left={withTextColor(History20Regular)}>
+              History
+            </Menu.MenuEntry>
+            <Menu.MenuEntry left={withTextColor(ArrowDownload20Regular)}>
               Downloads
             </Menu.MenuEntry>
-            <Menu.MenuEntry left={PuzzlePiece20Regular}>
+            <Menu.MenuEntry left={withTextColor(PuzzlePiece20Regular)}>
               Extensions
             </Menu.MenuEntry>
-            <Menu.MenuEntry left={DocumentSearch20Regular}>
+            <Menu.MenuEntry left={withTextColor(DocumentSearch20Regular)}>
               Find on page
             </Menu.MenuEntry>
-            <Menu.MenuEntry left={WrenchScrewdriver20Regular}>
+            <Menu.MenuEntry left={withTextColor(WrenchScrewdriver20Regular)}>
               More Tools
             </Menu.MenuEntry>
-            <Menu.MenuEntry left={Settings20Regular} onPress={openSettings}>
+            <Menu.MenuEntry
+              left={withTextColor(Settings20Regular)}
+              onPress={openSettings}>
               Settings
             </Menu.MenuEntry>
           </Menu>
@@ -125,6 +138,10 @@ export const Topbar = observer((props: TopbarProps) => {
     </View>
   );
 });
+
+const withColor = (color: string) => (Icon: Fluenticon) => {
+  return <Icon color={color} />;
+};
 
 const styles = StyleSheet.create({
   container: {

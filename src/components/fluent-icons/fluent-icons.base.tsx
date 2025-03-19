@@ -18,3 +18,7 @@ export const iconBuilder =
       </Svg>
     );
   };
+
+export type Fluenticon = (
+  props?: ComponentProps<typeof Svg>,
+) => React.JSX.Element;
