@@ -7,8 +7,8 @@ import {
   WINDOW_BORDER_SIZE,
 } from '../Tabbar.contants';
 import {
-  DismissFilled,
-  TabDesktopNewPageRegular,
+  Dismiss16Regular,
+  TabDesktopNewPage20Regular,
 } from '../../fluent-icons/fluent-icons';
 import { HoverView } from './HoverView';
 import { Memo, useObservable } from '@legendapp/state/react';
@@ -86,7 +86,9 @@ export function Tab(props: TabProps) {
           {/* Tab icon */}
           <View style={btnIconContainer}>
             <View style={[icon]}>
-              <TabDesktopNewPageRegular color={colors.fillColorTextSecondary} />
+              <TabDesktopNewPage20Regular
+                color={colors.fillColorTextSecondary}
+              />
             </View>
           </View>
 
@@ -142,7 +144,11 @@ const CloseButton = memo(function CloseButton(props: {
             style={hoverStyle}>
             {/* Close icon */}
             <TouchableOpacity onPress={onPress}>
-              <DismissFilled color={colors.fillColorTextSecondary} />
+              <Dismiss16Regular
+                width={16}
+                height={16}
+                color={colors.fillColorTextSecondary}
+              />
             </TouchableOpacity>
           </CloseButtonContainer>
         ) : null

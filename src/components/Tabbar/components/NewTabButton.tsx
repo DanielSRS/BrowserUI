@@ -7,7 +7,7 @@ import {
   ICON_PADDING,
   WINDOW_BORDER_SIZE,
 } from '../Tabbar.contants';
-import { AddRegular } from '../../fluent-icons/fluent-icons';
+import { Add20Regular } from '../../fluent-icons/fluent-icons';
 
 interface NewTabButtonProps {
   // id: number;
@@ -32,7 +32,7 @@ export const NewTabButton = React.memo((props: NewTabButtonProps) => {
         {/* Tab icon */}
         <IconContainer>
           <IconGroup>
-            <AddRegular color={colors.fillColorTextSecondary} />
+            <Add20Regular color={colors.fillColorTextSecondary} />
           </IconGroup>
         </IconContainer>
 
