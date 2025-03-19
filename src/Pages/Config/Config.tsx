@@ -21,18 +21,16 @@ export const Config = function Config(props: ConfigTabProps) {
   );
   return (
     <Memo>
-      {() => (
-        <PageContainer style={style$.get()}>
+      <PageContainer style={style$.get()}>
+        {}
+        <ScrollView style={scroll} contentContainerStyle={scrollContent}>
           {}
-          <ScrollView style={scroll} contentContainerStyle={scrollContent}>
-            {}
-            <MaxWidth>
-              <TitleLarge>Settings page</TitleLarge>
-            </MaxWidth>
-          </ScrollView>
-          {}
-        </PageContainer>
-      )}
+          <MaxWidth>
+            <TitleLarge>Settings page</TitleLarge>
+          </MaxWidth>
+        </ScrollView>
+        {}
+      </PageContainer>
     </Memo>
   );
 };

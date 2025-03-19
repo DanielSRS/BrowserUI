@@ -109,31 +109,28 @@ function Content(props: ContentProps) {
   return (
     <ContentContainer>
       <Memo>
-        {() => (
-          <ZStack>
-            {workspace.tabIds.get().map(tab => {
-              const { url, id } =
-                workspace$.tabs[tab as unknown as number].get();
-              if (url === 'browser://config') {
-                return (
-                  <Config
-                    key={id}
-                    selectedTab={workspace$.selectedTabId}
-                    tabId={id}
-                  />
-                );
-              }
-
+        <ZStack>
+          {workspace.tabIds.get().map(tab => {
+            const { url, id } = workspace$.tabs[tab as unknown as number].get();
+            if (url === 'browser://config') {
               return (
-                <NewTab
+                <Config
                   key={id}
                   selectedTab={workspace$.selectedTabId}
                   tabId={id}
                 />
               );
-            })}
-          </ZStack>
-        )}
+            }
+
+            return (
+              <NewTab
+                key={id}
+                selectedTab={workspace$.selectedTabId}
+                tabId={id}
+              />
+            );
+          })}
+        </ZStack>
       </Memo>
     </ContentContainer>
   );

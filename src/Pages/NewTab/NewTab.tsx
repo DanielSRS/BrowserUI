@@ -27,28 +27,26 @@ export const NewTab = function NewTab(props: NewTabProps) {
 
   return (
     <Memo>
-      {() => (
-        <PageContainer style={style$.get()}>
-          <LogoSearchGroup>
-            <AppLogo
-              color={colors.fillColorControlSecondary}
-              width={382 * 0.8}
-              height={300 * 0.8}
-            />
-            <SearchBar
-              // @ts-expect-error exists only on Macos
-              enableFocusRing={false}
-              ref={searchRef}
-              placeholder={'Ask me anything'}
-              style={{
-                backgroundColor: colors.fillColorControlTertiary,
-                borderColor: colors.strokeColorSurfaceStrokeDefault,
-              }}
-              placeholderTextColor={colors.fillColorTextSecondary}
-            />
-          </LogoSearchGroup>
-        </PageContainer>
-      )}
+      <PageContainer style={style$.get()}>
+        <LogoSearchGroup>
+          <AppLogo
+            color={colors.fillColorControlSecondary}
+            width={382 * 0.8}
+            height={300 * 0.8}
+          />
+          <SearchBar
+            // @ts-expect-error exists only on Macos
+            enableFocusRing={false}
+            ref={searchRef}
+            placeholder={'Ask me anything'}
+            style={{
+              backgroundColor: colors.fillColorControlTertiary,
+              borderColor: colors.strokeColorSurfaceStrokeDefault,
+            }}
+            placeholderTextColor={colors.fillColorTextSecondary}
+          />
+        </LogoSearchGroup>
+      </PageContainer>
     </Memo>
   );
 };

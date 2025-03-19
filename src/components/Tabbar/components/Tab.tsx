@@ -69,40 +69,36 @@ export function Tab(props: TabProps) {
 
   return (
     <Computed>
-      {() => (
-        <TabContent
-          onPress={fireTabPressEvent}
-          // @ts-expect-error
-          onMouseEnter={setHovered}
-          onMouseLeave={unsetHovered}
-          style={[
-            isSelected$.get() && {
-              borderColor: colors.controlStrongStrokeDefault,
-            },
-          ]}>
-          {/* Hover bg */}
-          <HoverView show={isHovered$} style={hoverBgColor} />
+      <TabContent
+        onPress={fireTabPressEvent}
+        // @ts-expect-error
+        onMouseEnter={setHovered}
+        onMouseLeave={unsetHovered}
+        style={[
+          isSelected$.get() && {
+            borderColor: colors.controlStrongStrokeDefault,
+          },
+        ]}>
+        {/* Hover bg */}
+        <HoverView show={isHovered$} style={hoverBgColor} />
 
-          {/* Tab icon */}
-          <View style={btnIconContainer}>
-            <View style={[icon]}>
-              <TabDesktopNewPage20Regular
-                color={colors.fillColorTextSecondary}
-              />
-            </View>
+        {/* Tab icon */}
+        <View style={btnIconContainer}>
+          <View style={[icon]}>
+            <TabDesktopNewPage20Regular color={colors.fillColorTextSecondary} />
           </View>
+        </View>
 
-          {/* Tab name */}
-          <TabName
-            // otherwise, tab height changes when theres no enough space
-            numberOfLines={1}>
-            {name}
-          </TabName>
+        {/* Tab name */}
+        <TabName
+          // otherwise, tab height changes when theres no enough space
+          numberOfLines={1}>
+          {name}
+        </TabName>
 
-          {/* Close button */}
-          <CloseButton isTabHovered={isHovered$} onPress={fireTabCloseEvent} />
-        </TabContent>
-      )}
+        {/* Close button */}
+        <CloseButton isTabHovered={isHovered$} onPress={fireTabCloseEvent} />
+      </TabContent>
     </Computed>
   );
 }
@@ -131,28 +127,26 @@ const CloseButton = memo(function CloseButton(props: {
 
   return (
     <Memo>
-      {() =>
-        isTabHovered.get() ? (
-          <CloseButtonContainer
-            // @ts-expect-error
-            onMouseEnter={(_p: MouseEvent) => {
-              setIsHovered(true);
-            }}
-            onMouseLeave={(_p: MouseEvent) => {
-              setIsHovered(undefined);
-            }}
-            style={hoverStyle}>
-            {/* Close icon */}
-            <TouchableOpacity onPress={onPress}>
-              <Dismiss16Regular
-                width={16}
-                height={16}
-                color={colors.fillColorTextSecondary}
-              />
-            </TouchableOpacity>
-          </CloseButtonContainer>
-        ) : null
-      }
+      {isTabHovered.get() ? (
+        <CloseButtonContainer
+          // @ts-expect-error
+          onMouseEnter={(_p: MouseEvent) => {
+            setIsHovered(true);
+          }}
+          onMouseLeave={(_p: MouseEvent) => {
+            setIsHovered(undefined);
+          }}
+          style={hoverStyle}>
+          {/* Close icon */}
+          <TouchableOpacity onPress={onPress}>
+            <Dismiss16Regular
+              width={16}
+              height={16}
+              color={colors.fillColorTextSecondary}
+            />
+          </TouchableOpacity>
+        </CloseButtonContainer>
+      ) : null}
     </Memo>
   );
 });

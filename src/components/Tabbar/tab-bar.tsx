@@ -143,31 +143,25 @@ export function Tabbar(props: TabbarProps) {
       style={[sideBar, { width: sideBarWidth }]}>
       {/* Blurred backgournd when opened */}
       <Memo>
-        {() =>
-          showBlurview.get() && (
-            <AbsolutePositioned>
-              <BlurGB />
-            </AbsolutePositioned>
-          )
-        }
+        {showBlurview.get() && (
+          <AbsolutePositioned>
+            <BlurGB />
+          </AbsolutePositioned>
+        )}
       </Memo>
 
       {/* Tab list */}
       <Memo>
-        {() => {
-          return (
-            <LegendList
-              data={tabIds.get()}
-              style={fatlist}
-              ref={listRef}
-              contentContainerStyle={fatlistContent}
-              renderItem={renderItem}
-              keyExtractor={item => item}
-              // showsVerticalScrollIndicator={showScrollIndicator.get()}
-              estimatedItemSize={36}
-            />
-          );
-        }}
+        <LegendList
+          data={tabIds.get()}
+          style={fatlist}
+          ref={listRef}
+          contentContainerStyle={fatlistContent}
+          renderItem={renderItem}
+          keyExtractor={item => item}
+          // showsVerticalScrollIndicator={showScrollIndicator.get()}
+          estimatedItemSize={36}
+        />
       </Memo>
 
       <NewButtonContainer>
