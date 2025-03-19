@@ -4,15 +4,25 @@ import { TextInput } from 'react-native';
 import { Menu, useColors } from '@danielsrs/react-native-sdk';
 import { ExpandOnHoverContext } from '../ExpandOnHover/ExpandOnHover.context';
 import { TopBarButton } from './components/TopbarButton';
-import {
-  ArrowLeftRegular,
-  ArrowRightRegular,
-  MoreHorizontalRegular,
-  PersonRegular,
-} from './components/icons';
 import { workspace } from '../../store/store';
 import { observer } from '@legendapp/state/react';
 import { WindowButtons } from './components/WindowButtons';
+import {
+  Window20Regular,
+  DocumentSearch20Regular,
+  StarLineHorizontal320Regular,
+  TabDesktopNewPage20Regular,
+  WindowInprivateAccount20Regular,
+  History20Regular,
+  ArrowDownload20Regular,
+  PuzzlePiece20Regular,
+  WrenchScrewdriver20Regular,
+  Settings20Regular,
+  ArrowLeft20Regular,
+  ArrowRight20Regular,
+  MoreHorizontal20Regular,
+  Person20Regular,
+} from '../fluent-icons/fluent-icons';
 
 const IS_MACOS = Platform.OS === 'macos';
 const WINDOW_CONTROL_AREA_LEFT = IS_MACOS ? 64 : 0;
@@ -47,9 +57,9 @@ export const Topbar = observer((props: TopbarProps) => {
       <View style={styles.contentArea}>
         <View style={styles.buttonsContainer}>
           {/* Voltar */}
-          <TopBarButton>{ArrowLeftRegular}</TopBarButton>
+          <TopBarButton>{ArrowLeft20Regular}</TopBarButton>
           {/* Avançar */}
-          <TopBarButton>{ArrowRightRegular}</TopBarButton>
+          <TopBarButton>{ArrowRight20Regular}</TopBarButton>
         </View>
         {}
         <View style={styles.spacer} />
@@ -77,20 +87,37 @@ export const Topbar = observer((props: TopbarProps) => {
         {}
         <View style={styles.buttonsContainer}>
           {/* Perfil */}
-          <TopBarButton>{PersonRegular}</TopBarButton>
+          <TopBarButton>{Person20Regular}</TopBarButton>
           {/* Menu */}
-          <Menu target={<TopBarButton>{MoreHorizontalRegular}</TopBarButton>}>
-            <Menu.MenuEntry onPress={workspace.openNewTab}>
+          <Menu target={<TopBarButton>{MoreHorizontal20Regular}</TopBarButton>}>
+            <Menu.MenuEntry
+              onPress={workspace.openNewTab}
+              left={TabDesktopNewPage20Regular}>
               New Tab
             </Menu.MenuEntry>
-            <Menu.MenuEntry>New Window</Menu.MenuEntry>
-            <Menu.MenuEntry>New InPrivate Window</Menu.MenuEntry>
-            <Menu.MenuEntry>Favorites</Menu.MenuEntry>
-            <Menu.MenuEntry>History</Menu.MenuEntry>
-            <Menu.MenuEntry>Downloads</Menu.MenuEntry>
-            <Menu.MenuEntry>Extensions</Menu.MenuEntry>
-            <Menu.MenuEntry>More Tools</Menu.MenuEntry>
-            <Menu.MenuEntry onPress={openSettings}>Settings</Menu.MenuEntry>
+            <Menu.MenuEntry left={Window20Regular}>New Window</Menu.MenuEntry>
+            <Menu.MenuEntry left={WindowInprivateAccount20Regular}>
+              New InPrivate Window
+            </Menu.MenuEntry>
+            <Menu.MenuEntry left={StarLineHorizontal320Regular}>
+              Favorites
+            </Menu.MenuEntry>
+            <Menu.MenuEntry left={History20Regular}>History</Menu.MenuEntry>
+            <Menu.MenuEntry left={ArrowDownload20Regular}>
+              Downloads
+            </Menu.MenuEntry>
+            <Menu.MenuEntry left={PuzzlePiece20Regular}>
+              Extensions
+            </Menu.MenuEntry>
+            <Menu.MenuEntry left={DocumentSearch20Regular}>
+              Find on page
+            </Menu.MenuEntry>
+            <Menu.MenuEntry left={WrenchScrewdriver20Regular}>
+              More Tools
+            </Menu.MenuEntry>
+            <Menu.MenuEntry left={Settings20Regular} onPress={openSettings}>
+              Settings
+            </Menu.MenuEntry>
           </Menu>
         </View>
       </View>
