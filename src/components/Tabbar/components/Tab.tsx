@@ -11,7 +11,7 @@ import {
   TabDesktopNewPage20Regular,
 } from '../../fluent-icons/fluent-icons';
 import { HoverView } from './HoverView';
-import { Memo, useObservable } from '@legendapp/state/react';
+import { Computed, Memo, useObservable } from '@legendapp/state/react';
 import type { ObservableBoolean, ObservablePrimitive } from '@legendapp/state';
 
 interface TabProps {
@@ -68,7 +68,7 @@ export function Tab(props: TabProps) {
   };
 
   return (
-    <Memo>
+    <Computed>
       {() => (
         <TabContent
           onPress={fireTabPressEvent}
@@ -103,7 +103,7 @@ export function Tab(props: TabProps) {
           <CloseButton isTabHovered={isHovered$} onPress={fireTabCloseEvent} />
         </TabContent>
       )}
-    </Memo>
+    </Computed>
   );
 }
 
