@@ -2,18 +2,23 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 import {
   animateTrafficLightsPositionTo,
+  changeTrafficLightsPosition,
+  hideTrafficLights,
+  showTrafficLights,
   // hideTrafficLights,
   // showTrafficLights,
 } from 'react-native-infinity';
 import { BlurView } from 'blurview';
 import { Styled, useColors } from '@danielsrs/react-native-sdk';
 import { ExpandOnHoverContext } from './ExpandOnHover.context';
+import { settings } from '../../store/store';
 import type { MouseEvent } from 'react-native';
 
 const WINDOW_BORDER_SIZE = 6;
 const WINDOW_BORDER_RADIUS = 6;
 const OPEN_ANIMATION_DURATION = 150;
 const CLOSE_ANIMATION_DURATION = 100;
+const BUTTONS_START_POSITION = 6 + 10; // window border size + tab icon padding
 
 const hover_targer_height = WINDOW_BORDER_SIZE * 2;
 export const ExpandOnHover = (props: {
@@ -21,8 +26,7 @@ export const ExpandOnHover = (props: {
   expanded?: boolean;
 }) => {
   const { children, expanded } = props;
-
-
+  const onRenderExpanded = useRef(expanded);
   const childrenHeight = useRef<number>(0);
   const lastY = useRef<number>(0);
   const height = useRef(new Animated.Value(-50)).current;
@@ -45,9 +49,12 @@ export const ExpandOnHover = (props: {
     // Make sure its hidden
     // animateTrafficLightsPositionTo(0, 20, 0);
     // Show it
-    // showTrafficLights();
+    if (!settings.isTopBarExpanded.peek()) {
+      changeTrafficLightsPosition(BUTTONS_START_POSITION, 14);
+      showTrafficLights();
+    }
     // Animate it
-    animateTrafficLightsPositionTo(0, -10, 0.25);
+    animateTrafficLightsPositionTo(0, -17, 0.25);
     setHoverHeight(childrenHeight.current);
   };
 
@@ -60,13 +67,30 @@ export const ExpandOnHover = (props: {
     }).start();
 
     // Animate it
-    animateTrafficLightsPositionTo(0, 20, 0.3);
+    animateTrafficLightsPositionTo(0, 20, 0.3).then(() => {
+      if (!settings.isTopBarExpanded.peek()) {
+        hideTrafficLights();
+      }
+    });
     // setTimeout(() => {
     //   // Hide it
     //   hideTrafficLights();
     // }, 200);
     setHoverHeight(hover_targer_height);
   };
+
+  if (onRenderExpanded.current !== expanded) {
+    // console.log('expanded changed: ', onRenderExpanded.current, expanded);
+    // change
+    if (!expanded) {
+      closeIfNotFocused();
+    } else {
+      // fadeIn();
+    }
+    // end change
+    // update ref
+    onRenderExpanded.current = expanded;
+  }
 
   if (expanded) {
     return <VerticalPadding>{children}</VerticalPadding>;
@@ -85,11 +109,11 @@ export const ExpandOnHover = (props: {
     fn();
   };
 
-  const closeIfNotFocused = () => {
+  function closeIfNotFocused() {
     if (focusCount.current === 0) {
       fadeOut();
     }
-  };
+  }
 
   return (
     <>

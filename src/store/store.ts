@@ -139,6 +139,10 @@ export const workspace = observable<Workspace>({
   },
 });
 
+export const settings = observable({
+  isTopBarExpanded: true,
+});
+
 // export const CLOSEE = observable((idToFind: number) => {
 //   const maxIndex = workspace.tabs.length - 1;
 //   const selectedTabId = workspace.selectedTabId.peek();

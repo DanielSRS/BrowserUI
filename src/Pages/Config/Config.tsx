@@ -8,6 +8,7 @@ import {
   SetColorScheme,
   BodyLarge,
 } from '@danielsrs/react-native-sdk';
+import { settings } from '../../store/store';
 import type { ObservablePrimitive } from '@legendapp/state';
 
 interface ConfigTabProps {
@@ -39,6 +40,22 @@ export const Config = function Config(props: ConfigTabProps) {
               <Button onPress={() => SetColorScheme('dark')}>Dark</Button>
               <Button onPress={() => SetColorScheme('light')}>Light</Button>
               <Button onPress={() => SetColorScheme('system')}>System</Button>
+            </SpacedRow>
+
+            <Computed>
+              <BodyLarge>TopBar</BodyLarge>
+            </Computed>
+            <SpacedRow>
+              <Button
+                disabled={settings.isTopBarExpanded.get()}
+                onPress={() => settings.isTopBarExpanded.set(true)}>
+                Expanded
+              </Button>
+              <Button
+                disabled={!settings.isTopBarExpanded.get()}
+                onPress={() => settings.isTopBarExpanded.set(false)}>
+                Colapsed
+              </Button>
             </SpacedRow>
           </MaxWidth>
         </ScrollView>

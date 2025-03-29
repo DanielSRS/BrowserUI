@@ -4,8 +4,8 @@ import { TextInput } from 'react-native';
 import { Menu, useColors } from '@danielsrs/react-native-sdk';
 import { ExpandOnHoverContext } from '../ExpandOnHover/ExpandOnHover.context';
 import { TopBarButton } from './components/TopbarButton';
-import { workspace } from '../../store/store';
-import { observer } from '@legendapp/state/react';
+import { settings, workspace } from '../../store/store';
+import { Memo, observer } from '@legendapp/state/react';
 import { WindowButtons } from './components/WindowButtons';
 import {
   Window20Regular,
@@ -59,7 +59,9 @@ export const Topbar = observer((props: TopbarProps) => {
 
   return (
     <View style={styles.container}>
-      {IS_MACOS && <WindowButtons />}
+      <Memo>
+        {IS_MACOS && settings.isTopBarExpanded.get() && <WindowButtons />}
+      </Memo>
       <View style={styles.contentArea}>
         <View style={styles.buttonsContainer}>
           {/* Voltar */}

@@ -6,20 +6,20 @@ import { ExpandOnHover } from './components/ExpandOnHover/ExpandOnHover';
 import { Styled, useColors, ZStack } from '@danielsrs/react-native-sdk';
 import { WINDOW_BORDER_SIZE } from './constraints/layout';
 import { NewTab } from './Pages/NewTab/NewTab';
-import { Memo } from '@legendapp/state/react';
-import { workspace, type Workspace } from './store/store';
+import { Memo, use$ } from '@legendapp/state/react';
+import { settings, workspace, type Workspace } from './store/store';
 import { Config } from './Pages/Config/Config';
 import type { Observable } from '@legendapp/state';
-
-const isTopBarExpanded = true;
 
 export const App = function App() {
   return (
     <Window>
       {/* Nav bar */}
-      <ExpandOnHover expanded={isTopBarExpanded}>
-        <Topbar />
-      </ExpandOnHover>
+      <Memo>
+        <ExpandOnHover expanded={settings.isTopBarExpanded.get()}>
+          <Topbar />
+        </ExpandOnHover>
+      </Memo>
       <Row>
         {/* Tabbar */}
         <Tabbar
@@ -79,6 +79,7 @@ const ContentAreaContainer = Styled.createStyledView({
 
 function ContentArea() {
   const colors = useColors();
+  const isTopBarExpanded = use$(settings.isTopBarExpanded);
   const borderColor = colors.strokeColorDividerStrokeDefault;
   return (
     <ContentAreaContainer
