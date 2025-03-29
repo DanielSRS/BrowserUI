@@ -3052,13 +3052,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@legendapp/list@npm:1.0.0-beta.11":
-  version: 1.0.0-beta.11
-  resolution: "@legendapp/list@npm:1.0.0-beta.11"
+"@legendapp/list@npm:1.0.0-beta.25":
+  version: 1.0.0-beta.25
+  resolution: "@legendapp/list@npm:1.0.0-beta.25"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10/a8b9b7f045d0440fa26d859ceefe328fc98a51e431c12fa2d4eedf9e67b7498d87c2da4cf4a2076e955c433e9d010180c3f67419860b9e3a5c399e9d22edaa19
+  checksum: 10/2a61226ee19ea9d02479b1f2b09be45f40a726bb345e4e640dc18a3b819b03b81a868115abaf608927eb35a9f3fbf437eaf5ec4c3fd7ada2bfa9ed6feb7bfd8a
   languageName: node
   linkType: hard
 
@@ -4887,7 +4887,7 @@ __metadata:
     "@babel/runtime": "npm:^7.25.0"
     "@danielsrs/react-native-sdk": "npm:^0.2.1"
     "@gorhom/bottom-sheet": "npm:^5.0.6"
-    "@legendapp/list": "npm:1.0.0-beta.11"
+    "@legendapp/list": "npm:1.0.0-beta.25"
     "@legendapp/state": "npm:^3.0.0-beta.30"
     "@react-native-async-storage/async-storage": "npm:^2.1.0"
     "@react-native-community/cli": "npm:15.0.1"
