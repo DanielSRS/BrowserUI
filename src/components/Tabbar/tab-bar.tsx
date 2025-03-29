@@ -102,7 +102,7 @@ export function Tabbar(props: TabbarProps) {
     if (state === 1 || state === 3) {
       return;
     }
-    console.log('expand');
+    // console.log('expand');
     // start animating
     animationState.set(1);
     expandAnimation.start(({ finished }) => {
@@ -118,7 +118,7 @@ export function Tabbar(props: TabbarProps) {
     if (animationState.peek() === 2) {
       return;
     }
-    console.log('colapse');
+    // console.log('colapse');
     // start animating
     animationState.set(2);
     Animated.timing(sideBarWidth, {

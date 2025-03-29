@@ -1,7 +1,13 @@
 import React from 'react';
-import { Memo, useObservable } from '@legendapp/state/react';
+import { Computed, useObservable } from '@legendapp/state/react';
 import { ScrollView, type ViewStyle } from 'react-native';
-import { Styled, TitleLarge } from '@danielsrs/react-native-sdk';
+import {
+  Button,
+  Styled,
+  TitleLarge,
+  SetColorScheme,
+  BodyLarge,
+} from '@danielsrs/react-native-sdk';
 import type { ObservablePrimitive } from '@legendapp/state';
 
 interface ConfigTabProps {
@@ -20,20 +26,31 @@ export const Config = function Config(props: ConfigTabProps) {
         } as const),
   );
   return (
-    <Memo>
+    <Computed>
       <PageContainer style={style$.get()}>
         {}
         <ScrollView style={scroll} contentContainerStyle={scrollContent}>
           {}
           <MaxWidth>
-            <TitleLarge>Settings page</TitleLarge>
+            <Title>Settings page</Title>
+
+            <BodyLarge>App theme</BodyLarge>
+            <SpacedRow>
+              <Button onPress={() => SetColorScheme('dark')}>Dark</Button>
+              <Button onPress={() => SetColorScheme('light')}>Light</Button>
+              <Button onPress={() => SetColorScheme('system')}>System</Button>
+            </SpacedRow>
           </MaxWidth>
         </ScrollView>
         {}
       </PageContainer>
-    </Memo>
+    </Computed>
   );
 };
+
+const Title = Styled.createStyled(TitleLarge, {
+  alignSelf: 'center',
+});
 
 const PageContainer = Styled.createStyledView({
   flex: 1,
@@ -43,7 +60,11 @@ const MaxWidth = Styled.createStyledView({
   maxWidth: 900,
   width: '100%',
   rowGap: 20,
-  alignItems: 'center',
+});
+
+const SpacedRow = Styled.createStyledView({
+  flexDirection: 'row',
+  columnGap: 10,
 });
 
 const scrollContent: ViewStyle = {
