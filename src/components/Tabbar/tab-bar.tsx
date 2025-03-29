@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef } from 'react';
-import { Animated } from 'react-native';
+import { Animated, Easing } from 'react-native';
 import {
   TABBAR_COLAPSED_WIDTH,
   TABLIST_GAP,
@@ -16,9 +16,15 @@ import type { Tab as TAB } from '../../store/store';
 import type { LegendListRef } from '@legendapp/list';
 
 const TABBAR_EXPANDED_WIDTH = 250;
-const OPEN_ANIMATION_DURATION = 30;
-const CLOSE_ANIMATION_DURATION = 50;
+const OPEN_ANIMATION_SPEED = 100;
+const CLOSE_ANIMATION_SPEED = 250;
 const DELAY_TO_EXPAND = 40;
+
+const interpolationConfig = {
+  inputRange: [TABBAR_COLAPSED_WIDTH, TABBAR_EXPANDED_WIDTH],
+  outputRange: [0, 1],
+  easing: Easing.ease,
+};
 
 interface TabbarProps {
   onNewTabButtonPress?: () => void;
@@ -47,9 +53,6 @@ export function Tabbar(props: TabbarProps) {
    * 3 - expanded
    */
   const animationState = useObservable<0 | 1 | 2 | 3>(0);
-  const showBlurview = useObservable(() => {
-    return animationState.get() !== 0;
-  });
   const listRef = useRef<LegendListRef>(null);
 
   const openAndFocusTab = useCallback(() => {
@@ -86,9 +89,10 @@ export function Tabbar(props: TabbarProps) {
 
   const expandAnimation = useMemo(
     () =>
-      Animated.timing(sideBarWidth, {
+      Animated.spring(sideBarWidth, {
         toValue: TABBAR_EXPANDED_WIDTH,
-        duration: OPEN_ANIMATION_DURATION,
+        speed: OPEN_ANIMATION_SPEED,
+        bounciness: 0,
         useNativeDriver: false,
         isInteraction: true,
         delay: DELAY_TO_EXPAND,
@@ -121,9 +125,10 @@ export function Tabbar(props: TabbarProps) {
     // console.log('colapse');
     // start animating
     animationState.set(2);
-    Animated.timing(sideBarWidth, {
+    Animated.spring(sideBarWidth, {
       toValue: TABBAR_COLAPSED_WIDTH,
-      duration: CLOSE_ANIMATION_DURATION,
+      speed: CLOSE_ANIMATION_SPEED,
+      bounciness: 0,
       useNativeDriver: false,
       isInteraction: true,
     }).start(ended => {
@@ -142,13 +147,15 @@ export function Tabbar(props: TabbarProps) {
       onMouseLeave={colapse}
       style={[sideBar, { width: sideBarWidth }]}>
       {/* Blurred backgournd when opened */}
-      <Memo>
-        {showBlurview.get() && (
-          <AbsolutePositioned>
-            <BlurGB />
-          </AbsolutePositioned>
-        )}
-      </Memo>
+      <AbsolutePositioned
+        style={[
+          absolutePositioned,
+          {
+            opacity: sideBarWidth.interpolate(interpolationConfig),
+          },
+        ]}>
+        <BlurGB />
+      </AbsolutePositioned>
 
       {/* Tab list */}
       <Memo>
@@ -181,6 +188,7 @@ export function Tabbar(props: TabbarProps) {
 // }
 
 const TabbarContainer = Animated.View;
+const AbsolutePositioned = Animated.View;
 const sideBar = {
   // backgroundColor: 'blue',
   borderRadius: WINDOW_BORDER_SIZE,
@@ -201,14 +209,14 @@ const fatlistContent = {
   // borderWidth: 1,
 } as const;
 
-const AbsolutePositioned = Styled.createStyledView({
+const absolutePositioned = {
   position: 'absolute',
   top: 0,
   left: 0,
   right: 0,
   bottom: 0,
   pointerEvents: 'none',
-});
+} as const;
 const BlurGB = Styled.createStyled(BlurView, {
   flex: 1,
 });
