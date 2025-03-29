@@ -21,15 +21,7 @@ export const ExpandOnHover = (props: {
   expanded?: boolean;
 }) => {
   const { children, expanded } = props;
-  const st = {
-    ...StyleSheet.absoluteFillObject,
-    overflow: 'hidden',
-    bottom: undefined,
-  } as const;
-  const HH = {
-    borderRadius: WINDOW_BORDER_SIZE,
-    paddingVertical: WINDOW_BORDER_SIZE,
-  } as const;
+
 
   const childrenHeight = useRef<number>(0);
   const lastY = useRef<number>(0);
@@ -175,3 +167,13 @@ export const ExpandOnHover = (props: {
 const VerticalPadding = Styled.createStyledView({
   paddingVertical: WINDOW_BORDER_SIZE,
 });
+
+const st = {
+  ...StyleSheet.absoluteFillObject,
+  overflow: 'hidden',
+  bottom: undefined,
+} as const;
+const HH = {
+  borderRadius: WINDOW_BORDER_SIZE,
+  paddingVertical: WINDOW_BORDER_SIZE,
+} as const;
