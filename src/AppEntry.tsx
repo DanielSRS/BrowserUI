@@ -14,7 +14,6 @@ import type { Observable } from '@legendapp/state';
 const isTopBarExpanded = true;
 
 export const App = function App() {
-  const colors = useColors();
   return (
     <Window>
       {/* Nav bar */}
@@ -32,14 +31,7 @@ export const App = function App() {
           selectTab={workspace.selectTab}
         />
         {/* Content container */}
-        <ContentArea
-          style={[
-            { borderColor: colors.strokeColorDividerStrokeDefault },
-            !isTopBarExpanded && { top: WINDOW_BORDER_SIZE },
-          ]}>
-          {/* Content */}
-          <Content workspace$={workspace} />
-        </ContentArea>
+        <ContentArea />
       </Row>
     </Window>
   );
@@ -72,23 +64,35 @@ const Row = memo(
   ),
 );
 
-const ContentArea = memo(
-  Styled.createStyledView(
-    {
-      flex: 1,
-      borderWidth: 1,
-      borderColor: 'rgba(255, 255, 255, 0.08)',
-      borderRadius: WINDOW_BORDER_SIZE,
-      ...StyleSheet.absoluteFillObject,
-      left: SIDEBAR_SIZE,
-      right: WINDOW_BORDER_SIZE,
-      bottom: WINDOW_BORDER_SIZE,
-      // top: WINDOW_BORDER_SIZE,
-      // backgroundColor: 'green',
-    },
-    'ContentArea',
-  ),
-);
+const ContentAreaContainer = Styled.createStyledView({
+  flex: 1,
+  borderWidth: 1,
+  borderColor: 'rgba(255, 255, 255, 0.08)',
+  borderRadius: WINDOW_BORDER_SIZE,
+  ...StyleSheet.absoluteFillObject,
+  left: SIDEBAR_SIZE,
+  right: WINDOW_BORDER_SIZE,
+  bottom: WINDOW_BORDER_SIZE,
+  // top: WINDOW_BORDER_SIZE,
+  // backgroundColor: 'green',
+});
+
+function ContentArea() {
+  const colors = useColors();
+  const borderColor = colors.strokeColorDividerStrokeDefault;
+  return (
+    <ContentAreaContainer
+      style={[
+        {
+          borderColor,
+        },
+        !isTopBarExpanded && { top: WINDOW_BORDER_SIZE },
+      ]}>
+      {/* Content */}
+      <Content workspace$={workspace} />
+    </ContentAreaContainer>
+  );
+}
 
 const ContentContainer = memo(
   Styled.createStyledView(
