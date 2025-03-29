@@ -1,6 +1,11 @@
 import React from 'react';
 import { Computed, useObservable } from '@legendapp/state/react';
-import { ScrollView, type ViewStyle } from 'react-native';
+import {
+  LayoutAnimation,
+  ScrollView,
+  type LayoutAnimationConfig,
+  type ViewStyle,
+} from 'react-native';
 import {
   Button,
   Styled,
@@ -15,6 +20,21 @@ interface ConfigTabProps {
   tabId: number;
   selectedTab: ObservablePrimitive<number>;
 }
+const animationConfig: LayoutAnimationConfig = {
+  duration: 300,
+  create: {
+    type: 'linear',
+    property: 'opacity',
+  },
+  update: {
+    type: 'spring',
+    springDamping: 0.4,
+  },
+  delete: {
+    type: 'linear',
+    property: 'opacity',
+  },
+};
 export const Config = function Config(props: ConfigTabProps) {
   const { selectedTab, tabId } = props;
   const isSelected$ = useObservable(() => selectedTab.get() === tabId);
@@ -48,12 +68,18 @@ export const Config = function Config(props: ConfigTabProps) {
             <SpacedRow>
               <Button
                 disabled={settings.isTopBarExpanded.get()}
-                onPress={() => settings.isTopBarExpanded.set(true)}>
+                onPress={() => {
+                  LayoutAnimation.configureNext(animationConfig);
+                  settings.isTopBarExpanded.set(true);
+                }}>
                 Expanded
               </Button>
               <Button
                 disabled={!settings.isTopBarExpanded.get()}
-                onPress={() => settings.isTopBarExpanded.set(false)}>
+                onPress={() => {
+                  LayoutAnimation.configureNext(animationConfig);
+                  settings.isTopBarExpanded.set(false);
+                }}>
                 Colapsed
               </Button>
             </SpacedRow>
