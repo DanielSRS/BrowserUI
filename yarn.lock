@@ -2394,9 +2394,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@danielsrs/react-native-sdk@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "@danielsrs/react-native-sdk@npm:0.2.1"
+"@danielsrs/react-native-sdk@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "@danielsrs/react-native-sdk@npm:0.4.0"
   dependencies:
     "@legendapp/state": "npm:beta"
     scheduler: "npm:^0.23.2"
@@ -2409,7 +2409,7 @@ __metadata:
   peerDependenciesMeta:
     react-native-document-picker:
       optional: true
-  checksum: 10/3c6f5dfb53de2a4c644ba65ff8c0ca6c80d86339f23c243c9e933276660d7de229b12d76090603a449e062458cab6fd1e2ccdeab8650a11337a5b68711efd3b2
+  checksum: 10/18ecde31b37970fcf339f21abce8c493d7ca60c9c56283dcd5a821d6d2a8079279df2f55b9f5555b922e015d6dff18bfff3c8e8287518137fa73876b2597f4a3
   languageName: node
   linkType: hard
 
@@ -4885,7 +4885,7 @@ __metadata:
     "@babel/core": "npm:^7.25.2"
     "@babel/preset-env": "npm:^7.25.3"
     "@babel/runtime": "npm:^7.25.0"
-    "@danielsrs/react-native-sdk": "npm:^0.2.1"
+    "@danielsrs/react-native-sdk": "npm:^0.4.0"
     "@gorhom/bottom-sheet": "npm:^5.0.6"
     "@legendapp/list": "npm:1.0.0-beta.26"
     "@legendapp/state": "npm:^3.0.0-beta.30"
