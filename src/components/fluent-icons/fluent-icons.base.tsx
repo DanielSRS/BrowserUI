@@ -3,9 +3,10 @@ import type { ComponentProps } from 'react';
 import Svg, { Path } from 'react-native-svg';
 
 export const iconBuilder =
-  (d: string) => (props?: ComponentProps<typeof Svg>) => {
-    const width = props?.width ?? 20;
-    const height = props?.height ?? 20;
+  (d: string, w?: number, h?: number) =>
+  (props?: ComponentProps<typeof Svg>) => {
+    const width = props?.width ?? w ?? 20;
+    const height = props?.height ?? h ?? 20;
     return (
       <Svg
         width={width}
