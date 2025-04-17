@@ -16,6 +16,7 @@ export interface Workspace {
   tabs: Record<number, Tab>;
   tabIds: string[];
   openNewTab: () => void;
+  openUrl: () => void;
   openNewConfigTab: () => void;
   focusConfigTab: () => boolean;
   selectTab: (id: number) => void;
@@ -50,6 +51,21 @@ export const workspace = observable<Workspace>({
         id: newid,
         order: newOrder,
         url: 'browser://newTab',
+      });
+    });
+  },
+  openUrl: () => {
+    const newid = workspace.nextNewTabId.get();
+    const nextId = newid + 1;
+    const newOrder = Object.keys(workspace.tabs.peek()).length;
+    batch(() => {
+      workspace.selectedTabId.set(newid);
+      workspace.nextNewTabId.set(nextId);
+      workspace.tabs[newid].set({
+        name: 'Showcase',
+        id: newid,
+        order: newOrder,
+        url: 'browser://showcase',
       });
     });
   },

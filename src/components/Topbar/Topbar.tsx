@@ -22,6 +22,7 @@ import {
   ArrowRight20Regular,
   MoreHorizontal20Regular,
   Person20Regular,
+  AppGeneric20Regular,
 } from '../fluent-icons/fluent-icons';
 import type { Fluenticon } from '../fluent-icons/fluent-icons.base';
 
@@ -127,6 +128,11 @@ export const Topbar = observer((props: TopbarProps) => {
             </Menu.MenuEntry>
             <Menu.MenuEntry left={withTextColor(WrenchScrewdriver20Regular)}>
               More Tools
+            </Menu.MenuEntry>
+            <Menu.MenuEntry
+              left={withTextColor(AppGeneric20Regular)}
+              onPress={workspace.openUrl}>
+              Showcase
             </Menu.MenuEntry>
             <Menu.MenuEntry
               left={withTextColor(Settings20Regular)}

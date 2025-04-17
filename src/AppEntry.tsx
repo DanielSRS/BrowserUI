@@ -9,6 +9,7 @@ import { NewTab } from './Pages/NewTab/NewTab';
 import { Memo, use$ } from '@legendapp/state/react';
 import { settings, workspace, type Workspace } from './store/store';
 import { Config } from './Pages/Config/Config';
+import { Showcase } from './Pages/showcase/showcase';
 import type { Observable } from '@legendapp/state';
 
 export const App = function App() {
@@ -132,6 +133,10 @@ function Content(props: ContentProps) {
                           tabId={id}
                         />
                       );
+                    }
+
+                    if (url === 'browser://showcase') {
+                      return <Showcase key={id} />;
                     }
 
                     return (
