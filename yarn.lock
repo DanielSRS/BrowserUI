@@ -4918,6 +4918,7 @@ __metadata:
     react-dom: "npm:18.3.1"
     react-native: "npm:0.77.1"
     react-native-gesture-handler: "npm:^2.21.2"
+    react-native-gifted-charts: "npm:^1.4.60"
     react-native-infinity: "link:./modules/infinity"
     react-native-macos: "npm:^0.77.0-0"
     react-native-reanimated: "npm:^3.16.2"
@@ -7559,6 +7560,16 @@ __metadata:
     es-errors: "npm:^1.3.0"
     get-intrinsic: "npm:^1.2.4"
   checksum: 10/e1cb53bc211f9dbe9691a4f97a46837a553c4e7caadd0488dc24ac694db8a390b93edd412b48dcdd0b4bbb4c595de1709effc75fc87c0839deedc6968f5bd973
+  languageName: node
+  linkType: hard
+
+"gifted-charts-core@npm:0.1.62":
+  version: 0.1.62
+  resolution: "gifted-charts-core@npm:0.1.62"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10/feb3e999bdb9435331210498e6e9d2a77cedc37371911d4f80809b405c96b8f418e910b7b1353423d9d5c8f7b5bc12a82f53924c76271cf2226853f815bf65c7
   languageName: node
   linkType: hard
 
@@ -11045,6 +11056,26 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10/b098fdfdda8ac9e834b0165d3f17d09682119fa2bf85ddb19a6f63257825cec073362f93d75b94da3b3581eccbce775d711aa044e9ea1ac888be2c071f9f00fd
+  languageName: node
+  linkType: hard
+
+"react-native-gifted-charts@npm:^1.4.60":
+  version: 1.4.60
+  resolution: "react-native-gifted-charts@npm:1.4.60"
+  dependencies:
+    gifted-charts-core: "npm:0.1.62"
+  peerDependencies:
+    expo-linear-gradient: "*"
+    react: "*"
+    react-native: "*"
+    react-native-linear-gradient: "*"
+    react-native-svg: "*"
+  peerDependenciesMeta:
+    expo-linear-gradient:
+      optional: true
+    react-native-linear-gradient:
+      optional: true
+  checksum: 10/55f70bfa508847e9fe6b5d6701afe8cff30407d280d3918df4a44ec2066731971cbf102cfebb2518bc864f76de3d360cd7bf4ee5238cc035cb06c0614a91c1ec
   languageName: node
   linkType: hard
 

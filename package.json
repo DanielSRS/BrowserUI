@@ -19,6 +19,7 @@
     "blurview": "link:./modules/BlurView",
     "react": "18.3.1",
     "react-native": "0.77.1",
+    "react-native-gifted-charts": "^1.4.60",
     "react-native-infinity": "link:./modules/infinity",
     "react-native-macos": "^0.77.0-0",
     "react-native-svg": "^15.11.2",
