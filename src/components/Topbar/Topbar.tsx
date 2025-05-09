@@ -24,7 +24,7 @@ import {
   Person20Regular,
   AppGeneric20Regular,
 } from '../fluent-icons/fluent-icons';
-import type { Fluenticon } from '../fluent-icons/fluent-icons.base';
+import type { Fluenticon } from '../fluent-icons/fluent-icons-base';
 
 const IS_MACOS = Platform.OS === 'macos';
 const WINDOW_CONTROL_AREA_LEFT = IS_MACOS ? 64 : 0;
