@@ -6,6 +6,10 @@
     <ProjectReference Include="$(ProjectDir)..\..\node_modules\react-native-svg\windows\RNSVG\RNSVG.vcxproj">
       <Project>{7acf84ec-efba-4043-8e14-40b159508902}</Project>
     </ProjectReference>
+    <!-- Projects from react-native-winrt -->
+    <ProjectReference Include="$(ProjectDir)..\..\node_modules\react-native-winrt\windows\WinRTTurboModule\WinRTTurboModule.vcxproj">
+      <Project>{E13C9C82-0013-422C-945E-848A258AC4DB}</Project>
+    </ProjectReference>
     <!-- Projects from react-native-xaml -->
     <ProjectReference Include="$(ProjectDir)..\..\node_modules\react-native-xaml\windows\ReactNativeXaml\ReactNativeXaml.vcxproj">
       <Project>{0ff7027a-222c-4ffb-8f17-91d18bbaf7a8}</Project>

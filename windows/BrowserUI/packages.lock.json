@@ -221,6 +221,13 @@
           "Microsoft.ReactNative": "[1.0.0, )",
           "Microsoft.UI.Xaml": "[2.8.0, )"
         }
+      },
+      "winrtturbomodule": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.ReactNative": "[1.0.0, )",
+          "Microsoft.UI.Xaml": "[2.8.0, )"
+        }
       }
     },
     "UAP,Version=v10.0.17763/win10-arm": {

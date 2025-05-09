@@ -5,6 +5,9 @@ using System.Collections.Generic;
 // Namespaces from react-native-svg
 using RNSVG;
 
+// Namespaces from react-native-winrt
+using WinRTTurboModule;
+
 // Namespaces from react-native-xaml
 using ReactNativeXaml;
 
@@ -25,6 +28,8 @@ namespace Microsoft.ReactNative.Managed
         { 
             // IReactPackageProviders from react-native-svg
             packageProviders.Add(new RNSVG.ReactPackageProvider());
+            // IReactPackageProviders from react-native-winrt
+            packageProviders.Add(new WinRTTurboModule.ReactPackageProvider());
             // IReactPackageProviders from react-native-xaml
             packageProviders.Add(new ReactNativeXaml.ReactPackageProvider());
             // IReactPackageProviders from @react-native-async-storage/async-storage
