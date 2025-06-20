@@ -21,7 +21,7 @@ const CLOSE_ANIMATION_SPEED = 250;
 const DELAY_TO_EXPAND = 40;
 
 const interpolationConfig = {
-  inputRange: [TABBAR_COLAPSED_WIDTH, TABBAR_EXPANDED_WIDTH],
+  inputRange: [TABBAR_COLAPSED_WIDTH, TABBAR_COLAPSED_WIDTH + 8],
   outputRange: [0, 1],
   easing: Easing.ease,
 };
