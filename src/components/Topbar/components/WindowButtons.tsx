@@ -20,7 +20,7 @@ export const WindowButtons = observer(function WindowButtons() {
     <ButtonsContainer // @ts-expect-error
       onMouseEnter={(_p: MouseEvent) => {
         isHovered$.set(true);
-        changeTrafficLightsPosition(BUTTONS_START_POSITION, -4).then(
+        changeTrafficLightsPosition(BUTTONS_START_POSITION, -2).then(
           showTrafficLights,
         );
       }}

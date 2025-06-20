@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     paddingHorizontal: 16,
-    paddingVertical: 2,
+    paddingVertical: 0,
     // backgroundColor: 'green',
     flexDirection: 'row',
     columnGap: BUTTON_GAP,
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     borderColor: '#FFFFFF',
   },
   url: {
-    paddingHorizontal: 10,
+    paddingHorizontal: 8,
     // borderWidth: 1,
     width: '100%',
     borderColor: 'red',
@@ -185,10 +185,11 @@ const styles = StyleSheet.create({
     // paddingVertical: 4,
   },
   urlInput: {
-    paddingVertical: 8,
+    paddingVertical: 6,
     // backgroundColor: '#00000040',
     paddingHorizontal: 32,
-    borderRadius: 8,
+    borderRadius: 24,
+    borderCurve: 'continuous',
     width: '100%',
     maxWidth: 600,
     // borderColor: 'red',
@@ -201,12 +202,5 @@ const styles = StyleSheet.create({
     // flex: 1,
     // borderWidth: 1,
     borderColor: 'pink',
-  },
-  navbarButton: {
-    // borderWidth: 1,
-    aspectRatio: 1,
-    width: 30,
-    borderRadius: 4,
-    backgroundColor: 'rgba(0, 0, 0, 0.24)',
   },
 });
