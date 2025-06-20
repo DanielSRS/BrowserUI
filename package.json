@@ -22,6 +22,7 @@
     "react-native-gifted-charts": "^1.4.60",
     "react-native-infinity": "link:./modules/infinity",
     "react-native-macos": "^0.77.0-0",
+    "react-native-screens": "^4.11.1",
     "react-native-svg": "^15.11.2",
     "react-native-windows": "0.77.3",
     "react-native-winrt": "0.72.2",
