@@ -1,5 +1,5 @@
 import React from 'react';
-import { Computed, useObservable } from '@legendapp/state/react';
+import { Computed } from '@legendapp/state/react';
 import {
   LayoutAnimation,
   ScrollView,
@@ -14,12 +14,8 @@ import {
   BodyLarge,
 } from '@danielsrs/react-native-sdk';
 import { settings } from '../../store/store';
-import type { ObservablePrimitive } from '@legendapp/state';
 
-interface ConfigTabProps {
-  tabId: number;
-  selectedTab: ObservablePrimitive<number>;
-}
+interface ConfigTabProps {}
 const animationConfig: LayoutAnimationConfig = {
   duration: 300,
   create: {
@@ -35,20 +31,10 @@ const animationConfig: LayoutAnimationConfig = {
     property: 'opacity',
   },
 };
-export const Config = function Config(props: ConfigTabProps) {
-  const { selectedTab, tabId } = props;
-  const isSelected$ = useObservable(() => selectedTab.get() === tabId);
-  const style$ = useObservable(() =>
-    isSelected$.get()
-      ? undefined
-      : ({
-          opacity: 0,
-          pointerEvents: 'none',
-        } as const),
-  );
+export const Config = function Config(_props: ConfigTabProps) {
   return (
     <Computed>
-      <PageContainer style={style$.get()}>
+      <PageContainer>
         {}
         <ScrollView style={scroll} contentContainerStyle={scrollContent}>
           {}

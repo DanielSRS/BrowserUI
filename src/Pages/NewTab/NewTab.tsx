@@ -2,32 +2,17 @@ import React, { useRef } from 'react';
 import { Styled, useColors } from '@danielsrs/react-native-sdk';
 import { AppLogo } from '../../components/Atoms/AppLogo';
 import { StyleSheet, TextInput } from 'react-native';
-import { Memo, useObservable } from '@legendapp/state/react';
-import type { ObservablePrimitive } from '@legendapp/state';
+import { Memo } from '@legendapp/state/react';
 
-interface NewTabProps {
-  tabId: number;
-  selectedTab: ObservablePrimitive<number>;
-}
-export const NewTab = function NewTab(props: NewTabProps) {
-  const { selectedTab, tabId } = props;
+interface NewTabProps {}
+
+export function NewTab(_props: NewTabProps) {
   const searchRef = useRef<TextInput>(null);
-  const isSelected$ = useObservable(() => selectedTab.get() === tabId);
-  const style$ = useObservable(() => {
-    if (isSelected$.get()) {
-      searchRef.current?.focus();
-      return undefined;
-    }
-    return {
-      opacity: 0,
-      pointerEvents: 'none',
-    } as const;
-  });
   const colors = useColors();
 
   return (
     <Memo>
-      <PageContainer style={style$.get()}>
+      <PageContainer>
         <LogoSearchGroup>
           <AppLogo
             color={colors.fillColorControlSecondary}
@@ -49,7 +34,7 @@ export const NewTab = function NewTab(props: NewTabProps) {
       </PageContainer>
     </Memo>
   );
-};
+}
 
 const PageContainer = Styled.createStyledView({
   flex: 1,

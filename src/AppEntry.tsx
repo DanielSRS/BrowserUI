@@ -3,13 +3,14 @@ import { StyleSheet } from 'react-native';
 import { Topbar } from './components/Topbar/Topbar';
 import { Tabbar } from './components/Tabbar/tab-bar';
 import { ExpandOnHover } from './components/ExpandOnHover/ExpandOnHover';
-import { Styled, useColors, ZStack } from '@danielsrs/react-native-sdk';
+import { Styled, useColors } from '@danielsrs/react-native-sdk';
 import { WINDOW_BORDER_SIZE } from './constraints/layout';
 import { NewTab } from './Pages/NewTab/NewTab';
 import { Memo, use$ } from '@legendapp/state/react';
 import { settings, workspace, type Workspace } from './store/store';
 import { Config } from './Pages/Config/Config';
 import { Showcase } from './Pages/showcase/showcase';
+import { Screen, ScreenContainer } from 'react-native-screens';
 import type { Observable } from '@legendapp/state';
 
 export const App = function App() {
@@ -96,16 +97,6 @@ function ContentArea() {
   );
 }
 
-const ContentContainer = memo(
-  Styled.createStyledView(
-    {
-      flex: 1,
-      borderRadius: WINDOW_BORDER_SIZE,
-    },
-    'Content',
-  ),
-);
-
 interface ContentProps {
   workspace$: Observable<Workspace>;
 }
@@ -113,46 +104,45 @@ interface ContentProps {
 function Content(props: ContentProps) {
   const { workspace$ } = props;
   return (
-    <ContentContainer>
+    <ScreenContainer style={screenContainerStyles}>
       <Memo>
         {() => {
-          const tabs = workspace.tabIds.get();
-          return (
-            <ZStack>
-              {tabs.map(tab => (
-                <Memo key={tab}>
+          const tabs = workspace$.tabIds.get();
+          return tabs.map(tabId => {
+            const activityState =
+              workspace$.selectedTabId.get() === +tabId ? 2 : 0;
+            return (
+              <Screen activityState={activityState} key={tabId} style={FLEX1}>
+                <Memo>
                   {() => {
-                    const tabId = tab as unknown as number;
-                    const { url, id } = workspace$.tabs[tabId].get();
+                    const { url, id } =
+                      workspace$.tabs[tabId as unknown as number].get();
 
                     if (url === 'browser://config') {
-                      return (
-                        <Config
-                          key={id}
-                          selectedTab={workspace$.selectedTabId}
-                          tabId={id}
-                        />
-                      );
+                      return <Config key={id} />;
                     }
 
                     if (url === 'browser://showcase') {
-                      return <Showcase key={id} />;
+                      return <Showcase />;
                     }
 
-                    return (
-                      <NewTab
-                        key={id}
-                        selectedTab={workspace$.selectedTabId}
-                        tabId={id}
-                      />
-                    );
+                    return <NewTab />;
                   }}
                 </Memo>
-              ))}
-            </ZStack>
-          );
+              </Screen>
+            );
+          });
         }}
       </Memo>
-    </ContentContainer>
+    </ScreenContainer>
   );
 }
+const screenContainerStyles = {
+  flex: 1,
+  borderRadius: WINDOW_BORDER_SIZE,
+  overflow: 'hidden',
+} as const;
+
+const FLEX1 = {
+  flex: 1,
+} as const;
