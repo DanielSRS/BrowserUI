@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useMemo, useState } from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import { Caption, Styled, useColors } from '@danielsrs/react-native-sdk';
 import {
   BUTTON_ICON_SIZE,
@@ -69,12 +69,12 @@ export function Tab(props: TabProps) {
 
   return (
     <Computed>
-      <TabContent
+      <Pressable
         onPress={fireTabPressEvent}
-        // @ts-expect-error
-        onMouseEnter={setHovered}
-        onMouseLeave={unsetHovered}
+        onHoverIn={setHovered}
+        onHoverOut={unsetHovered}
         style={[
+          tabContentStyle,
           isSelected$.get() && {
             borderColor: colors.controlStrongStrokeDefault,
           },
@@ -98,7 +98,7 @@ export function Tab(props: TabProps) {
 
         {/* Close button */}
         <CloseButton isTabHovered={isHovered$} onPress={fireTabCloseEvent} />
-      </TabContent>
+      </Pressable>
     </Computed>
   );
 }
@@ -138,13 +138,13 @@ const CloseButton = memo(function CloseButton(props: {
           }}
           style={hoverStyle}>
           {/* Close icon */}
-          <TouchableOpacity onPress={onPress}>
+          <Pressable onPress={onPress}>
             <Dismiss16Regular
               width={16}
               height={16}
               color={colors.fillColorTextSecondary}
             />
-          </TouchableOpacity>
+          </Pressable>
         </CloseButtonContainer>
       ) : null}
     </Memo>
@@ -162,18 +162,15 @@ const TabName = memo(
   ),
 );
 
-const TabContent = Styled.createStyledTouchableOpacity(
-  {
-    borderRadius: WINDOW_BORDER_SIZE * 0.9,
-    flexDirection: 'row',
-    alignItems: 'center',
-    overflow: 'hidden',
-    paddingRight: ICON_PADDING,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'transparent',
-  },
-  'TabContent',
-);
+const tabContentStyle = {
+  borderRadius: WINDOW_BORDER_SIZE * 0.9,
+  flexDirection: 'row',
+  alignItems: 'center',
+  overflow: 'hidden',
+  paddingRight: ICON_PADDING,
+  borderWidth: StyleSheet.hairlineWidth,
+  borderColor: 'transparent',
+} as const;
 
 const btnIconContainer = {
   paddingHorizontal: ICON_PADDING - StyleSheet.hairlineWidth,
