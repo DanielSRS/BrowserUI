@@ -14,7 +14,9 @@
     "storybook:android": "cross-env STORYBOOK_ENABLED='true' react-native run-android",
     "storybook-generate": "sb-rn-get-stories",
     "storybook:web": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "windows": "npx @react-native-community/cli run-windows",
+    "test:windows": "jest --config jest.config.windows.js"
   },
   "dependencies": {
     "@danielsrs/react-native-sdk": "^0.5.4",
@@ -28,7 +30,8 @@
     "react-native-macos": "^0.78.0-0",
     "react-native-screens": "^4.11.1",
     "react-native-svg": "^15.11.2",
-    "react-native-web": "^0.20.0"
+    "react-native-web": "^0.20.0",
+    "react-native-windows": "^0.78.13"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -47,6 +50,7 @@
     "@react-native/eslint-config": "0.78.2",
     "@react-native/metro-config": "0.78.2",
     "@react-native/typescript-config": "0.78.2",
+    "@rnx-kit/jest-preset": "^0.1.17",
     "@storybook/addon-docs": "^9",
     "@storybook/addon-ondevice-actions": "^9",
     "@storybook/addon-ondevice-backgrounds": "^9",
@@ -86,5 +90,12 @@
       "react-docgen-typescript": "2.2.2"
     }
   },
-  "packageManager": "yarn@4.5.1"
+  "packageManager": "yarn@4.5.1",
+  "react-native-windows": {
+    "init-windows": {
+      "name": "BrowserUI",
+      "namespace": "BrowserUI",
+      "template": "cpp-app"
+    }
+  }
 }
