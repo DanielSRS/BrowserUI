@@ -1,4 +1,8 @@
 import { Preview } from '@storybook/react';
+import {
+  globalSdkProvider,
+  globalStrictMode,
+} from '../.rnstorybook/decorators';
 
 const preview: Preview = {
   parameters: {
@@ -10,6 +14,7 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [globalStrictMode, globalSdkProvider],
 };
 
 export default preview;

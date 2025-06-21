@@ -17,7 +17,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@danielsrs/react-native-sdk": "^0.4.0",
+    "@danielsrs/react-native-sdk": "^0.5.4",
     "@legendapp/list": "1.0.0-beta.26",
     "@legendapp/state": "^3.0.0-beta.30",
     "blurview": "link:./modules/BlurView",

@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { PlatformColor, View } from 'react-native';
+import { View } from 'react-native';
 import type { BlurViewProps } from './index.types';
 
 export const BlurView = forwardRef<View, BlurViewProps>((props, ref) => {
@@ -10,7 +10,7 @@ export const BlurView = forwardRef<View, BlurViewProps>((props, ref) => {
       style={[
         props.style,
         {
-          backgroundColor: PlatformColor('SystemControlAcrylicWindowBrush'),
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
         },
       ]}
     />

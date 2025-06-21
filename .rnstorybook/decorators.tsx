@@ -30,7 +30,7 @@ export function globalSdkProvider(Story: () => React.ReactNode) {
   return (
     <SdkProvider
       appBackgroundProps={{
-        transparentBackground: false,
+        transparentBackground: true,
       }}>
       <Story />
     </SdkProvider>

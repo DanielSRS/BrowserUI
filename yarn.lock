@@ -2667,14 +2667,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@danielsrs/react-native-sdk@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@danielsrs/react-native-sdk@npm:0.4.0"
+"@danielsrs/react-native-sdk@npm:^0.5.4":
+  version: 0.5.4
+  resolution: "@danielsrs/react-native-sdk@npm:0.5.4"
   dependencies:
     "@legendapp/state": "npm:beta"
     scheduler: "npm:^0.23.2"
     ts-pattern: "npm:^5.2.0"
-    use-context-selector: "npm:^2.0.0"
   peerDependencies:
     react: "*"
     react-native: "*"
@@ -2682,7 +2681,7 @@ __metadata:
   peerDependenciesMeta:
     react-native-document-picker:
       optional: true
-  checksum: 10/18ecde31b37970fcf339f21abce8c493d7ca60c9c56283dcd5a821d6d2a8079279df2f55b9f5555b922e015d6dff18bfff3c8e8287518137fa73876b2597f4a3
+  checksum: 10/841326fee2b6f94a71c8f674a738fbcd9efedcab3fe73f6e2ceae76bdeddd16241e2f549f61a14add370af54b130f57642e12f724be0afceea3e2be2bf6e2794
   languageName: node
   linkType: hard
 
@@ -4972,7 +4971,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.27.1"
     "@babel/runtime": "npm:^7.25.0"
     "@chromatic-com/storybook": "npm:^4"
-    "@danielsrs/react-native-sdk": "npm:^0.4.0"
+    "@danielsrs/react-native-sdk": "npm:^0.5.4"
     "@gorhom/bottom-sheet": "npm:^5.1.3"
     "@legendapp/list": "npm:1.0.0-beta.26"
     "@legendapp/state": "npm:^3.0.0-beta.30"
@@ -12909,16 +12908,6 @@ __metadata:
   dependencies:
     punycode: "npm:^2.1.0"
   checksum: 10/b271ca7e3d46b7160222e3afa3e531505161c9a4e097febae9664e4b59912f4cbe94861361a4175edac3a03fee99d91e44b6a58c17a634bc5a664b19fc76fbcb
-  languageName: node
-  linkType: hard
-
-"use-context-selector@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "use-context-selector@npm:2.0.0"
-  peerDependencies:
-    react: ">=18.0.0"
-    scheduler: ">=0.19.0"
-  checksum: 10/2dfd8a916b75c9ef4243381a9a061f04942dcfdaa8cf0658a574a7ca888c3f873822341c0eeff7bfda72c27447157da3b8aac886c1cf18a35975f9652885443c
   languageName: node
   linkType: hard
 
