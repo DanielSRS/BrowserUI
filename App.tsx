@@ -2,7 +2,7 @@ import React, { StrictMode } from 'react';
 import { App } from './src/AppEntry';
 import { SdkProvider } from '@danielsrs/react-native-sdk';
 
-export default () => {
+export function app() {
   return (
     <StrictMode>
       <SdkProvider>
@@ -10,5 +10,12 @@ export default () => {
       </SdkProvider>
     </StrictMode>
   );
-};
-// export { default } from './.storybook';
+}
+
+let AppEntryPoint = app;
+
+if (process.env.STORYBOOK_ENABLED) {
+  AppEntryPoint = require('./.rnstorybook').default;
+}
+
+export default AppEntryPoint;

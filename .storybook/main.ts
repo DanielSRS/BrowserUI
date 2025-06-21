@@ -1,13 +1,16 @@
-import type { StorybookConfig } from '@storybook/react-native';
-
-const main: StorybookConfig = {
+/** @type{import("@storybook/react-webpack5").StorybookConfig} */
+module.exports = {
   stories: ['../src/**/*.stories.?(ts|tsx|js|jsx)'],
-  addons: [
-    '@storybook/addon-ondevice-controls',
-    '@storybook/addon-ondevice-actions',
-    '@storybook/addon-ondevice-backgrounds',
-    '@storybook/addon-ondevice-notes',
-  ],
-};
+  addons: ['@storybook/addon-docs'],
+  framework: {
+    name: '@storybook/react-native-web-vite',
+    options: {},
+  },
+  docs: {
+    autodocs: true,
+  },
 
-export default main;
+  typescript: {
+    reactDocgen: 'react-docgen',
+  },
+};
