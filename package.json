@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@danielsrs/react-native-sdk": "^0.5.4",
-    "@legendapp/list": "1.0.0-beta.26",
+    "@legendapp/list": "1.1.4",
     "@legendapp/state": "^3.0.0-beta.31",
     "@storybook/react-native-ui-lite": "^9.0.9",
     "blurview": "link:./modules/BlurView",
