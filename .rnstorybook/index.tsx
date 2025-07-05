@@ -8,8 +8,7 @@ const StorybookUIRoot = view.getStorybookUI({
     getItem: AsyncStorage.getItem,
     setItem: AsyncStorage.setItem,
   },
-  // @ts-expect-error
-  CustomUIComponent: Constants.IS_WINDOWS ? LiteUI : undefined,
+  CustomUIComponent: LiteUI,
 });
 
 export default StorybookUIRoot;
