@@ -5627,6 +5627,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/react-dom-shim@npm:9.0.14":
+  version: 9.0.14
+  resolution: "@storybook/react-dom-shim@npm:9.0.14"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    storybook: ^9.0.14
+  checksum: 10/cd8694f9313c3aadd754cdf5c6393b6b0966dc8d460df3771ebc1379b0f9501c71fcd331b3f7cfdd9287a38989938d592655be5f7633e1d01c559e2b499683f9
+  languageName: node
+  linkType: hard
+
+"@storybook/react-native-theming@npm:^9.0.14":
+  version: 9.0.14
+  resolution: "@storybook/react-native-theming@npm:9.0.14"
+  dependencies:
+    polished: "npm:^4.3.1"
+  peerDependencies:
+    react: "*"
+    react-native: ">=0.57.0"
+  checksum: 10/1098ad8287c91cdeb72f55d4cb14c79316b52a09f2362e612a5fb0aee77269812fa3795384763437a601b9a806daf5dafe6f812a9a857fed662432d4a03bf8f3
+  languageName: node
+  linkType: hard
+
 "@storybook/react-native-theming@npm:^9.0.9":
   version: 9.0.9
   resolution: "@storybook/react-native-theming@npm:9.0.9"
@@ -5636,6 +5659,26 @@ __metadata:
     react: "*"
     react-native: ">=0.57.0"
   checksum: 10/6d3f2ce818bdb3146328b23e5205fd87f40c6028aef7ca0e88f48c055acdb4175bb3a4ceb985617a6f07be1d1833498c863b02dfc0722428d6bae01e2bdac0b5
+  languageName: node
+  linkType: hard
+
+"@storybook/react-native-ui-common@npm:^9.0.14":
+  version: 9.0.14
+  resolution: "@storybook/react-native-ui-common@npm:9.0.14"
+  dependencies:
+    "@storybook/react": "npm:9.0.14"
+    "@storybook/react-native-theming": "npm:^9.0.14"
+    es-toolkit: "npm:^1.38.0"
+    fuse.js: "npm:^7.0.0"
+    memoizerific: "npm:^1.11.3"
+    polished: "npm:^4.3.1"
+    store2: "npm:^2.14.3"
+    ts-dedent: "npm:^2.2.0"
+  peerDependencies:
+    react: "*"
+    react-native: ">=0.57.0"
+    storybook: 9.0.14
+  checksum: 10/71d5d10ad28f201a0e3647e16cea69881bc3b80012fe391a226d55696eda0227e50b7ba02b3b90ef8a59f12aa528b60ed968acc6924ceb83f119e0d050e83f59
   languageName: node
   linkType: hard
 
@@ -5657,6 +5700,25 @@ __metadata:
     react-native: ">=0.57.0"
     storybook: ^9.0.9
   checksum: 10/abcb0c11411850a380b4720dca318975ba6f81fd3051bbe21a5a27f73a5b47e9c17f51276b6510fbbb24d170bf89a36583af1884062a297930552cfa0a61de16
+  languageName: node
+  linkType: hard
+
+"@storybook/react-native-ui-lite@npm:^9.0.9":
+  version: 9.0.14
+  resolution: "@storybook/react-native-ui-lite@npm:9.0.14"
+  dependencies:
+    "@storybook/react": "npm:9.0.14"
+    "@storybook/react-native-theming": "npm:^9.0.14"
+    "@storybook/react-native-ui-common": "npm:^9.0.14"
+    fuse.js: "npm:^7.0.0"
+    memoizerific: "npm:^1.11.3"
+    polished: "npm:^4.3.1"
+    store2: "npm:^2.14.3"
+  peerDependencies:
+    react: "*"
+    react-native: ">=0.57.0"
+    storybook: 9.0.14
+  checksum: 10/fa694c3d554355307fa047f23e1fe8737a5c7471cf311af5703bf35a5c8e28ac8c1286514295fbfe25ffc4d1e9b4795cbe2bd897a2d93e1cec4b24c40d9eeb4e
   languageName: node
   linkType: hard
 
@@ -5786,6 +5848,24 @@ __metadata:
     typescript:
       optional: true
   checksum: 10/1263fde8423b248b18e4d99bdc7288ece0b2c3b48a4ce0b0e186273e6a78833360a4c267b1660ac41dac69f28c86a43b29d69f6bb636e7d0a10b5fed9731176a
+  languageName: node
+  linkType: hard
+
+"@storybook/react@npm:9.0.14":
+  version: 9.0.14
+  resolution: "@storybook/react@npm:9.0.14"
+  dependencies:
+    "@storybook/global": "npm:^5.0.0"
+    "@storybook/react-dom-shim": "npm:9.0.14"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
+    storybook: ^9.0.14
+    typescript: ">= 4.9.x"
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: 10/79d015a5d8c0d6e582b2b270e8e4bf7a605acc9cb4bda98c08c79651c94109c4dad47ba4dc9b55ba25d4f118f13666d733439bc4a789e002f4f8137c7235fdbd
   languageName: node
   linkType: hard
 
@@ -6335,6 +6415,7 @@ __metadata:
     "@storybook/addon-ondevice-notes": "npm:^9"
     "@storybook/react": "npm:^9"
     "@storybook/react-native": "npm:^9"
+    "@storybook/react-native-ui-lite": "npm:^9.0.9"
     "@storybook/react-native-web-vite": "npm:^9"
     "@types/jest": "npm:^29.5.13"
     "@types/react": "npm:^19.0.0"

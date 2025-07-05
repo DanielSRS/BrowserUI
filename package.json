@@ -22,6 +22,7 @@
     "@danielsrs/react-native-sdk": "^0.5.4",
     "@legendapp/list": "1.0.0-beta.26",
     "@legendapp/state": "^3.0.0-beta.30",
+    "@storybook/react-native-ui-lite": "^9.0.9",
     "blurview": "link:./modules/BlurView",
     "react": "19.0.0",
     "react-native": "0.78.2",
