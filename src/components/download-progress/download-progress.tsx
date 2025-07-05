@@ -3,7 +3,6 @@ import type { Observable, ObservablePrimitive } from '@legendapp/state';
 import { Computed, useObservable } from '@legendapp/state/react';
 import { Animated } from 'react-native';
 import {
-  Body,
   Caption,
   Styled,
   useColors,
@@ -80,37 +79,30 @@ export function DownloadProgress(props: DownloadProgressProps) {
         borderColor: colors.strokeColorSurfaceStrokeDefault,
       }}>
       <Top>
-        <TopLeft>
-          <IconContainer>
-            <Document16Regular color={iconColor} />
-          </IconContainer>
-          {/* Item name */}
-          <Body>{fileName}</Body>
-        </TopLeft>
+        <IconContainer>
+          <Document16Regular color={iconColor} />
+        </IconContainer>
+        <FileName>{fileName}</FileName>
 
         {/* Stop Button */}
         <IconContainer>
-          <Dismiss16Regular color={iconColor} />
+          <ChevronUp16Regular color={iconColor} />
         </IconContainer>
       </Top>
       <Bottom>
         <ProgressContainer>
-          <ZStack style={{ flex: 1, justifyContent: 'center', maxHeight: 3 }}>
-            <Track />
-            <Computed>
-              <Animated.View
-                style={[
-                  {
-                    height: 3,
-                    backgroundColor: colors.accentDefault,
-                    borderRadius: 8,
-                  },
-                  progressStyle.get(),
-                ]}
-              />
-            </Computed>
-          </ZStack>
-          <Caption>
+          <Track />
+          <Computed>
+            <ProgressLine
+              style={[
+                { backgroundColor: colors.accentDefault },
+                progressStyle.get(),
+              ]}
+            />
+          </Computed>
+        </ProgressContainer>
+        <InfoContainer>
+          <DownloadStats>
             <Computed>
               {formatDownloadSpeed(
                 isObservable(downloadSpeed)
@@ -133,11 +125,11 @@ export function DownloadProgress(props: DownloadProgressProps) {
                 : props.remainingTime,
             )}
             {' left'}
-          </Caption>
-        </ProgressContainer>
-        <IconContainer>
-          <ChevronUp16Regular color={iconColor} />
-        </IconContainer>
+          </DownloadStats>
+          <IconContainer>
+            <Dismiss16Regular color={iconColor} />
+          </IconContainer>
+        </InfoContainer>
       </Bottom>
     </Container>
   );
@@ -145,15 +137,35 @@ export function DownloadProgress(props: DownloadProgressProps) {
 
 const Container = Styled.createStyledView({
   borderWidth: 1,
-  maxWidth: 320,
-  padding: 4,
-  borderRadius: 8,
+  maxWidth: 326, // remove
+  padding: 12,
+  rowGap: 12,
+  borderRadius: 3,
 });
 
 const Top = Styled.createStyledView({
   flexDirection: 'row',
-  alignItems: 'center',
-  // backgroundColor: 'red',
+  gap: 8,
+});
+
+const FileName = Styled.createStyled(Caption, {
+  flex: 1,
+});
+
+const DownloadStats = Styled.createStyled(Caption, {
+  flex: 1,
+});
+
+const ProgressLine = Styled.createStyled(Animated.View, {
+  height: 3,
+  borderRadius: 8,
+});
+
+const ProgressContainer = Styled.createStyled(ZStack, {
+  flex: 1,
+  justifyContent: 'center',
+  maxHeight: 3,
+  minHeight: 3,
 });
 
 const Track = Styled.createStyledView({
@@ -164,31 +176,20 @@ const Track = Styled.createStyledView({
   marginVertical: 1,
 });
 
-const ProgressContainer = Styled.createStyledView({
-  flex: 1,
-  paddingHorizontal: 8,
-  // backgroundColor: 'red',
+const Bottom = Styled.createStyledView({
+  gap: 8,
 });
 
-const Bottom = Styled.createStyledView({
+const InfoContainer = Styled.createStyledView({
+  gap: 10,
   flexDirection: 'row',
   alignItems: 'center',
-  // backgroundColor: 'green',
-});
-const TopLeft = Styled.createStyledView({
-  flexDirection: 'row',
-  alignItems: 'center',
-  paddingHorizontal: 4,
-  columnGap: 8,
-  // backgroundColor: 'blue',
-  flex: 1,
+  justifyContent: 'center',
 });
 
 const IconContainer = Styled.createStyledView({
-  width: 40,
-  height: 40,
-  // backgroundColor: 'white',
-  // borderWidth: 1,
+  width: 16,
+  height: 16,
   justifyContent: 'center',
   alignItems: 'center',
 });
