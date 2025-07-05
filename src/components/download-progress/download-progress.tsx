@@ -93,7 +93,7 @@ export function DownloadProgress(props: DownloadProgressProps) {
     <Container
       style={{
         backgroundColor: colors.backgroundFillColorAcrylicBackgroundDefault,
-        borderColor: colors.strokeColorSurfaceStrokeDefault,
+        borderColor: colors.strokeColorCardStrokeDefault,
       }}>
       <Top>
         <IconContainer>
