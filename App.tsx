@@ -10,7 +10,11 @@ if (Constants.IS_WINDOWS) {
 export function app() {
   return (
     <StrictMode>
-      <SdkProvider>
+      <SdkProvider
+        appBackgroundProps={{
+          useAcrylic: !Constants.IS_WINDOWS,
+          transparentBackground: !Constants.IS_WINDOWS,
+        }}>
         <App />
       </SdkProvider>
     </StrictMode>
