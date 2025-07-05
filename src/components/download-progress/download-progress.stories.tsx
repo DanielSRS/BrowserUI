@@ -7,7 +7,7 @@ const meta = {
   argTypes: {},
   args: {
     donwloadId: 324,
-    downloadedSize: 1024 * 1024 * 10, // 10 MB
+    downloadedSize: 1024 * 1024 * 70, // 10 MB
     totalSize: 1024 * 1024 * 100, // 100 MB
     downloadSpeed: 1024 * 1024, // 1 MB/s
     fileName: 'example-file.zip',
@@ -20,4 +20,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Basic: Story = {};
+export const DefaultWithProgressChart: Story = {};
+export const ProgressBarOnly: Story = {
+  args: {
+    initiallyExpanded: false,
+  },
+};

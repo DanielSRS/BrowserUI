@@ -3,6 +3,7 @@ import type { Observable, ObservablePrimitive } from '@legendapp/state';
 import { Computed, useObservable } from '@legendapp/state/react';
 import { Animated } from 'react-native';
 import {
+  BodyStrong,
   Caption,
   Styled,
   useColors,
@@ -13,6 +14,7 @@ import {
   Dismiss16Regular,
   Document16Regular,
 } from '../fluent-icons/fluent-icons';
+import { DownloadProgressChart } from './progress-chart';
 
 interface DownloadProgressProps {
   /**
@@ -43,6 +45,15 @@ interface DownloadProgressProps {
    * The download status
    */
   status: 'downloading' | 'paused' | 'completed';
+  /**
+   * Whether the component should be initially expanded
+   * to show the speed chart.
+   *
+   * Defaults to true.
+   *
+   * @default true
+   */
+  initiallyExpanded?: boolean;
 }
 
 /**
@@ -52,7 +63,13 @@ interface DownloadProgressProps {
  * @param props Download progress information
  */
 export function DownloadProgress(props: DownloadProgressProps) {
-  const { totalSize, downloadedSize, fileName, downloadSpeed } = props;
+  const {
+    totalSize,
+    downloadedSize,
+    fileName,
+    downloadSpeed,
+    initiallyExpanded = true,
+  } = props;
   const colors = useColors();
 
   /**
@@ -90,17 +107,45 @@ export function DownloadProgress(props: DownloadProgressProps) {
         </IconContainer>
       </Top>
       <Bottom>
-        <ProgressContainer>
-          <Track />
-          <Computed>
-            <ProgressLine
-              style={[
-                { backgroundColor: colors.accentDefault },
-                progressStyle.get(),
-              ]}
-            />
-          </Computed>
-        </ProgressContainer>
+        {initiallyExpanded && (
+          <SpeedChart>
+            <Computed>
+              <DownloadProgressChart
+                progress={calculatePercentage(
+                  totalSize,
+                  isObservable(downloadedSize)
+                    ? downloadedSize.get()
+                    : downloadedSize,
+                )}
+              />
+            </Computed>
+            <SpeedOverlay>
+              <SpeedCaption>Speed:</SpeedCaption>
+              <SpeedInfo>
+                <Computed>
+                  {formatDownloadSpeed(
+                    isObservable(downloadSpeed)
+                      ? downloadSpeed.get()
+                      : downloadSpeed,
+                  )}
+                </Computed>
+              </SpeedInfo>
+            </SpeedOverlay>
+          </SpeedChart>
+        )}
+        {!initiallyExpanded && (
+          <ProgressContainer>
+            <Track />
+            <Computed>
+              <ProgressLine
+                style={[
+                  { backgroundColor: colors.accentDefault },
+                  progressStyle.get(),
+                ]}
+              />
+            </Computed>
+          </ProgressContainer>
+        )}
         <InfoContainer>
           <DownloadStats>
             <Computed>
@@ -141,6 +186,29 @@ const Container = Styled.createStyledView({
   padding: 12,
   rowGap: 12,
   borderRadius: 3,
+});
+
+const SpeedChart = Styled.createStyledView({});
+
+const SpeedOverlay = Styled.createStyledView({
+  position: 'absolute',
+  top: 0,
+  right: 0,
+  alignItems: 'flex-end',
+  paddingTop: 4,
+  paddingRight: 4,
+  // rowGap: 2,
+  // backgroundColor: 'white',
+});
+
+const SpeedCaption = Styled.createStyled(Caption, {
+  fontSize: 10,
+  opacity: 0.8,
+});
+
+const SpeedInfo = Styled.createStyled(BodyStrong, {
+  fontSize: 12,
+  marginTop: -2,
 });
 
 const Top = Styled.createStyledView({
