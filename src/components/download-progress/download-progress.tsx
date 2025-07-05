@@ -16,7 +16,7 @@ import {
 } from '../fluent-icons/fluent-icons';
 import { DownloadProgressChart } from './progress-chart';
 
-interface DownloadProgressProps {
+export interface DownloadProgressProps {
   /**
    * The name of the file being downloaded
    */
