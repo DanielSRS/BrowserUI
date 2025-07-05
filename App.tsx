@@ -1,6 +1,11 @@
 import React, { StrictMode } from 'react';
 import { App } from './src/AppEntry';
-import { SdkProvider } from '@danielsrs/react-native-sdk';
+import { SdkProvider, Constants } from '@danielsrs/react-native-sdk';
+import { enableScreens } from 'react-native-screens';
+
+if (Constants.IS_WINDOWS) {
+  enableScreens(false);
+}
 
 export function app() {
   return (
