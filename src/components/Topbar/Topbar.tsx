@@ -98,7 +98,9 @@ export const Topbar = observer((props: TopbarProps) => {
           {/* Perfil */}
           <TopBarButton>{Person20Regular}</TopBarButton>
           {/* Menu */}
-          <Menu target={<TopBarButton>{MoreHorizontal20Regular}</TopBarButton>}>
+          <Menu
+            minWidth={250}
+            target={<TopBarButton>{MoreHorizontal20Regular}</TopBarButton>}>
             <Menu.MenuEntry
               onPress={workspace.openNewTab}
               left={withTextColor(TabDesktopNewPage20Regular)}>
