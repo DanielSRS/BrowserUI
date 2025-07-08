@@ -15,5 +15,10 @@ module.exports = {
         windows: null,
       },
     },
+    'react-native-webview': {
+      platforms: {
+        windows: null,
+      },
+    },
   },
 };
