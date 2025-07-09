@@ -80,9 +80,13 @@ export const Topbar = observer((props: TopbarProps) => {
                 const cuurrentTabId = workspace.selectedTabId.get();
                 const currentTab = workspace.tabs[cuurrentTabId];
                 const url = currentTab.state.url.get() || '';
+                const isNewTab = url === 'browser://newTab';
                 return (
                   <TextInput
                     placeholderTextColor={colors.fillColorTextSecondary}
+                    selectTextOnFocus={true}
+                    autoCapitalize={'none'}
+                    autoCorrect={false}
                     style={[
                       styles.urlInput,
                       {
@@ -95,7 +99,7 @@ export const Topbar = observer((props: TopbarProps) => {
                       urlInputRef.current = text;
                     }}
                     // value={url}
-                    defaultValue={url}
+                    defaultValue={isNewTab ? '' : url}
                     onSubmitEditing={() => {
                       const _url = urlInputRef.current || '';
                       const withProtocol = _url.startsWith('https://')
@@ -109,7 +113,7 @@ export const Topbar = observer((props: TopbarProps) => {
                       }
                       currentTab.state.url.set(withProtocol);
                     }}
-                    placeholder={'about:work-in-progress'}
+                    placeholder={'Search or enter web address'}
                     // @ts-expect-error Exits only on Macos
                     enableFocusRing={false}
                     onFocus={onInnerFocus}
