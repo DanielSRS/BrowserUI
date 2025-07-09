@@ -5,12 +5,10 @@ import { Tabbar } from './components/Tabbar/tab-bar';
 import { ExpandOnHover } from './components/ExpandOnHover/ExpandOnHover';
 import { Styled, useColors } from '@danielsrs/react-native-sdk';
 import { WINDOW_BORDER_SIZE } from './constraints/layout';
-import { NewTab } from './Pages/NewTab/NewTab';
 import { Memo, use$ } from '@legendapp/state/react';
 import { settings, workspace, type Workspace } from './store/store';
-import { Config } from './Pages/Config/Config';
-import { Showcase } from './Pages/showcase/showcase';
 import { Screen, ScreenContainer } from 'react-native-screens';
+import { TabRenderer } from './components/tab-renderer/tab-renderer';
 import type { Observable } from '@legendapp/state';
 
 export const App = function App() {
@@ -113,24 +111,7 @@ function Content(props: ContentProps) {
               workspace$.selectedTabId.get() === +tabId ? 2 : 0;
             return (
               <Screen activityState={activityState} key={tabId} style={FLEX1}>
-                <Memo>
-                  {() => {
-                    const {
-                      state: { url },
-                      id,
-                    } = workspace$.tabs[tabId as unknown as number].get();
-
-                    if (url === 'browser://config') {
-                      return <Config key={id} />;
-                    }
-
-                    if (url === 'browser://showcase') {
-                      return <Showcase />;
-                    }
-
-                    return <NewTab />;
-                  }}
-                </Memo>
+                <TabRenderer tabId={+tabId} workspace$={workspace$} />
               </Screen>
             );
           });
