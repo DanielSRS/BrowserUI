@@ -25,6 +25,28 @@ PODS:
   - fast_float (6.1.4)
   - FBLazyVector (0.78.3)
   - fmt (11.0.2)
+  - FRNCallout (0.27.3):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - glog (0.3.5)
   - hermes-engine (0.78.3):
     - hermes-engine/cdp (= 0.78.3)
@@ -1753,6 +1775,7 @@ DEPENDENCIES:
   - fast_float (from `../node_modules/react-native-macos/third-party-podspecs/fast_float.podspec`)
   - FBLazyVector (from `../node_modules/react-native-macos/Libraries/FBLazyVector`)
   - fmt (from `../node_modules/react-native-macos/third-party-podspecs/fmt.podspec`)
+  - "FRNCallout (from `../node_modules/@fluentui-react-native/callout`)"
   - glog (from `../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native-macos/sdks/hermes-engine/hermes-engine.podspec`)
   - RCT-Folly (from `../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
@@ -1838,6 +1861,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-macos/Libraries/FBLazyVector"
   fmt:
     :podspec: "../node_modules/react-native-macos/third-party-podspecs/fmt.podspec"
+  FRNCallout:
+    :path: "../node_modules/@fluentui-react-native/callout"
   glog:
     :podspec: "../node_modules/react-native-macos/third-party-podspecs/glog.podspec"
   hermes-engine:
@@ -1985,6 +2010,7 @@ SPEC CHECKSUMS:
   fast_float: 44983b3bddb2d2ed3021a98be86f60ec8abc9ffd
   FBLazyVector: b61b46a4137164b884a21e2ae3e289e1ccef5700
   fmt: f6af2d677a106e3e44c9536a4c0c7f03ab53c854
+  FRNCallout: fd5a91a7d2bd739b217d1fd4689bb1829ea701dd
   glog: b7594b792ee4e02ed1f44b01d046ca25fa713e3d
   hermes-engine: 2d607c0c4d654080c2958bee555c16813089bda8
   RCT-Folly: abec2d7f4af402b4957c44e86ceff8725b23c1b4

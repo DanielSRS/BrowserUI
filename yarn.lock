@@ -3850,6 +3850,224 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fluentui-react-native/adapters@npm:0.13.1":
+  version: 0.13.1
+  resolution: "@fluentui-react-native/adapters@npm:0.13.1"
+  peerDependencies:
+    "@office-iss/react-native-win32": ^0.74.0
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+    react-native-macos: ^0.73.0 || ^0.74.0
+    react-native-windows: ^0.73.0 || ^0.74.0
+  peerDependenciesMeta:
+    "@office-iss/react-native-win32":
+      optional: true
+    react-native-macos:
+      optional: true
+    react-native-windows:
+      optional: true
+  checksum: 10/e08d57e6cb32ae12d384baf7883da513737877edfcfe93fff64f2386573ba98c77df450126ae73e4cf6a6e631a799672381a2b686bb0ecfc1ba6f06ab1ef5f07
+  languageName: node
+  linkType: hard
+
+"@fluentui-react-native/callout@npm:^0.27.3":
+  version: 0.27.3
+  resolution: "@fluentui-react-native/callout@npm:0.27.3"
+  dependencies:
+    "@fluentui-react-native/adapters": "npm:0.13.1"
+    "@fluentui-react-native/tokens": "npm:0.23.2"
+    "@uifabricshared/foundation-composable": "npm:0.13.2"
+    "@uifabricshared/foundation-compose": "npm:1.15.3"
+    "@uifabricshared/foundation-settings": "npm:0.15.2"
+  peerDependencies:
+    "@office-iss/react-native-win32": ^0.74.0
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+    react-native-macos: ^0.73.0 || ^0.74.0
+    react-native-windows: ^0.73.0 || ^0.74.0
+  peerDependenciesMeta:
+    "@office-iss/react-native-win32":
+      optional: true
+    react-native-macos:
+      optional: true
+    react-native-windows:
+      optional: true
+  checksum: 10/52f6b1016d3f5dd64caee3618b29d4bff070dc88c4788e26e8a9b3b3553512def96482857152f52c5c7899b0cf68c7d9c543d8973f468df7c7219c1a34a6e773
+  languageName: node
+  linkType: hard
+
+"@fluentui-react-native/default-theme@npm:0.26.3":
+  version: 0.26.3
+  resolution: "@fluentui-react-native/default-theme@npm:0.26.3"
+  dependencies:
+    "@fluentui-react-native/memo-cache": "npm:1.3.3"
+    "@fluentui-react-native/theme": "npm:0.11.2"
+    "@fluentui-react-native/theme-tokens": "npm:0.27.2"
+    "@fluentui-react-native/theme-types": "npm:0.39.2"
+    "@fluentui-react-native/theming-utils": "npm:0.26.2"
+    assert-never: "npm:^1.2.1"
+  peerDependencies:
+    "@office-iss/react-native-win32": ^0.74.0
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+    react-native-macos: ^0.73.0 || ^0.74.0
+    react-native-windows: ^0.73.0 || ^0.74.0
+  peerDependenciesMeta:
+    "@office-iss/react-native-win32":
+      optional: true
+    react-native-macos:
+      optional: true
+    react-native-windows:
+      optional: true
+  checksum: 10/6359ebf64d9b14017ec4730b820bf919e8f3b5bc9df5931e71e24aa443091aeaca8bcbf67a4aa83abbab866bf3e58f16a97001eba60bb745974598a74ec5600c
+  languageName: node
+  linkType: hard
+
+"@fluentui-react-native/design-tokens-android@npm:^0.53.0":
+  version: 0.53.0
+  resolution: "@fluentui-react-native/design-tokens-android@npm:0.53.0"
+  checksum: 10/d79e208bf9dadb67e6117b306b4006a356a067b3e43534e84481c6ecde34c6a53bf181bc7111582b8aa89a695087e13eafd5c22e8a53c6b5678e5617963fc804
+  languageName: node
+  linkType: hard
+
+"@fluentui-react-native/design-tokens-ios@npm:^0.53.0":
+  version: 0.53.0
+  resolution: "@fluentui-react-native/design-tokens-ios@npm:0.53.0"
+  checksum: 10/b65fa613b9ab1c39d1bc518903720fa70d520731d186b3e872ea8e681a2c71584c7bcd201313c5fe3fd745fc5cc3614af4929370ba58a70bd96ae9807e3c647f
+  languageName: node
+  linkType: hard
+
+"@fluentui-react-native/design-tokens-win32@npm:^0.53.0":
+  version: 0.53.0
+  resolution: "@fluentui-react-native/design-tokens-win32@npm:0.53.0"
+  checksum: 10/0cc3f490d331a2afe43bb4186b8367b2d4f0a803e4551cea1a102fbcf60c5171f4c4d4df0cc2873b7b374cc1a509da614c8a1d2a40bf8eaf9138f95991ee19ea
+  languageName: node
+  linkType: hard
+
+"@fluentui-react-native/design-tokens-windows@npm:^0.53.0":
+  version: 0.53.0
+  resolution: "@fluentui-react-native/design-tokens-windows@npm:0.53.0"
+  checksum: 10/a38aaf7a22ee45c2b2350bf2a0ebc534c161a91828bc8a17ef12cf3daa772790904f73439c33f212104525b6e335b24a5b3c39100751eb43f7aa7ffcefcdc305
+  languageName: node
+  linkType: hard
+
+"@fluentui-react-native/immutable-merge@npm:1.2.2":
+  version: 1.2.2
+  resolution: "@fluentui-react-native/immutable-merge@npm:1.2.2"
+  dependencies:
+    tslib: "npm:^2.3.1"
+  checksum: 10/a9347c9769947fd73dd3fcc8854744dc54321cea71fbaafc779eab43072069eb29244eec1769e4af668c6d33d41fb43b193891dfbbc3133ab606c20edae16cbd
+  languageName: node
+  linkType: hard
+
+"@fluentui-react-native/memo-cache@npm:1.3.3":
+  version: 1.3.3
+  resolution: "@fluentui-react-native/memo-cache@npm:1.3.3"
+  checksum: 10/860ab6f6e132347b4d944a9f891caa4e1bb34b768b6cd95e6b1010ad79f7620b6e2809c9c06d92e96326e27a70c8df2090a550f24118c91d54f603082e9ce35f
+  languageName: node
+  linkType: hard
+
+"@fluentui-react-native/merge-props@npm:0.9.2":
+  version: 0.9.2
+  resolution: "@fluentui-react-native/merge-props@npm:0.9.2"
+  dependencies:
+    "@fluentui-react-native/immutable-merge": "npm:1.2.2"
+    "@fluentui-react-native/memo-cache": "npm:1.3.3"
+    tslib: "npm:^2.3.1"
+  peerDependencies:
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+  checksum: 10/35315c6f50a13ce18b9beed2273ae6cbfb6c321529c8205235ab482c96ac4845c4b6a5aa2a5807a947e86240036af5187cbe158cb1ea1c7abf7e90668c1e2165
+  languageName: node
+  linkType: hard
+
+"@fluentui-react-native/theme-tokens@npm:0.27.2":
+  version: 0.27.2
+  resolution: "@fluentui-react-native/theme-tokens@npm:0.27.2"
+  dependencies:
+    "@fluentui-react-native/design-tokens-android": "npm:^0.53.0"
+    "@fluentui-react-native/design-tokens-ios": "npm:^0.53.0"
+    "@fluentui-react-native/design-tokens-win32": "npm:^0.53.0"
+    "@fluentui-react-native/design-tokens-windows": "npm:^0.53.0"
+    "@fluentui-react-native/theme-types": "npm:0.39.2"
+    assert-never: "npm:^1.2.1"
+  peerDependencies:
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+  checksum: 10/5737d71bd8e7cba3d5cc136217adb1fa56403ddc31f268bd13540a38a15ca9f7a64c93e6c9d25d1eca14027c96aaa6afef40c4b1d78b1557a3de7cf56c3d078d
+  languageName: node
+  linkType: hard
+
+"@fluentui-react-native/theme-types@npm:0.39.2":
+  version: 0.39.2
+  resolution: "@fluentui-react-native/theme-types@npm:0.39.2"
+  peerDependencies:
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+  checksum: 10/1d6c250fdbbe2379f680d3fefaf0d9680ec7cd9fba0111092a2e553c24dec096fc44dedef4ae2c47398dec3bb066eafb4fa190d4d2f722ab6b91ab35879db9bf
+  languageName: node
+  linkType: hard
+
+"@fluentui-react-native/theme@npm:0.11.2":
+  version: 0.11.2
+  resolution: "@fluentui-react-native/theme@npm:0.11.2"
+  dependencies:
+    "@fluentui-react-native/immutable-merge": "npm:1.2.2"
+    "@fluentui-react-native/theme-types": "npm:0.39.2"
+  peerDependencies:
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+  checksum: 10/4d3f2216cb796a2a601e9459bc3e4858ed045afad20168349167173d9c453938cfe8e8890f865a1d838f387de4affae4fd9ced87aadccdecbb31f94004704580
+  languageName: node
+  linkType: hard
+
+"@fluentui-react-native/theming-utils@npm:0.26.2":
+  version: 0.26.2
+  resolution: "@fluentui-react-native/theming-utils@npm:0.26.2"
+  dependencies:
+    "@fluentui-react-native/theme-types": "npm:0.39.2"
+    "@fluentui-react-native/tokens": "npm:0.23.2"
+  peerDependencies:
+    "@office-iss/react-native-win32": ^0.74.0
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+    react-native-macos: ^0.73.0 || ^0.74.0
+    react-native-windows: ^0.73.0 || ^0.74.0
+  peerDependenciesMeta:
+    "@office-iss/react-native-win32":
+      optional: true
+    react-native-macos:
+      optional: true
+    react-native-windows:
+      optional: true
+  checksum: 10/3486b5525708332501befb530b9039fa50bad7696e5ed8a8d3ea4ddf82c7f38c2f35d4843b79c851ef832fb5ac3d46aef4cb29a8bdaa14318c6ff76ea6462cc1
+  languageName: node
+  linkType: hard
+
+"@fluentui-react-native/tokens@npm:0.23.2":
+  version: 0.23.2
+  resolution: "@fluentui-react-native/tokens@npm:0.23.2"
+  dependencies:
+    "@fluentui-react-native/adapters": "npm:0.13.1"
+    "@fluentui-react-native/theme-types": "npm:0.39.2"
+    tslib: "npm:^2.3.1"
+  peerDependencies:
+    "@office-iss/react-native-win32": ^0.74.0
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+    react-native-macos: ^0.73.0 || ^0.74.0
+    react-native-windows: ^0.73.0 || ^0.74.0
+  peerDependenciesMeta:
+    "@office-iss/react-native-win32":
+      optional: true
+    react-native-macos:
+      optional: true
+    react-native-windows:
+      optional: true
+  checksum: 10/e73766cdcd9762daf5bff31b2d1fe9e38e64f725816060e2439520f7b638d376e607d912721eeeeb889faad77185d98d3f4785c7fd20cfa49cbc06e14f262521
+  languageName: node
+  linkType: hard
+
 "@gorhom/bottom-sheet@npm:^5.1.3":
   version: 5.1.6
   resolution: "@gorhom/bottom-sheet@npm:5.1.6"
@@ -6245,6 +6463,112 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@uifabricshared/foundation-composable@npm:0.13.2":
+  version: 0.13.2
+  resolution: "@uifabricshared/foundation-composable@npm:0.13.2"
+  dependencies:
+    "@fluentui-react-native/merge-props": "npm:0.9.2"
+    "@uifabricshared/foundation-settings": "npm:0.15.2"
+  peerDependencies:
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+  checksum: 10/131593ad30af4c8b4da13648d66420d9e39d5930073ab870217ee3615e33dbcc6aa45ecd8acbdc888178b1dec4705f6fcfc9e14b58fc5fcbe97ccba227d029ec
+  languageName: node
+  linkType: hard
+
+"@uifabricshared/foundation-compose@npm:1.15.3":
+  version: 1.15.3
+  resolution: "@uifabricshared/foundation-compose@npm:1.15.3"
+  dependencies:
+    "@fluentui-react-native/default-theme": "npm:0.26.3"
+    "@fluentui-react-native/immutable-merge": "npm:1.2.2"
+    "@fluentui-react-native/memo-cache": "npm:1.3.3"
+    "@fluentui-react-native/theme-types": "npm:0.39.2"
+    "@uifabricshared/foundation-composable": "npm:0.13.2"
+    "@uifabricshared/foundation-settings": "npm:0.15.2"
+    "@uifabricshared/foundation-tokens": "npm:0.15.3"
+    "@uifabricshared/themed-settings": "npm:0.12.2"
+    "@uifabricshared/theming-ramp": "npm:0.20.3"
+  peerDependencies:
+    "@office-iss/react-native-win32": ^0.74.0
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+    react-native-macos: ^0.73.0 || ^0.74.0
+    react-native-windows: ^0.73.0 || ^0.74.0
+  peerDependenciesMeta:
+    "@office-iss/react-native-win32":
+      optional: true
+    react-native-macos:
+      optional: true
+    react-native-windows:
+      optional: true
+  checksum: 10/41aa77636c1c52fd1d6edf4d2cc9d7bf930ccdc9df0559328d069d8c7a591043ac19a88621518dfb194133d62853daffc7560359835a704e7a11c02971254182
+  languageName: node
+  linkType: hard
+
+"@uifabricshared/foundation-settings@npm:0.15.2":
+  version: 0.15.2
+  resolution: "@uifabricshared/foundation-settings@npm:0.15.2"
+  dependencies:
+    "@fluentui-react-native/immutable-merge": "npm:1.2.2"
+    "@fluentui-react-native/merge-props": "npm:0.9.2"
+  peerDependencies:
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+  checksum: 10/ae709d54a43ab1f781796ff62a9f6b05f342ef199d212853cb3052f34ca4f3ba2d9bc35928f59d9efb9a308953a93ff247402f9d34721e17e9fcf9f48b2cf3be
+  languageName: node
+  linkType: hard
+
+"@uifabricshared/foundation-tokens@npm:0.15.3":
+  version: 0.15.3
+  resolution: "@uifabricshared/foundation-tokens@npm:0.15.3"
+  dependencies:
+    "@fluentui-react-native/merge-props": "npm:0.9.2"
+    "@fluentui-react-native/tokens": "npm:0.23.2"
+    "@uifabricshared/foundation-settings": "npm:0.15.2"
+  peerDependencies:
+    "@office-iss/react-native-win32": ^0.74.0
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+    react-native-macos: ^0.73.0 || ^0.74.0
+    react-native-windows: ^0.73.0 || ^0.74.0
+  peerDependenciesMeta:
+    "@office-iss/react-native-win32":
+      optional: true
+    react-native-macos:
+      optional: true
+    react-native-windows:
+      optional: true
+  checksum: 10/dd3e2258c5b6492b4d16a90684ffde02435c664e57c2cd328d96c94b9b027160295084f9c8a851d1398cf581cd4cb32e2d7b4da148399c6abf2487a19e783e42
+  languageName: node
+  linkType: hard
+
+"@uifabricshared/themed-settings@npm:0.12.2":
+  version: 0.12.2
+  resolution: "@uifabricshared/themed-settings@npm:0.12.2"
+  dependencies:
+    "@uifabricshared/foundation-settings": "npm:0.15.2"
+  peerDependencies:
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+  checksum: 10/f270fea192ed4692fc833b01354bb355803722dfb68b96ff81986c6f5a8410b0bed13eb6db737c890e038e70211a0b0f6f6b2f2f790fc8995923279c5f6d591e
+  languageName: node
+  linkType: hard
+
+"@uifabricshared/theming-ramp@npm:0.20.3":
+  version: 0.20.3
+  resolution: "@uifabricshared/theming-ramp@npm:0.20.3"
+  dependencies:
+    "@fluentui-react-native/immutable-merge": "npm:1.2.2"
+    "@fluentui-react-native/theme-types": "npm:0.39.2"
+    "@uifabricshared/foundation-settings": "npm:0.15.2"
+  peerDependencies:
+    react: 18.2.0
+    react-native: ^0.73.0 || ^0.74.0
+  checksum: 10/06fbd4e1f57c92bcc74659e05599b31b3516f792a19c419042295570e4d3ff92ba6657d847e7fce2ac00c51f908c69f2f1d491b4c6f740ca61bd5284c3d22dbe
+  languageName: node
+  linkType: hard
+
 "@ungap/structured-clone@npm:^1.2.0":
   version: 1.2.0
   resolution: "@ungap/structured-clone@npm:1.2.0"
@@ -6327,6 +6651,7 @@ __metadata:
     "@babel/runtime": "npm:^7.25.0"
     "@chromatic-com/storybook": "npm:^4"
     "@danielsrs/react-native-sdk": "npm:^0.6.0"
+    "@fluentui-react-native/callout": "npm:^0.27.3"
     "@gorhom/bottom-sheet": "npm:^5.1.3"
     "@legendapp/list": "npm:1.1.4"
     "@legendapp/state": "npm:^3.0.0-beta.31"
@@ -6709,6 +7034,13 @@ __metadata:
   version: 2.0.6
   resolution: "asap@npm:2.0.6"
   checksum: 10/b244c0458c571945e4b3be0b14eb001bea5596f9868cc50cc711dc03d58a7e953517d3f0dad81ccde3ff37d1f074701fa76a6f07d41aaa992d7204a37b915dda
+  languageName: node
+  linkType: hard
+
+"assert-never@npm:^1.2.1":
+  version: 1.4.0
+  resolution: "assert-never@npm:1.4.0"
+  checksum: 10/e51e1fc4587405b929d07f1b033f7e92b9f59f9a9ced20f2bb2e5218b06a079fdf8c5b0e993366acc2ca25050a437a2df1f4e624959151e60f4893cad4e50d89
   languageName: node
   linkType: hard
 
@@ -14557,7 +14889,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.2.0, tslib@npm:^2.6.2":
+"tslib@npm:^2.2.0, tslib@npm:^2.3.1, tslib@npm:^2.6.2":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7
