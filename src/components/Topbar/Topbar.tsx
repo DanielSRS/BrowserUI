@@ -1,11 +1,11 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo, useRef } from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 import { TextInput } from 'react-native';
 import { Menu, useColors } from '@danielsrs/react-native-sdk';
 import { ExpandOnHoverContext } from '../ExpandOnHover/ExpandOnHover.context';
 import { TopBarButton } from './components/TopbarButton';
 import { settings, workspace } from '../../store/store';
-import { Memo, observer } from '@legendapp/state/react';
+import { Computed, Memo, observer } from '@legendapp/state/react';
 import { WindowButtons } from './components/WindowButtons';
 import {
   Window20Regular,
@@ -46,6 +46,7 @@ interface TopbarProps {
  */
 export const Topbar = observer((props: TopbarProps) => {
   const {} = props;
+  const urlInputRef = useRef<string | undefined>(undefined);
   const { onInnerBlur, onInnerFocus } = useContext(ExpandOnHoverContext);
   const colors = useColors();
 
@@ -74,22 +75,49 @@ export const Topbar = observer((props: TopbarProps) => {
         <View style={styles.spacer} />
         <View style={styles.urlContainer}>
           <View style={styles.url}>
-            <TextInput
-              placeholderTextColor={colors.fillColorTextSecondary}
-              style={[
-                styles.urlInput,
-                {
-                  backgroundColor: colors.fillColorControlDefault,
-                  borderWidth: StyleSheet.hairlineWidth,
-                  borderColor: colors.strokeColorSurfaceStrokeDefault,
-                },
-              ]}
-              placeholder={'about:work-in-progress'}
-              // @ts-expect-error Exits only on Macos
-              enableFocusRing={false}
-              onFocus={onInnerFocus}
-              onBlur={onInnerBlur}
-            />
+            <Computed>
+              {() => {
+                const cuurrentTabId = workspace.selectedTabId.get();
+                const currentTab = workspace.tabs[cuurrentTabId];
+                const url = currentTab.state.url.get() || '';
+                return (
+                  <TextInput
+                    placeholderTextColor={colors.fillColorTextSecondary}
+                    style={[
+                      styles.urlInput,
+                      {
+                        backgroundColor: colors.fillColorControlDefault,
+                        borderWidth: StyleSheet.hairlineWidth,
+                        borderColor: colors.strokeColorSurfaceStrokeDefault,
+                      },
+                    ]}
+                    onChangeText={text => {
+                      urlInputRef.current = text;
+                    }}
+                    // value={url}
+                    defaultValue={url}
+                    onSubmitEditing={() => {
+                      const _url = urlInputRef.current || '';
+                      const withProtocol = _url.startsWith('https://')
+                        ? _url
+                        : `https://${_url}`;
+                      console.log('Submit URL:', withProtocol);
+                      const isValid = isValidUrl(withProtocol);
+                      if (!isValid) {
+                        console.warn('Invalid URL:', withProtocol);
+                        return;
+                      }
+                      currentTab.state.url.set(withProtocol);
+                    }}
+                    placeholder={'about:work-in-progress'}
+                    // @ts-expect-error Exits only on Macos
+                    enableFocusRing={false}
+                    onFocus={onInnerFocus}
+                    onBlur={onInnerBlur}
+                  />
+                );
+              }}
+            </Computed>
           </View>
         </View>
         <View style={styles.spacer} />
@@ -148,6 +176,21 @@ export const Topbar = observer((props: TopbarProps) => {
     </View>
   );
 });
+
+function isValidUrl(url: string): boolean {
+  try {
+    const u = new URL(url);
+    if (!url.startsWith('https://')) {
+      console.warn('Invalid URL protocol:', url);
+      return false;
+    }
+    // console.log('Valid URL:', u);
+    return !!u;
+  } catch (e) {
+    console.warn('Invalid URL:', e);
+    return false;
+  }
+}
 
 const withColor = (color: string) => (Icon: Fluenticon) => {
   return <Icon color={color} />;
