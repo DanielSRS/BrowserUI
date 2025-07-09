@@ -1,10 +1,20 @@
 import { batch, observable } from '@legendapp/state';
+import type { ReactNode } from 'react';
 
 export interface Tab {
   name: string;
-  url: 'browser://newTab' | 'browser://config' | (string & {});
   id: number;
   order: number;
+  icon?: () => ReactNode;
+  state: {
+    url: 'browser://newTab' | 'browser://config' | (string & {});
+    // url: string;
+    loading: boolean;
+    title: string;
+    canGoBack: boolean;
+    canGoForward: boolean;
+    // lockIdentifier: number;
+  };
   // selected: boolean;
 }
 
@@ -33,9 +43,15 @@ export const workspace = observable<Workspace>({
   tabs: {
     0: {
       name: 'New Tab',
-      url: 'browser://newTab',
       id: 0,
       order: 0,
+      state: {
+        url: 'browser://newTab',
+        canGoBack: false,
+        canGoForward: false,
+        loading: false,
+        title: 'New Tab',
+      },
     },
   },
   tabIds: () => Object.keys(workspace.tabs.get(true)),
@@ -50,7 +66,13 @@ export const workspace = observable<Workspace>({
         name: 'New Tab',
         id: newid,
         order: newOrder,
-        url: 'browser://newTab',
+        state: {
+          url: 'browser://newTab',
+          canGoBack: false,
+          canGoForward: false,
+          loading: false,
+          title: 'New Tab',
+        },
       });
     });
   },
@@ -65,7 +87,13 @@ export const workspace = observable<Workspace>({
         name: 'Showcase',
         id: newid,
         order: newOrder,
-        url: 'browser://showcase',
+        state: {
+          url: 'browser://showcase',
+          canGoBack: false,
+          canGoForward: false,
+          loading: false,
+          title: 'Showcase',
+        },
       });
     });
   },
@@ -81,7 +109,13 @@ export const workspace = observable<Workspace>({
         name: 'Settings',
         id: newid,
         order: newOrder,
-        url: 'browser://config',
+        state: {
+          url: 'browser://config',
+          canGoBack: false,
+          canGoForward: false,
+          loading: false,
+          title: 'Settings',
+        },
       });
       workspace.selectedTabId.set(newid);
       workspace.nextNewTabId.set(nextId);
@@ -89,7 +123,7 @@ export const workspace = observable<Workspace>({
   },
   focusConfigTab: () => {
     const opened = Object.values(workspace.tabs.get()).find(
-      v => v.url === 'browser://config',
+      v => v.state.url === 'browser://config',
     );
     if (opened) {
       // focus on tab

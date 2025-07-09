@@ -115,8 +115,10 @@ function Content(props: ContentProps) {
               <Screen activityState={activityState} key={tabId} style={FLEX1}>
                 <Memo>
                   {() => {
-                    const { url, id } =
-                      workspace$.tabs[tabId as unknown as number].get();
+                    const {
+                      state: { url },
+                      id,
+                    } = workspace$.tabs[tabId as unknown as number].get();
 
                     if (url === 'browser://config') {
                       return <Config key={id} />;
