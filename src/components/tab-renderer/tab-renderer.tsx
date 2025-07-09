@@ -5,6 +5,8 @@ import { Config } from '../../Pages/Config/Config';
 import { Showcase } from '../../Pages/showcase/showcase';
 import { NewTab } from '../../Pages/NewTab/NewTab';
 import { Styled } from '@danielsrs/react-native-sdk';
+import { useRef } from 'react';
+import { WebView } from 'react-native-webview';
 
 interface TabRendererProps {
   tabId: number;
@@ -13,17 +15,19 @@ interface TabRendererProps {
 
 export function TabRenderer(props: TabRendererProps) {
   const { tabId, workspace$ } = props;
-  const tabData = use$(workspace$.tabs[tabId]);
+  const tabData = workspace$.tabs[tabId];
+  const _url = use$(tabData.state.url);
+  const webviewRef = useRef<WebView>(null);
 
-  if (!tabData) {
+  if (!tabData || !_url) {
     return <NoTabData />;
   }
 
-  const isInternalPage = tabData.state.url.startsWith('browser://');
+  const isInternalPage = _url.startsWith('browser://');
   if (isInternalPage) {
-    const url = tabData.state.url;
+    const url = _url;
     if (url === 'browser://config') {
-      return <Config key={tabData.id} />;
+      return <Config key={tabData.id.peek()} />;
     }
 
     if (url === 'browser://showcase') {
@@ -37,7 +41,16 @@ export function TabRenderer(props: TabRendererProps) {
     return <UnknownInternalTab />;
   }
 
-  return null;
+  return (
+    <WebView
+      ref={webviewRef}
+      key={tabData.id.peek()}
+      source={{ uri: _url }}
+      onNavigationStateChange={state => {
+        tabData.state.set(state);
+      }}
+    />
+  );
 }
 
 const NoTabData = Styled.createStyledView({
