@@ -81,6 +81,7 @@ export function Tabbar(props: TabbarProps) {
           selectedTabId={selectedTabId}
           id={id}
           name={name}
+          _tab={tabs[item as unknown as number]}
         />
       );
     },

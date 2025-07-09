@@ -5,7 +5,9 @@ export interface Tab {
   name: string;
   id: number;
   order: number;
-  icon?: () => ReactNode;
+  icon?: {
+    component: () => ReactNode;
+  };
   state: {
     url: 'browser://newTab' | 'browser://config' | (string & {});
     // url: string;

@@ -12,7 +12,12 @@ import {
 } from '../../fluent-icons/fluent-icons';
 import { HoverView } from './HoverView';
 import { Computed, Memo, useObservable } from '@legendapp/state/react';
-import type { ObservableBoolean, ObservablePrimitive } from '@legendapp/state';
+import type {
+  Observable,
+  ObservableBoolean,
+  ObservablePrimitive,
+} from '@legendapp/state';
+import type { Tab } from '../../../store/store';
 
 interface TabProps {
   /**
@@ -29,9 +34,11 @@ interface TabProps {
    */
   name: string;
   selectedTabId: ObservablePrimitive<number>;
+  icon?: () => React.ReactNode;
+  _tab: Observable<Tab>;
 }
 export function Tab(props: TabProps) {
-  const { id, onPress, name, onClose, selectedTabId } = props;
+  const { id, onPress, name, onClose, selectedTabId, _tab } = props;
   const isHovered$ = useObservable(false);
   const isSelected$ = useObservable(() => selectedTabId.get() === id);
   const colors = useColors();
@@ -85,7 +92,19 @@ export function Tab(props: TabProps) {
         {/* Tab icon */}
         <View style={btnIconContainer}>
           <View style={[icon]}>
-            <TabDesktopNewPage20Regular color={colors.fillColorTextSecondary} />
+            <Memo>
+              {() => {
+                const Icon = _tab.icon.get(true)?.component;
+                if (Icon) {
+                  return <Icon />;
+                }
+                return (
+                  <TabDesktopNewPage20Regular
+                    color={colors.fillColorTextSecondary}
+                  />
+                );
+              }}
+            </Memo>
           </View>
         </View>
 
