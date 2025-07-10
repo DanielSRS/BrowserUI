@@ -1,10 +1,10 @@
 import React from 'react';
 import { Styled, useColors } from '@danielsrs/react-native-sdk';
 import { BUTTON_ICON_SIZE } from '../../Tabbar/Tabbar.contants';
-import type { ColorValue } from 'react-native';
 import { HoverView } from '../../Tabbar/components/HoverView';
+import type { ColorValue, TouchableOpacityProps } from 'react-native';
 
-interface TabProps {
+interface TabProps extends Omit<TouchableOpacityProps, 'children'> {
   // id: number;
   // onPress?: () => void;
   /**
@@ -13,12 +13,12 @@ interface TabProps {
   children: (props: { color: ColorValue }) => React.ReactNode;
 }
 export const TopBarButton = React.memo(function TopBarButton(props: TabProps) {
-  const { children: Icon } = props;
+  const { children: Icon, ...rest } = props;
   const colors = useColors();
 
   return (
     // Pressable area
-    <ButtonContainer>
+    <ButtonContainer {...rest}>
       {/* Tab icon */}
       <HoverView
         hoveredStyle={{ backgroundColor: colors.fillColorControlDefault }}

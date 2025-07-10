@@ -20,6 +20,7 @@ export function TabRenderer(props: TabRendererProps) {
   const _url = use$(tabData.state.url);
   const webviewRef = useRef<WebView>(null);
 
+  // Set favicon for the tab
   useEffect(() => {
     const isInternalPage = _url.startsWith('browser://');
     if (isInternalPage) {
@@ -60,6 +61,20 @@ export function TabRenderer(props: TabRendererProps) {
         reader.readAsDataURL(blob);
       });
   }, [_url, tabData.icon]);
+
+  useEffect(() => {
+    tabData.actions.set({
+      goBack: () => {
+        webviewRef.current?.goBack();
+      },
+      goForward: () => {
+        webviewRef.current?.goForward();
+      },
+      reload: () => {
+        webviewRef.current?.reload();
+      },
+    });
+  }, [tabData, webviewRef]);
 
   if (!tabData || !_url) {
     return <NoTabData />;

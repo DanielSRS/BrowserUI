@@ -8,6 +8,11 @@ export interface Tab {
   icon?: {
     component: () => ReactNode;
   };
+  actions?: {
+    goBack: () => void;
+    goForward: () => void;
+    reload: () => void;
+  };
   state: {
     url: 'browser://newTab' | 'browser://config' | (string & {});
     // url: string;

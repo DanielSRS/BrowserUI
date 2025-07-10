@@ -112,7 +112,7 @@ export function Tab(props: TabProps) {
         <TabName
           // otherwise, tab height changes when theres no enough space
           numberOfLines={1}>
-          {name}
+          <Memo>{_tab.state.title.get() ?? name}</Memo>
         </TabName>
 
         {/* Close button */}

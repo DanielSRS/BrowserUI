@@ -4,7 +4,7 @@ import { TextInput } from 'react-native';
 import { Menu, useColors } from '@danielsrs/react-native-sdk';
 import { ExpandOnHoverContext } from '../ExpandOnHover/ExpandOnHover.context';
 import { TopBarButton } from './components/TopbarButton';
-import { settings, workspace } from '../../store/store';
+import { settings, workspace, type Tab } from '../../store/store';
 import { Computed, Memo, observer } from '@legendapp/state/react';
 import { WindowButtons } from './components/WindowButtons';
 import {
@@ -67,9 +67,46 @@ export const Topbar = observer((props: TopbarProps) => {
       <View style={styles.contentArea}>
         <View style={styles.buttonsContainer}>
           {/* Voltar */}
-          <TopBarButton>{ArrowLeft20Regular}</TopBarButton>
+          <Memo>
+            {() => {
+              const cuurrentTabId = workspace.selectedTabId.get();
+              const currentTab = workspace.tabs[cuurrentTabId];
+              const tabState = currentTab.state.get();
+              const actions = currentTab.actions.get() as Tab['actions'];
+              return (
+                <TopBarButton
+                  disabled={!tabState.canGoBack}
+                  onPress={() => {
+                    if (actions) {
+                      actions.goBack?.();
+                    }
+                  }}>
+                  {ArrowLeft20Regular}
+                </TopBarButton>
+              );
+            }}
+          </Memo>
           {/* Avançar */}
-          <TopBarButton>{ArrowRight20Regular}</TopBarButton>
+
+          <Memo>
+            {() => {
+              const cuurrentTabId = workspace.selectedTabId.get();
+              const currentTab = workspace.tabs[cuurrentTabId];
+              const tabState = currentTab.state.get();
+              const actions = currentTab.actions.get() as Tab['actions'];
+              return (
+                <TopBarButton
+                  disabled={!tabState.canGoForward}
+                  onPress={() => {
+                    if (actions) {
+                      actions.goForward?.();
+                    }
+                  }}>
+                  {ArrowRight20Regular}
+                </TopBarButton>
+              );
+            }}
+          </Memo>
         </View>
         {}
         <View style={styles.spacer} />
