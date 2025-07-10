@@ -58,13 +58,15 @@ export const Topbar = observer((props: TopbarProps) => {
 
   useObserveEffect(() => {
     const cuurrentTabId = workspace.selectedTabId.get();
-    const currentTab = workspace.tabs[cuurrentTabId].navigationURLChange.get();
-    if (!currentTab) {
+    const navigationURLChange =
+      workspace.tabs[cuurrentTabId].navigationURLChange.get();
+    if (!navigationURLChange) {
       return;
     }
     pageUrlInputRef.current?.setNativeProps({
-      text: currentTab,
+      text: navigationURLChange,
     });
+    urlInputRef.current = navigationURLChange;
   });
 
   const withTextColor = useMemo(
@@ -171,7 +173,20 @@ export const Topbar = observer((props: TopbarProps) => {
                     placeholder={'Search or enter web address'}
                     // @ts-expect-error Exits only on Macos
                     enableFocusRing={false}
-                    onFocus={onInnerFocus}
+                    onFocus={() => {
+                      // select all text
+                      setTimeout(() => {
+                        console.log('Focus on URL input');
+                        pageUrlInputRef.current?.setNativeProps({
+                          selection: {
+                            start: 0,
+                            end: urlInputRef.current?.length || 0,
+                          },
+                        });
+                      }, 200);
+                      // Notify the context that the input is focused
+                      onInnerFocus();
+                    }}
                     onBlur={onInnerBlur}
                   />
                 );
