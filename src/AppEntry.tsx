@@ -111,7 +111,9 @@ function Content(props: ContentProps) {
               workspace$.selectedTabId.get() === +tabId ? 2 : 0;
             return (
               <Screen activityState={activityState} key={tabId} style={FLEX1}>
-                <TabRenderer tabId={+tabId} workspace$={workspace$} />
+                <Memo>
+                  <TabRenderer tabId={+tabId} workspace$={workspace$} />
+                </Memo>
               </Screen>
             );
           });
