@@ -129,7 +129,15 @@ export function TabRenderer(props: TabRendererProps) {
         sendRNEvent + listenForNavigationChanges
       }
       onNavigationStateChange={state => {
-        tabData.state.set(state);
+        console.log('WebView navigation state change:', state);
+        tabData.state.set({
+          url: tabData.state.url.peek() || state.url,
+          title: state.title,
+          canGoBack: state.canGoBack,
+          canGoForward: state.canGoForward,
+          loading: state.loading,
+        });
+        tabData.navigationURLChange.set(state.url);
       }}
       onShouldStartLoadWithRequest={request => {
         if (!adblockerEngine) {
