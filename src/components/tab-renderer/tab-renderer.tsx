@@ -60,6 +60,7 @@ export function TabRenderer(props: TabRendererProps) {
           tabData.icon.set(
             ObservableHint.opaque({
               component: comp,
+              faviconURL: faviconUrl,
             }),
           );
         };

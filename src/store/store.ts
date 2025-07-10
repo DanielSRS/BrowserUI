@@ -7,6 +7,7 @@ export interface Tab {
   order: number;
   icon?: {
     component: () => ReactNode;
+    faviconURL: string;
   };
   actions?: {
     goBack: () => void;
