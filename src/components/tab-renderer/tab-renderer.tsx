@@ -1,6 +1,6 @@
 import { ObservableHint, type Observable } from '@legendapp/state';
 import type { Workspace } from '../../store/store';
-import { use$ } from '@legendapp/state/react';
+import { use$, useObserve } from '@legendapp/state/react';
 import { Config } from '../../Pages/Config/Config';
 import { Showcase } from '../../Pages/showcase/showcase';
 import { NewTab } from '../../Pages/NewTab/NewTab';
@@ -71,9 +71,13 @@ export function TabRenderer(props: TabRendererProps) {
   );
 
   // Set favicon for the tab
-  useEffect(() => {
-    setFavicon(_url);
-  }, [_url, setFavicon]);
+  useObserve(() => {
+    const f = tabData.navigationURLChange.get();
+    if (!f) {
+      return;
+    }
+    setFavicon(f);
+  });
 
   useEffect(() => {
     tabData.actions.set({
