@@ -10,6 +10,8 @@ import { WebView } from 'react-native-webview';
 import { Image } from 'react-native';
 import { sendRNEvent } from '../../webview-injected-scripts/send-event';
 import { listenForNavigationChanges } from '../../webview-injected-scripts/navigation-events';
+import { adblockerEngine } from '../../adblocker/engine';
+import { Request } from '@ghostery/adblocker';
 import type { WVNavigationEvent } from '../../webview-injected-scripts/types';
 
 interface TabRendererProps {
@@ -120,6 +122,21 @@ export function TabRenderer(props: TabRendererProps) {
       }
       onNavigationStateChange={state => {
         tabData.state.set(state);
+      }}
+      onShouldStartLoadWithRequest={request => {
+        if (!adblockerEngine) {
+          console.warn('Adblocker engine not initialized');
+          return true; // Allow all requests if adblocker is not ready
+        }
+        const { match } = adblockerEngine.match(
+          Request.fromRawDetails(request),
+        );
+        // console.log('WebView should start load with request:', request);
+        if (match) {
+          console.log('Blocked request:', request.url);
+        }
+
+        return !match;
       }}
       onMessage={event => {
         const data = JSON.parse(event.nativeEvent.data) as WVNavigationEvent;

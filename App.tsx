@@ -2,6 +2,9 @@ import React, { StrictMode } from 'react';
 import { App } from './src/AppEntry';
 import { SdkProvider, Constants } from '@danielsrs/react-native-sdk';
 import { enableScreens } from 'react-native-screens';
+import { loadAdblockerFilters } from './src/adblocker/engine';
+
+loadAdblockerFilters();
 
 if (Constants.IS_WINDOWS) {
   enableScreens(false);

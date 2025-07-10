@@ -4068,6 +4068,46 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ghostery/adblocker-content@npm:^2.11.1":
+  version: 2.11.1
+  resolution: "@ghostery/adblocker-content@npm:2.11.1"
+  dependencies:
+    "@ghostery/adblocker-extended-selectors": "npm:^2.11.1"
+  checksum: 10/51d17bb647e137a2d723f27b5d992adc34921da11a636bb552d957845b26e2607ed264002854cd764e77e82bfb011c12aa3cc091787a84c95b17290609f41e31
+  languageName: node
+  linkType: hard
+
+"@ghostery/adblocker-extended-selectors@npm:^2.11.1":
+  version: 2.11.1
+  resolution: "@ghostery/adblocker-extended-selectors@npm:2.11.1"
+  checksum: 10/a78b3d3488826211d6215b5cc80a99055c4d8bbd4967dc5a624d65c1294cd341516f5a1dce40884a93383bf74170515e1cfd4e07e40fb51daf6bc1dff1f85f12
+  languageName: node
+  linkType: hard
+
+"@ghostery/adblocker@npm:^2.11.1":
+  version: 2.11.1
+  resolution: "@ghostery/adblocker@npm:2.11.1"
+  dependencies:
+    "@ghostery/adblocker-content": "npm:^2.11.1"
+    "@ghostery/adblocker-extended-selectors": "npm:^2.11.1"
+    "@ghostery/url-parser": "npm:^1.3.0"
+    "@remusao/guess-url-type": "npm:^2.1.0"
+    "@remusao/small": "npm:^2.1.0"
+    "@remusao/smaz": "npm:^2.2.0"
+    tldts-experimental: "npm:^7.0.0"
+  checksum: 10/a8740bfd6e7ada16f39422a005bce50e5ecf20d6bda2abcd075537184944b0d9abe41435b42935f719d3f073398ab594b3d5b0dec12feae9d487de7ba1f11436
+  languageName: node
+  linkType: hard
+
+"@ghostery/url-parser@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@ghostery/url-parser@npm:1.3.0"
+  dependencies:
+    tldts-experimental: "npm:^7.0.8"
+  checksum: 10/9e4c3eeed1ae4c54dbc9c15073253b4e3c60ce0e09f540984ee8a68f04fed4c17db28c0d1fda189ceb20cd976383c1904fae6024c4f29c07dfb307c49e185763
+  languageName: node
+  linkType: hard
+
 "@gorhom/bottom-sheet@npm:^5.1.3":
   version: 5.1.6
   resolution: "@gorhom/bottom-sheet@npm:5.1.6"
@@ -5462,6 +5502,53 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@remusao/guess-url-type@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@remusao/guess-url-type@npm:2.1.0"
+  checksum: 10/083acf99389b35995af15a785cbbeea09b2819c87ee4405812db68103a529b836b8b4c3750c73c96c70fe157258d43251ad140719fcf063ba213d54663235a91
+  languageName: node
+  linkType: hard
+
+"@remusao/small@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@remusao/small@npm:2.1.0"
+  checksum: 10/4c2588591b8cca54f12a38976c8ad7b1754d6a474859e8a504c157f3c4664b39dffed344ecb929cd1d42093bc85921f9f44e478ae2df184e5cdc8eb07890dd95
+  languageName: node
+  linkType: hard
+
+"@remusao/smaz-compress@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@remusao/smaz-compress@npm:2.2.0"
+  dependencies:
+    "@remusao/trie": "npm:^2.1.0"
+  checksum: 10/353ee62875021e72b2c00ad78fa3681b64a9f1175dcf9061c23da3ec8b4ad32ec3121e10ba867591238487a3530515722221f12b2c378ffc323fe5a7010b2547
+  languageName: node
+  linkType: hard
+
+"@remusao/smaz-decompress@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@remusao/smaz-decompress@npm:2.2.0"
+  checksum: 10/ae7cf8b02081fb49a74c29469725c08a147ef67de2fd09af2c19f38a6be91755d355960ce97ab3972f902cfd9fbd155778b0dfbf93703453b9a3b8db2a6c649d
+  languageName: node
+  linkType: hard
+
+"@remusao/smaz@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@remusao/smaz@npm:2.2.0"
+  dependencies:
+    "@remusao/smaz-compress": "npm:^2.2.0"
+    "@remusao/smaz-decompress": "npm:^2.2.0"
+  checksum: 10/10f6d8cd574ab32353b02297e73eb7a5b0c0f8e1389e5f6da0168b948b6cac9c1879e3ffb08655375ef2e97a9db05c87c45ad5dc7938bd7a9f8e9323a917213a
+  languageName: node
+  linkType: hard
+
+"@remusao/trie@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@remusao/trie@npm:2.1.0"
+  checksum: 10/e841d7c1b8424870798f98454c24400bb369098f13992f8433ea948ab1184dcfc5f0da817f7b805c4d00d59c9c5f520dd97b51ba13fe3e52d68220737d53fcaa
+  languageName: node
+  linkType: hard
+
 "@rnx-kit/jest-preset@npm:^0.1.17":
   version: 0.1.18
   resolution: "@rnx-kit/jest-preset@npm:0.1.18"
@@ -6652,6 +6739,7 @@ __metadata:
     "@chromatic-com/storybook": "npm:^4"
     "@danielsrs/react-native-sdk": "npm:^0.6.0"
     "@fluentui-react-native/callout": "npm:^0.27.3"
+    "@ghostery/adblocker": "npm:^2.11.1"
     "@gorhom/bottom-sheet": "npm:^5.1.3"
     "@legendapp/list": "npm:1.1.4"
     "@legendapp/state": "npm:^3.0.0-beta.31"
@@ -14780,6 +14868,22 @@ __metadata:
   version: 4.0.3
   resolution: "tinyspy@npm:4.0.3"
   checksum: 10/b6a3ed40dd76a2b3c020250cf1401506b456509d1fb9dba0c7b0e644d258dac722843b85c57ccc36c8687db1e7978cb6adcc43e3b71c475910c085b96d41cb53
+  languageName: node
+  linkType: hard
+
+"tldts-core@npm:^7.0.10":
+  version: 7.0.10
+  resolution: "tldts-core@npm:7.0.10"
+  checksum: 10/465c42ebb5a95f43b06e03ebdddfdba5853a3c8c5f937c54fbdbe666be7e0b3fa7b6667f6157203ca38205ae6e29b32b455624ecdf768a210f9a2909e5638722
+  languageName: node
+  linkType: hard
+
+"tldts-experimental@npm:^7.0.0, tldts-experimental@npm:^7.0.8":
+  version: 7.0.10
+  resolution: "tldts-experimental@npm:7.0.10"
+  dependencies:
+    tldts-core: "npm:^7.0.10"
+  checksum: 10/156d395fbda401f4648dfc1bf11dfd0cf0c6ece7ce0812d5612cbce5b281e83db3ff5310ab261f851994ac0b3c3217a91473fb49f4580203db77a290fc8e7605
   languageName: node
   linkType: hard
 

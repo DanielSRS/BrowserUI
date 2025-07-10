@@ -22,6 +22,7 @@
   "dependencies": {
     "@danielsrs/react-native-sdk": "^0.6.0",
     "@fluentui-react-native/callout": "^0.27.3",
+    "@ghostery/adblocker": "^2.11.1",
     "@legendapp/list": "1.1.4",
     "@legendapp/state": "^3.0.0-beta.31",
     "@storybook/react-native-ui-lite": "^9.0.9",
