@@ -13,6 +13,7 @@ export interface Tab {
     goForward: () => void;
     reload: () => void;
   };
+  navigationURLChange?: string;
   state: {
     url: 'browser://newTab' | 'browser://config' | (string & {});
     // url: string;

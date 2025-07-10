@@ -5,7 +5,12 @@ import { Menu, useColors } from '@danielsrs/react-native-sdk';
 import { ExpandOnHoverContext } from '../ExpandOnHover/ExpandOnHover.context';
 import { TopBarButton } from './components/TopbarButton';
 import { settings, workspace, type Tab } from '../../store/store';
-import { Computed, Memo, observer } from '@legendapp/state/react';
+import {
+  Computed,
+  Memo,
+  observer,
+  useObserveEffect,
+} from '@legendapp/state/react';
 import { WindowButtons } from './components/WindowButtons';
 import {
   Window20Regular,
@@ -47,8 +52,20 @@ interface TopbarProps {
 export const Topbar = observer((props: TopbarProps) => {
   const {} = props;
   const urlInputRef = useRef<string | undefined>(undefined);
+  const pageUrlInputRef = useRef<TextInput>(null);
   const { onInnerBlur, onInnerFocus } = useContext(ExpandOnHoverContext);
   const colors = useColors();
+
+  useObserveEffect(() => {
+    const cuurrentTabId = workspace.selectedTabId.get();
+    const currentTab = workspace.tabs[cuurrentTabId].navigationURLChange.get();
+    if (!currentTab) {
+      return;
+    }
+    pageUrlInputRef.current?.setNativeProps({
+      text: currentTab,
+    });
+  });
 
   const withTextColor = useMemo(
     () => withColor(colors.textPrimary.toString()),
@@ -120,6 +137,7 @@ export const Topbar = observer((props: TopbarProps) => {
                 const isNewTab = url === 'browser://newTab';
                 return (
                   <TextInput
+                    ref={pageUrlInputRef}
                     placeholderTextColor={colors.fillColorTextSecondary}
                     selectTextOnFocus={true}
                     autoCapitalize={'none'}
