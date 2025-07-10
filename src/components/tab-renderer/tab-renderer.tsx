@@ -5,7 +5,7 @@ import { Config } from '../../Pages/Config/Config';
 import { Showcase } from '../../Pages/showcase/showcase';
 import { NewTab } from '../../Pages/NewTab/NewTab';
 import { Styled } from '@danielsrs/react-native-sdk';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { WebView } from 'react-native-webview';
 import { Image } from 'react-native';
 import { sendRNEvent } from '../../webview-injected-scripts/send-event';
@@ -25,48 +25,55 @@ export function TabRenderer(props: TabRendererProps) {
   const _url = use$(tabData.state.url);
   const webviewRef = useRef<WebView>(null);
 
+  const setFavicon = useCallback(
+    (favUrl: string) => {
+      const isInternalPage = favUrl.startsWith('browser://');
+      if (isInternalPage) {
+        return;
+      }
+      const ur = favUrl.indexOf('://');
+      if (ur === -1) {
+        console.warn('Invalid URL ÇÇÇ:', favUrl);
+        return;
+      }
+      let l = favUrl.substring(ur + 3).indexOf('/');
+      if (l === -1) {
+        console.log('shorrt???', favUrl.substring(0, ur));
+        l = 0;
+        return;
+      }
+      const faviconUrl = favUrl.substring(0, ur + l + 1 + 3) + 'favicon.ico';
+      console.log('Favicon URL:', faviconUrl);
+      fetch(faviconUrl)
+        .then(response => response.blob())
+        .then(blob => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            // console.log(reader.result.toString());
+            const comp = () => (
+              <Image
+                key={faviconUrl}
+                style={{ width: 16, height: 16 }}
+                source={{ uri: reader.result.toString() }}
+              />
+            );
+            tabData.icon.set(
+              ObservableHint.opaque({
+                component: comp,
+                faviconURL: faviconUrl,
+              }),
+            );
+          };
+          reader.readAsDataURL(blob);
+        });
+    },
+    [tabData.icon],
+  );
+
   // Set favicon for the tab
   useEffect(() => {
-    const isInternalPage = _url.startsWith('browser://');
-    if (isInternalPage) {
-      return;
-    }
-    const ur = _url.indexOf('://');
-    if (ur === -1) {
-      console.warn('Invalid URL ÇÇÇ:', _url);
-      return;
-    }
-    let l = _url.substring(ur + 3).indexOf('/');
-    if (l === -1) {
-      console.log('shorrt???', _url.substring(0, ur));
-      l = 0;
-      return;
-    }
-    const faviconUrl = _url.substring(0, ur + l + 1 + 3) + 'favicon.ico';
-    console.log('Favicon URL:', faviconUrl);
-    fetch(faviconUrl)
-      .then(response => response.blob())
-      .then(blob => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          // console.log(reader.result.toString());
-          const comp = () => (
-            <Image
-              key={faviconUrl}
-              style={{ width: 16, height: 16 }}
-              source={{ uri: reader.result.toString() }}
-            />
-          );
-          tabData.icon.set(
-            ObservableHint.opaque({
-              component: comp,
-              faviconURL: faviconUrl,
-            }),
-          );
-        };
-        reader.readAsDataURL(blob);
-      });
-  }, [_url, tabData.icon]);
+    setFavicon(_url);
+  }, [_url, setFavicon]);
 
   useEffect(() => {
     tabData.actions.set({
