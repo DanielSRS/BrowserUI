@@ -74,6 +74,11 @@ export function TabRenderer(props: TabRendererProps) {
         webviewRef.current?.reload();
       },
     });
+
+    // Set zoom level for the page
+    setTimeout(() => {
+      webviewRef.current?.injectJavaScript('document.body.style.zoom = "0.9";');
+    }, 5000);
   }, [tabData, webviewRef]);
 
   if (!tabData || !_url) {
