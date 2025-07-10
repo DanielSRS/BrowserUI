@@ -3,7 +3,7 @@ export interface WVNavigationEvent {
   payload: {
     url: string;
     title: string;
-    // canGoBack: boolean;
+    canGoBack: boolean;
     // canGoForward: boolean;
     // loading: boolean;
   };

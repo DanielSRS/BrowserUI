@@ -128,6 +128,7 @@ export function TabRenderer(props: TabRendererProps) {
             // tabData.state.url.set(data.payload.url);
             tabData.state.title.set(data.payload.title);
             tabData.navigationURLChange.set(data.payload.url);
+            tabData.state.canGoBack.set(data.payload.canGoBack);
             break;
           default:
             console.warn('Unknown event type:', data.type);

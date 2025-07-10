@@ -3,7 +3,8 @@ export const listenForNavigationChanges = `
     function sendUrlChange() {
       globalThis.sendRNEvent('navigation', {
         url: location.href,
-        title: document.title
+        title: document.title,
+        canGoBack: window.history.length > 1,
       });
     }
     let lastUrl = location.href;
