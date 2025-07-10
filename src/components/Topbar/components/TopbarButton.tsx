@@ -15,15 +15,17 @@ interface TabProps extends Omit<TouchableOpacityProps, 'children'> {
 export const TopBarButton = React.memo(function TopBarButton(props: TabProps) {
   const { children: Icon, ...rest } = props;
   const colors = useColors();
+  const opacity = props.disabled ? 0.5 : 1;
+  const backgroundColor = props.disabled
+    ? undefined
+    : colors.fillColorControlDefault;
 
   return (
     // Pressable area
     <ButtonContainer {...rest}>
       {/* Tab icon */}
-      <HoverView
-        hoveredStyle={{ backgroundColor: colors.fillColorControlDefault }}
-      />
-      <IconGroup>
+      <HoverView hoveredStyle={{ backgroundColor }} />
+      <IconGroup style={{ opacity }}>
         <Icon color={colors.fillColorTextPrimary} />
       </IconGroup>
     </ButtonContainer>
