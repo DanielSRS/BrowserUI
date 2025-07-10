@@ -9,6 +9,8 @@ import { useEffect, useRef } from 'react';
 import { WebView } from 'react-native-webview';
 import { Image } from 'react-native';
 import { sendRNEvent } from '../../webview-injected-scripts/send-event';
+import { listenForNavigationChanges } from '../../webview-injected-scripts/navigation-events';
+import type { WVNavigationEvent } from '../../webview-injected-scripts/types';
 
 interface TabRendererProps {
   tabId: number;
@@ -80,9 +82,9 @@ export function TabRenderer(props: TabRendererProps) {
   useEffect(() => {
     // Set zoom level for the page
     setTimeout(() => {
-      webviewRef.current?.injectJavaScript(
-        'document.body.style.zoom = "0.9";globalThis.sendRNEvent("bodyZoomChanged", { newZoom: document.body.style.zoom });',
-      );
+      // webviewRef.current?.injectJavaScript(
+      //   'document.body.style.zoom = "0.9";globalThis.sendRNEvent("bodyZoomChanged", { newZoom: document.body.style.zoom });',
+      // );
     }, 5000);
   }, [_url, webviewRef]);
 
@@ -113,12 +115,22 @@ export function TabRenderer(props: TabRendererProps) {
       ref={webviewRef}
       key={tabData.id.peek()}
       source={{ uri: _url }}
-      injectedJavaScriptBeforeContentLoaded={sendRNEvent}
+      injectedJavaScriptBeforeContentLoaded={
+        sendRNEvent + listenForNavigationChanges
+      }
       onNavigationStateChange={state => {
         tabData.state.set(state);
       }}
       onMessage={event => {
-        // const data = JSON.parse(event.nativeEvent.data);
+        const data = JSON.parse(event.nativeEvent.data) as WVNavigationEvent;
+        switch (data.type) {
+          case 'navigation':
+            // tabData.state.url.set(data.payload.url);
+            tabData.state.title.set(data.payload.title);
+            break;
+          default:
+            console.warn('Unknown event type:', data.type);
+        }
         console.log('WebView message:', event.nativeEvent.data);
       }}
       userAgent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Safari/605.1.15"
