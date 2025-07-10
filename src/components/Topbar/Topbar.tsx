@@ -135,7 +135,8 @@ export const Topbar = observer((props: TopbarProps) => {
               {() => {
                 const cuurrentTabId = workspace.selectedTabId.get();
                 const currentTab = workspace.tabs[cuurrentTabId];
-                const url = currentTab.state.url.get() || '';
+                const uurl = currentTab.state.url.get() || '';
+                const url = currentTab.navigationURLChange.get() || uurl;
                 const isNewTab = url === 'browser://newTab';
                 return (
                   <TextInput
