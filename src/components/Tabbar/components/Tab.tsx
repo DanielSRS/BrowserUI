@@ -88,7 +88,7 @@ export function Tab(props: TabProps) {
         {/* Tab icon */}
         <View style={btnIconContainer}>
           <View style={[icon]}>
-            <Memo>
+            <Computed>
               {() => {
                 const Icon = _tab?.icon.get(true)?.component;
                 if (Icon) {
@@ -100,7 +100,7 @@ export function Tab(props: TabProps) {
                   />
                 );
               }}
-            </Memo>
+            </Computed>
           </View>
         </View>
 
@@ -141,7 +141,7 @@ const CloseButton = memo(function CloseButton(props: {
   };
 
   return (
-    <Memo>
+    <Computed>
       {isTabHovered.get() ? (
         <CloseButtonContainer
           // @ts-expect-error
@@ -162,7 +162,7 @@ const CloseButton = memo(function CloseButton(props: {
           </Pressable>
         </CloseButtonContainer>
       ) : null}
-    </Memo>
+    </Computed>
   );
 });
 
