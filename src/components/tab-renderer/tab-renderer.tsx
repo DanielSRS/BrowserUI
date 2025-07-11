@@ -4,7 +4,7 @@ import { use$, useObserve } from '@legendapp/state/react';
 import { Config } from '../../Pages/Config/Config';
 import { Showcase } from '../../Pages/showcase/showcase';
 import { NewTab } from '../../Pages/NewTab/NewTab';
-import { Styled } from '@danielsrs/react-native-sdk';
+import { Body, Constants, Styled, Subtitle } from '@danielsrs/react-native-sdk';
 import { useCallback, useEffect, useRef } from 'react';
 import { WebView } from 'react-native-webview';
 import { Image } from 'react-native';
@@ -124,6 +124,15 @@ export function TabRenderer(props: TabRendererProps) {
     return <UnknownInternalTab />;
   }
 
+  if (Constants.IS_WINDOWS) {
+    return (
+      <NoWindowsWebviewSupport>
+        <Subtitle>Windows cannot render web pages yet.</Subtitle>
+        <Body>This will be fixed later</Body>
+      </NoWindowsWebviewSupport>
+    );
+  }
+
   return (
     <WebView
       ref={webviewRef}
@@ -185,4 +194,10 @@ const NoTabData = Styled.createStyledView({
 const UnknownInternalTab = Styled.createStyledView({
   backgroundColor: 'yellow',
   flex: 1,
+});
+
+const NoWindowsWebviewSupport = Styled.createStyledView({
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
 });
