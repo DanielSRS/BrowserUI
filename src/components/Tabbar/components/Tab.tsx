@@ -71,50 +71,48 @@ export function Tab(props: TabProps) {
   };
 
   return (
-    <Computed>
-      <Pressable
-        onPress={fireTabPressEvent}
-        onHoverIn={setHovered}
-        onHoverOut={unsetHovered}
-        style={[
-          tabContentStyle,
-          isSelected && {
-            borderColor: colors.controlStrongStrokeDefault,
-          },
-        ]}>
-        {/* Hover bg */}
-        <HoverView show={isHovered$} style={hoverBgColor} />
+    <Pressable
+      onPress={fireTabPressEvent}
+      onHoverIn={setHovered}
+      onHoverOut={unsetHovered}
+      style={[
+        tabContentStyle,
+        isSelected && {
+          borderColor: colors.controlStrongStrokeDefault,
+        },
+      ]}>
+      {/* Hover bg */}
+      <HoverView show={isHovered$} style={hoverBgColor} />
 
-        {/* Tab icon */}
-        <View style={btnIconContainer}>
-          <View style={[icon]}>
-            <Computed>
-              {() => {
-                const Icon = _tab?.icon.get(true)?.component;
-                if (Icon) {
-                  return <Icon />;
-                }
-                return (
-                  <TabDesktopNewPage20Regular
-                    color={colors.fillColorTextSecondary}
-                  />
-                );
-              }}
-            </Computed>
-          </View>
+      {/* Tab icon */}
+      <View style={btnIconContainer}>
+        <View style={[icon]}>
+          <Computed>
+            {() => {
+              const Icon = _tab?.icon.get(true)?.component;
+              if (Icon) {
+                return <Icon />;
+              }
+              return (
+                <TabDesktopNewPage20Regular
+                  color={colors.fillColorTextSecondary}
+                />
+              );
+            }}
+          </Computed>
         </View>
+      </View>
 
-        {/* Tab name */}
-        <TabName
-          // otherwise, tab height changes when theres no enough space
-          numberOfLines={1}>
-          <Memo>{_tab?.state.title.get() ?? name}</Memo>
-        </TabName>
+      {/* Tab name */}
+      <TabName
+        // otherwise, tab height changes when theres no enough space
+        numberOfLines={1}>
+        <Memo>{_tab?.state.title.get() ?? name}</Memo>
+      </TabName>
 
-        {/* Close button */}
-        <CloseButton isTabHovered={isHovered$} onPress={fireTabCloseEvent} />
-      </Pressable>
-    </Computed>
+      {/* Close button */}
+      <CloseButton isTabHovered={isHovered$} onPress={fireTabCloseEvent} />
+    </Pressable>
   );
 }
 
