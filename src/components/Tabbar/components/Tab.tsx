@@ -12,11 +12,7 @@ import {
 } from '../../fluent-icons/fluent-icons';
 import { HoverView } from './HoverView';
 import { Computed, Memo, useObservable } from '@legendapp/state/react';
-import type {
-  Observable,
-  ObservableBoolean,
-  ObservablePrimitive,
-} from '@legendapp/state';
+import type { Observable, ObservableBoolean } from '@legendapp/state';
 import type { Tab } from '../../../store/store';
 
 interface TabProps {
@@ -33,14 +29,14 @@ interface TabProps {
    * Nome da aba
    */
   name: string;
-  selectedTabId: ObservablePrimitive<number>;
+  selectedTabId: number;
   icon?: () => React.ReactNode;
-  _tab: Observable<Tab>;
+  _tab?: Observable<Tab>;
 }
 export function Tab(props: TabProps) {
   const { id, onPress, name, onClose, selectedTabId, _tab } = props;
   const isHovered$ = useObservable(false);
-  const isSelected$ = useObservable(() => selectedTabId.get() === id);
+  const isSelected = selectedTabId === id;
   const colors = useColors();
 
   const hoverBgColor = useMemo(
@@ -82,7 +78,7 @@ export function Tab(props: TabProps) {
         onHoverOut={unsetHovered}
         style={[
           tabContentStyle,
-          isSelected$.get() && {
+          isSelected && {
             borderColor: colors.controlStrongStrokeDefault,
           },
         ]}>
@@ -94,7 +90,7 @@ export function Tab(props: TabProps) {
           <View style={[icon]}>
             <Memo>
               {() => {
-                const Icon = _tab.icon.get(true)?.component;
+                const Icon = _tab?.icon.get(true)?.component;
                 if (Icon) {
                   return <Icon />;
                 }
@@ -112,7 +108,7 @@ export function Tab(props: TabProps) {
         <TabName
           // otherwise, tab height changes when theres no enough space
           numberOfLines={1}>
-          <Memo>{_tab.state.title.get() ?? name}</Memo>
+          <Memo>{_tab?.state.title.get() ?? name}</Memo>
         </TabName>
 
         {/* Close button */}

@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Tab } from './Tab';
-import { observable } from '@legendapp/state';
 
 const meta = {
   title: 'Components/Tabbar/Tab',
@@ -11,7 +10,7 @@ const meta = {
   args: {
     id: 1,
     name: 'New Tab',
-    selectedTabId: observable(0),
+    selectedTabId: 0,
   },
 } satisfies Meta<typeof Tab>;
 type Story = StoryObj<typeof meta>;
@@ -20,6 +19,6 @@ export default meta;
 export const Basic: Story = {};
 export const Selected: Story = {
   args: {
-    selectedTabId: observable(1),
+    selectedTabId: 1,
   },
 };

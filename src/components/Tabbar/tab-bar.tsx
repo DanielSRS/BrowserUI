@@ -5,7 +5,7 @@ import {
   TABLIST_GAP,
   WINDOW_BORDER_SIZE,
 } from './Tabbar.contants';
-import { Memo, useObservable } from '@legendapp/state/react';
+import { Memo, use$, useObservable } from '@legendapp/state/react';
 import { Styled } from '@danielsrs/react-native-sdk';
 import { BlurView } from 'blurview';
 import { NewTabButton } from './components/NewTabButton';
@@ -73,15 +73,24 @@ export function Tabbar(props: TabbarProps) {
 
   const renderItem = useCallback(
     ({ item }: { item: string }) => {
-      const { id, name } = tabs[item as unknown as number].get();
+      const _tab = tabs[+item];
+      const _selectedTabId = use$(selectedTabId);
+      const tab = use$(_tab);
+
+      // The observable updates before the list re-renders,
+      // so it might try to render a tab that was already closed.
+      if (!tab) {
+        return null;
+      }
+      const { id, name } = tab;
       return (
         <Tab
           onPress={() => selectTab?.(id)}
           onClose={() => closeTab?.(id)}
-          selectedTabId={selectedTabId}
+          selectedTabId={_selectedTabId}
           id={id}
           name={name}
-          _tab={tabs[item as unknown as number]}
+          _tab={_tab}
         />
       );
     },
