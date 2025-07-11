@@ -11,7 +11,7 @@ import {
   TabDesktopNewPage20Regular,
 } from '../../fluent-icons/fluent-icons';
 import { HoverView } from './HoverView';
-import { Computed, Memo, useObservable } from '@legendapp/state/react';
+import { Computed, Memo, use$, useObservable } from '@legendapp/state/react';
 import type { Observable, ObservableBoolean } from '@legendapp/state';
 import type { Tab } from '../../../store/store';
 
@@ -133,6 +133,7 @@ const CloseButton = memo(function CloseButton(props: {
   onPress: () => void;
 }) {
   const { isTabHovered, onPress } = props;
+  const isParentHovered = use$(isTabHovered);
   const [isHovered, setIsHovered] = useState<true>();
   const colors = useColors();
 
@@ -140,29 +141,29 @@ const CloseButton = memo(function CloseButton(props: {
     backgroundColor: colors.controlAltQuarternary,
   };
 
+  if (!isParentHovered) {
+    return null;
+  }
+
   return (
-    <Computed>
-      {isTabHovered.get() ? (
-        <CloseButtonContainer
-          // @ts-expect-error
-          onMouseEnter={(_p: MouseEvent) => {
-            setIsHovered(true);
-          }}
-          onMouseLeave={(_p: MouseEvent) => {
-            setIsHovered(undefined);
-          }}
-          style={hoverStyle}>
-          {/* Close icon */}
-          <Pressable onPress={onPress}>
-            <Dismiss16Regular
-              width={16}
-              height={16}
-              color={colors.fillColorTextSecondary}
-            />
-          </Pressable>
-        </CloseButtonContainer>
-      ) : null}
-    </Computed>
+    <CloseButtonContainer
+      // @ts-expect-error
+      onMouseEnter={(_p: MouseEvent) => {
+        setIsHovered(true);
+      }}
+      onMouseLeave={(_p: MouseEvent) => {
+        setIsHovered(undefined);
+      }}
+      style={hoverStyle}>
+      {/* Close icon */}
+      <Pressable onPress={onPress}>
+        <Dismiss16Regular
+          width={16}
+          height={16}
+          color={colors.fillColorTextSecondary}
+        />
+      </Pressable>
+    </CloseButtonContainer>
   );
 });
 
