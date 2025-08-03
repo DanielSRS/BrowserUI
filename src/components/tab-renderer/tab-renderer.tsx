@@ -137,6 +137,10 @@ export function TabRenderer(props: TabRendererProps) {
     <WebView
       ref={webviewRef}
       key={tabData.id.peek()}
+      onOpenWindow={event => {
+        console.log('Open window event:', event.nativeEvent);
+        workspace$.openNewTabAt(event.nativeEvent.targetUrl);
+      }}
       source={{ uri: _url }}
       injectedJavaScriptBeforeContentLoaded={
         sendRNEvent + listenForNavigationChanges

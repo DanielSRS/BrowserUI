@@ -35,6 +35,7 @@ export interface Workspace {
   tabs: Record<number, Tab>;
   tabIds: string[];
   openNewTab: () => void;
+  openNewTabAt: (url: string) => void;
   openUrl: () => void;
   openNewConfigTab: () => void;
   focusConfigTab: () => boolean;
@@ -77,6 +78,27 @@ export const workspace = observable<Workspace>({
         order: newOrder,
         state: {
           url: 'browser://newTab',
+          canGoBack: false,
+          canGoForward: false,
+          loading: false,
+          title: 'New Tab',
+        },
+      });
+    });
+  },
+  openNewTabAt: (url: string) => {
+    const newid = workspace.nextNewTabId.get();
+    const nextId = newid + 1;
+    const newOrder = Object.keys(workspace.tabs.peek()).length;
+    batch(() => {
+      workspace.selectedTabId.set(newid);
+      workspace.nextNewTabId.set(nextId);
+      workspace.tabs[newid].set({
+        name: 'New Tab',
+        id: newid,
+        order: newOrder,
+        state: {
+          url: urlParser(url),
           canGoBack: false,
           canGoForward: false,
           loading: false,
@@ -228,3 +250,32 @@ export const settings = observable({
 //   }
 //   tab.delete();
 // });
+
+const urlParser = (_url: string) => {
+  const withProtocol =
+    _url.startsWith('https://') || _url.startsWith('browser://')
+      ? _url
+      : `https://${_url}`;
+  console.log('opening page', withProtocol);
+  const isValid = isValidUrl(withProtocol);
+  if (!isValid) {
+    console.warn('Invalid URL:', withProtocol);
+    return 'browser://newTab';
+  }
+  return withProtocol;
+};
+
+function isValidUrl(url: string): boolean {
+  try {
+    const u = new URL(url);
+    if (!url.startsWith('https://')) {
+      console.warn('Invalid URL protocol:', url);
+      return false;
+    }
+    // console.log('Valid URL:', u);
+    return !!u;
+  } catch (e) {
+    console.warn('Invalid URL:', e);
+    return false;
+  }
+}
