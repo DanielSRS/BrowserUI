@@ -160,9 +160,11 @@ export const Topbar = observer((props: TopbarProps) => {
                     defaultValue={isNewTab ? '' : url}
                     onSubmitEditing={() => {
                       const _url = urlInputRef.current || '';
-                      const withProtocol = _url.startsWith('https://')
-                        ? _url
-                        : `https://${_url}`;
+                      const withProtocol =
+                        _url.startsWith('https://') ||
+                        _url.startsWith('browser://')
+                          ? _url
+                          : `https://${_url}`;
                       console.log('Submit URL:', withProtocol);
                       const isValid = isValidUrl(withProtocol);
                       if (!isValid) {
