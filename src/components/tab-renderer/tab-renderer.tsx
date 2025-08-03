@@ -1,4 +1,4 @@
-import { ObservableHint, type Observable } from '@legendapp/state';
+import { observable, ObservableHint, type Observable } from '@legendapp/state';
 import type { Workspace } from '../../store/store';
 import { use$, useObserve } from '@legendapp/state/react';
 import { Config } from '../../Pages/Config/Config';
@@ -12,6 +12,7 @@ import { sendRNEvent } from '../../webview-injected-scripts/send-event';
 import { listenForNavigationChanges } from '../../webview-injected-scripts/navigation-events';
 import { adblockerEngine } from '../../adblocker/engine';
 import { Request } from '@ghostery/adblocker';
+import { Blocker$ } from '../flyout-backdrop/flyout-backdrop';
 import type { WVNavigationEvent } from '../../webview-injected-scripts/types';
 
 interface TabRendererProps {
@@ -19,10 +20,15 @@ interface TabRendererProps {
   workspace$: Observable<Workspace>;
 }
 
+const pointerEvents$ = observable(() =>
+  Blocker$.get() > 0 ? 'none' : undefined,
+);
+
 export function TabRenderer(props: TabRendererProps) {
   const { tabId, workspace$ } = props;
   const tabData = workspace$.tabs[tabId];
   const _url = use$(tabData.state.url);
+  const pointerEvents = use$(pointerEvents$.get());
   const webviewRef = useRef<WebView>(null);
 
   const setFavicon = useCallback(
@@ -141,6 +147,7 @@ export function TabRenderer(props: TabRendererProps) {
         console.log('Open window event:', event.nativeEvent);
         workspace$.openNewTabAt(event.nativeEvent.targetUrl);
       }}
+      style={{ pointerEvents: pointerEvents }}
       source={{ uri: _url }}
       injectedJavaScriptBeforeContentLoaded={
         sendRNEvent + listenForNavigationChanges
