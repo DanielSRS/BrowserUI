@@ -3,6 +3,7 @@ import { App } from './src/AppEntry';
 import { SdkProvider, Constants } from '@danielsrs/react-native-sdk';
 import { enableScreens } from 'react-native-screens';
 import { loadAdblockerFilters } from './src/adblocker/engine';
+import { FlyoutBackdrop } from './src/components/flyout-backdrop/flyout-backdrop';
 
 loadAdblockerFilters();
 
@@ -19,6 +20,7 @@ export function app() {
           transparentBackground: !Constants.IS_WINDOWS,
         }}>
         <App />
+        <FlyoutBackdrop />
       </SdkProvider>
     </StrictMode>
   );
