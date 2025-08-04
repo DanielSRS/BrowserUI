@@ -6785,6 +6785,7 @@ __metadata:
     react-native-svg: "npm:^15.11.2"
     react-native-web: "npm:^0.20.0"
     react-native-webview: "npm:^13.15.0"
+    react-native-window-manager: "link:./modules/WindowManager"
     react-native-windows: "npm:^0.78.13"
     react-test-renderer: "npm:19.0.0"
     storybook: "npm:9.0.14"
@@ -13436,6 +13437,12 @@ __metadata:
   checksum: 10/7d4b23cb0536199ab2339644d8b6ce720e794ac9a8200f23746032a768a61af8727d2401fc000be09b4fb478dce6f795d7d400945a17ab013a3bbc92a5077e4e
   languageName: node
   linkType: hard
+
+"react-native-window-manager@link:./modules/WindowManager::locator=BrowserUI%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "react-native-window-manager@link:./modules/WindowManager::locator=BrowserUI%40workspace%3A."
+  languageName: node
+  linkType: soft
 
 "react-native-windows@npm:^0.78.13":
   version: 0.78.13

@@ -1334,6 +1334,27 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - react-native-window-manager (0.0.0):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - React-NativeModulesApple (0.78.3):
     - glog
     - hermes-engine
@@ -1813,6 +1834,7 @@ DEPENDENCIES:
   - react-native-infinity (from `../node_modules/react-native-infinity`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-webview (from `../node_modules/react-native-webview`)
+  - react-native-window-manager (from `../node_modules/react-native-window-manager`)
   - React-NativeModulesApple (from `../node_modules/react-native-macos/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../node_modules/react-native-macos/ReactCommon/reactperflogger`)
   - React-performancetimeline (from `../node_modules/react-native-macos/ReactCommon/react/performance/timeline`)
@@ -1934,6 +1956,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
+  react-native-window-manager:
+    :path: "../node_modules/react-native-window-manager"
   React-NativeModulesApple:
     :path: "../node_modules/react-native-macos/ReactCommon/react/nativemodule/core/platform/ios"
   React-perflogger:
@@ -2046,6 +2070,7 @@ SPEC CHECKSUMS:
   react-native-infinity: 4fcc29cfc0371a9c4cc9b81d1e95b4c4abe3cb6a
   react-native-safe-area-context: 141eca0fd4e4191288dfc8b96a7c7e1c2983447a
   react-native-webview: 3113f47b24b228a7dec250da41a8426481540be4
+  react-native-window-manager: 81203df1b81b61cbdc2d17ceddcea4bd163bf774
   React-NativeModulesApple: cf1ca7b8e6e75db09eaaf1d2d43459630b148c93
   React-perflogger: 264dc0f53bd9ee0fd734106002b531966ecc3256
   React-performancetimeline: d4f03d4699df0321c6303735cdede7f9dc6292a2

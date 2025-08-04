@@ -1,0 +1,14 @@
+{
+  "name": "react-native-window-manager",
+  "version": "0.0.0",
+  "description": "Native module for window management",
+  "main": "src/index",
+  "author": "",
+  "license": "UNLICENSED",
+  "homepage": "#readme",
+  "create-react-native-library": {
+    "type": "module-legacy",
+    "languages": "kotlin-swift",
+    "version": "0.41.2"
+  }
+}

@@ -29,6 +29,7 @@ import {
   Person20Regular,
   AppGeneric20Regular,
 } from '../fluent-icons/fluent-icons';
+import { openNewWindow } from 'react-native-window-manager';
 import type { Fluenticon } from '../fluent-icons/fluent-icons-base';
 
 const IS_MACOS = Platform.OS === 'macos';
@@ -211,7 +212,19 @@ export const Topbar = observer((props: TopbarProps) => {
               left={withTextColor(TabDesktopNewPage20Regular)}>
               New Tab
             </Menu.MenuEntry>
-            <Menu.MenuEntry left={withTextColor(Window20Regular)}>
+            <Menu.MenuEntry
+              onPress={() =>
+                openNewWindow({
+                  title: 'New Window',
+                  resizable: true,
+                  componentName: 'BrowserUI',
+                  initialProps: {
+                    title: 'New Window',
+                    message: 'new window content',
+                  },
+                })
+              }
+              left={withTextColor(Window20Regular)}>
               New Window
             </Menu.MenuEntry>
             <Menu.MenuEntry
