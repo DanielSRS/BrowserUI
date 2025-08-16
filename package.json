@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "storybook": "cross-env STORYBOOK_ENABLED='true' react-native start",
+    "storybook": "cross-env STORYBOOK_ENABLED='true' react-native start --client-logs",
     "storybook:ios": "cross-env STORYBOOK_ENABLED='true' react-native run-ios",
     "storybook:android": "cross-env STORYBOOK_ENABLED='true' react-native run-android",
     "storybook-generate": "sb-rn-get-stories",
