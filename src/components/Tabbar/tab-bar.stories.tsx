@@ -8,7 +8,13 @@ const tabs = observable<Record<number, Tab>>({
     id: 0,
     name: 'fist tab',
     order: 1,
-    url: 'browser://newTab',
+    state: {
+      canGoBack: false,
+      canGoForward: false,
+      loading: false,
+      title: 'First Tab',
+      url: 'https://example.com',
+    },
   },
 });
 
