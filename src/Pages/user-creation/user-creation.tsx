@@ -9,7 +9,14 @@ import { Computed, useObservable } from '@legendapp/state/react';
 import { useRef } from 'react';
 import { Pressable, TextInput, type View } from 'react-native';
 
-export function UserCreation() {
+interface UserCreationProps {
+  onUserCreated: (name: string) => void;
+}
+
+/**
+ * User creation page
+ */
+export function UserCreation(props: UserCreationProps) {
   const nameInputRef = useRef<TextInput>(null);
   const focusAreaRef = useRef<View>(null);
   const userName$ = useObservable('');
@@ -22,8 +29,7 @@ export function UserCreation() {
 
   const createUser = () => {
     unfocusTextInput();
-    // Logic to create user goes here
-    console.log('User created:', userName$.get());
+    props.onUserCreated(userName$.get().trim());
   };
   return (
     <Container>
@@ -61,7 +67,6 @@ export function UserCreation() {
 
 const Container = Styled.createStyledView({
   flex: 1,
-  borderWidth: 1,
 });
 
 const UnfocusInputArea = Pressable;

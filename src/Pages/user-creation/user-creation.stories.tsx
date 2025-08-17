@@ -6,7 +6,7 @@ const meta = {
   title: 'Pages/UserCreation',
   component: UserCreation,
   tags: ['autodocs'],
-  args: { onClick: fn() },
+  args: { onUserCreated: fn() },
 } satisfies Meta<typeof UserCreation>;
 
 export default meta;
