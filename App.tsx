@@ -1,9 +1,9 @@
 import React, { StrictMode } from 'react';
-import { App } from './src/AppEntry';
 import { SdkProvider, Constants } from '@danielsrs/react-native-sdk';
 import { enableScreens } from 'react-native-screens';
 import { loadAdblockerFilters } from './src/adblocker/engine';
 import { FlyoutBackdrop } from './src/components/flyout-backdrop/flyout-backdrop';
+import { AppRouter } from './src/app-router';
 
 loadAdblockerFilters();
 
@@ -19,7 +19,7 @@ export function app() {
           useAcrylic: !Constants.IS_WINDOWS,
           transparentBackground: !Constants.IS_WINDOWS,
         }}>
-        <App />
+        <AppRouter />
         <FlyoutBackdrop />
       </SdkProvider>
     </StrictMode>

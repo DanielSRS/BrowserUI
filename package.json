@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "storybook": "cross-env STORYBOOK_ENABLED='true' react-native start",
+    "typecheck": "tsc --noEmit",
+    "storybook": "cross-env STORYBOOK_ENABLED='true' react-native start --client-logs",
     "storybook:ios": "cross-env STORYBOOK_ENABLED='true' react-native run-ios",
     "storybook:android": "cross-env STORYBOOK_ENABLED='true' react-native run-android",
     "storybook-generate": "sb-rn-get-stories",
@@ -26,6 +27,7 @@
     "@legendapp/list": "1.1.4",
     "@legendapp/state": "^3.0.0-beta.31",
     "@storybook/react-native-ui-lite": "^9.0.9",
+    "@xstate/react": "3.2.1",
     "blurview": "link:./modules/BlurView",
     "react": "19.0.0",
     "react-native": "0.78.2",
@@ -37,7 +39,8 @@
     "react-native-web": "^0.20.0",
     "react-native-webview": "^13.15.0",
     "react-native-window-manager": "link:./modules/WindowManager",
-    "react-native-windows": "^0.78.13"
+    "react-native-windows": "^0.78.13",
+    "xstate": "4.37.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
