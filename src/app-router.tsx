@@ -2,10 +2,7 @@ import { useObservable, Switch } from '@legendapp/state/react';
 import { users$ } from './data/user';
 import { UserCreation } from './Pages/user-creation/user-creation';
 import { UndefinedStatePage } from './Pages/undefined-state/undefined-state';
-import type { ApplicationState } from '../types/aplication-state';
-
-const NO_USERS: ApplicationState = 0;
-const UNDEFINED_STATE: ApplicationState = 1;
+import { APP_STATE, type ApplicationState } from '../types/aplication-state';
 
 /**
  * The application router.
@@ -15,7 +12,10 @@ const UNDEFINED_STATE: ApplicationState = 1;
  */
 export function AppRouter() {
   const currentState$ = useObservable<ApplicationState>(() => {
-    return users$.count.get() === 0 ? NO_USERS : UNDEFINED_STATE;
+    if (users$.count.get()) {
+      return APP_STATE.NO_USERS;
+    }
+    return APP_STATE.UNDEFINED_STATE;
   });
   const deleteAllUsers = () => {
     users$.all.set({});
