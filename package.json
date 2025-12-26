@@ -28,6 +28,7 @@
     "@legendapp/state": "^3.0.0-beta.42",
     "@storybook/react-native-ui-lite": "^9.0.9",
     "@xstate/react": "3.2.1",
+    "arktype": "^2.1.29",
     "blurview": "link:./modules/BlurView",
     "react": "19.0.0",
     "react-native": "0.78.2",

@@ -1,5 +1,10 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "exactOptionalPropertyTypes": true,
+    "skipLibCheck": true,
+    "strict": true
+  },
   "exclude": [
     "**/pods/**",
   ],
