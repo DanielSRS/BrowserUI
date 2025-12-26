@@ -1,63 +1,57 @@
-import { observable, syncState } from '@legendapp/state';
-import { syncPlugin } from './sync/sync-pluggin';
-import type { User } from '../../types/user';
-import type { ObservableSyncState } from '@legendapp/state';
+import { observable } from '@legendapp/state';
+import { syncedCrud } from '@legendapp/state/sync-plugins/crud';
 
-const CURRENT_USER_TYPE_VERSION = 1;
+const generateId = () => Date.now();
 
-type UserId = number;
+const deletedUsersSubscribers = new Set<(userId: number) => void>();
 
-interface UserRegistry {
-  /**
-   * A record of all users by their unique IDs.
-   */
-  all: Record<UserId, User>;
-  /**
-   * The synchronization state of the user registry.
-   */
-  syncState: ObservableSyncState;
-  /**
-   * The number of users in the registry.
-   */
-  count: number;
-  /**
-   * Whether there are any users in the registry.
-   */
-  hasAnyUser: boolean;
-  /**
-   * Creates a new user and adds them to the registry.
-   */
-  createUser: (name: string) => User;
+export function subscribeToDeletedUsers(fn: (userId: number) => void) {
+  deletedUsersSubscribers.add(fn);
+  return () => {
+    deletedUsersSubscribers.delete(fn);
+  };
 }
 
-const allUsers$ = observable<Record<UserId, User>>(
-  syncPlugin({
-    initial: {},
+const notifyUserDeleted = (userId: number) => {
+  deletedUsersSubscribers.forEach(fn => fn(userId));
+};
+
+export const users$ = observable(
+  syncedCrud({
+    list: async () => {
+      return [] as {
+        id: number;
+        lastActiveAt: number;
+      }[];
+    },
+    create: async (user: { id: number; lastActiveAt: number }) => {
+      console.log('----Creating user', user);
+      // const id = (user as any).id as number;
+      // if (!id) {
+      //   console.error('User ID is required');
+      //   throw new Error('User ID is required');
+      // }
+      return user;
+    },
+    delete: async (user: { id: number; lastActiveAt: number }) => {
+      console.log('----Deleting user', user);
+      notifyUserDeleted(user.id);
+      return;
+    },
+    initial: [],
+    as: 'array',
   }),
 );
 
-const usersSyncState$ = syncState(allUsers$);
-const usersCount$ = observable(() => {
-  return Object.keys(allUsers$.get(true)).length;
-});
+export function createUser(newUser: { lastActiveAt: number }) {
+  return users$.push({
+    ...newUser,
+    id: generateId(),
+  });
+}
 
-export const users$ = observable<UserRegistry>({
-  all: allUsers$,
-  count: usersCount$,
-  syncState: usersSyncState$,
-  hasAnyUser: () => {
-    return usersSyncState$.isPersistLoaded.get() && usersCount$.get() > 0;
-  },
-  createUser: (name: string) => {
-    const now = Date.now();
-    const newUser: User = {
-      id: now,
-      name,
-      ' createdAt': now,
-      ' updatedAt': now,
-      ' version': CURRENT_USER_TYPE_VERSION,
-    };
-    allUsers$[newUser.id].set(newUser);
-    return newUser;
-  },
+export const usersData$ = observable({
+  list: users$,
+  hasAnyUser: () => users$.length > 0,
+  count: () => users$.length,
 });

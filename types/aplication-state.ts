@@ -2,11 +2,12 @@ export const APP_STATE = {
   /**
    * Indicates that there are no users in the application.
    */
-  NO_USERS: 0,
+  NO_USERS: 1,
   /**
    * Indicates that the application is in an undefined state.
    */
-  UNDEFINED_STATE: 1,
+  UNDEFINED_STATE: 2,
+  NO_SESSIONS_OPEN: 3,
 } as const;
 
 /**

@@ -1,8 +1,11 @@
 import { useObservable, Switch } from '@legendapp/state/react';
-import { users$ } from './data/user';
+import { createUser, users$, usersData$ } from './data/user';
 import { UserCreation } from './Pages/user-creation/user-creation';
 import { UndefinedStatePage } from './Pages/undefined-state/undefined-state';
-import { APP_STATE, type ApplicationState } from '../types/aplication-state';
+import { APP_STATE } from '../types/aplication-state';
+import { createSession, OpenSessionsData$ } from './data/session';
+import type { ComponentProps } from 'react';
+import { App } from './AppEntry';
 
 /**
  * The application router.
@@ -11,29 +14,53 @@ import { APP_STATE, type ApplicationState } from '../types/aplication-state';
  * state of the application.
  */
 export function AppRouter() {
-  const currentState$ = useObservable<ApplicationState>(() => {
-    if (users$.count.get()) {
+  const currentState$ = useObservable(() => {
+    if (usersData$.count.get() === 0) {
       return APP_STATE.NO_USERS;
+    }
+    if (OpenSessionsData$.numberOfSessions.get() === 0) {
+      return APP_STATE.NO_SESSIONS_OPEN;
     }
     return APP_STATE.UNDEFINED_STATE;
   });
   const deleteAllUsers = () => {
-    users$.all.set({});
+    usersData$.list.forEach(u => u.delete());
+  };
+  const onCreateUser = (_: string) => {
+    createUser({
+      lastActiveAt: Date.now(),
+    });
   };
   return (
     <Switch value={currentState$}>
       {{
-        0: UserCreationPage,
-        default: undefinedStatePage(deleteAllUsers),
+        1: UserCreationPage(onCreateUser),
+        3: undefinedStatePage({
+          onRetry: () => {
+            const userId = users$[0]?.id.peek();
+            if (!userId) {
+              console.error('No user found to create session for.');
+              return;
+            }
+            createSession(userId);
+          },
+          title: 'No sessions are currently open.',
+        }),
+        2: App,
+        default: undefinedStatePage({
+          onRetry: deleteAllUsers,
+          title: 'This is an undefined ---.',
+        }),
       }}
     </Switch>
   );
 }
 
-const undefinedStatePage = (onRetry: () => void) => () => {
-  return <UndefinedStatePage onRetry={onRetry} />;
-};
+const undefinedStatePage =
+  (props: ComponentProps<typeof UndefinedStatePage>) => () => {
+    return <UndefinedStatePage {...props} />;
+  };
 
-function UserCreationPage() {
-  return <UserCreation onUserCreated={users$.createUser} />;
-}
+const UserCreationPage = (onUserCreated: (name: string) => void) => () => {
+  return <UserCreation onUserCreated={onUserCreated} />;
+};

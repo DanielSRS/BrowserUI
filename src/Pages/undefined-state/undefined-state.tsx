@@ -2,13 +2,15 @@ import { BodyLarge, Button, Styled } from '@danielsrs/react-native-sdk';
 
 interface UndefinedStatePageProps {
   onRetry: () => void;
+  title: string;
 }
 
 export function UndefinedStatePage(props: UndefinedStatePageProps) {
+  const { onRetry, title } = props;
   return (
     <Container>
-      <BodyLarge>This is an undefined state.</BodyLarge>
-      <Button onPress={props.onRetry}>Retry</Button>
+      <BodyLarge>{title}</BodyLarge>
+      <Button onPress={onRetry}>Retry</Button>
     </Container>
   );
 }
