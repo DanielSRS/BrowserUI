@@ -53,5 +53,5 @@ export function createUser(newUser: { lastActiveAt: number }) {
 export const usersData$ = observable({
   list: users$,
   hasAnyUser: () => users$.length > 0,
-  count: () => users$.length,
+  count: () => users$.get(true).length,
 });

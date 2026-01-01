@@ -3,7 +3,7 @@ import { syncedCrud } from '@legendapp/state/sync-plugins/crud';
 import { createWorkspace, userWorkspacesMap$, workspaces$ } from './workspace';
 import { subscribeToDeletedUsers } from './user';
 
-interface Session {
+export interface Session {
   /**
    * The session ID but it also represents the workspace ID.
    */
@@ -35,8 +35,8 @@ const OpenSessions$ = observable(
   }),
 );
 
-export function createSession(userId: number, type: 0 | 1 | 2 = 0): Session {
-  const newWorkspace = createWorkspace(userId, type);
+export function createSession(userId: number, t: 0 | 1 | 2 = 0): Session {
+  const newWorkspace = createWorkspace(userId, t);
   const d: Session = {
     id: newWorkspace.id,
     lastFocusedAt: Date.now(),
