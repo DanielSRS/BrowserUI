@@ -31,6 +31,9 @@ const config = {
       /.*\.ProjectImports\.zip/,
     ]),
     //
+
+    // Needed for arktype to work
+    unstable_enablePackageExports: true,
   },
   transformer: {
     getTransformOptions: async () => ({
